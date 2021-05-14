@@ -40,6 +40,3 @@ The first version does not suit me anymore in relation to the skills I had and t
 
 [codecov-src]: https://img.shields.io/codecov/c/github/Stun3R/strapi-sdk.svg?style=flat-square
 [codecov-href]: https://codecov.io/gh/Stun3R/strapi-sdk
-
-[license-src]: https://img.shields.io/npm/l/strapi-sdk.svg?style=flat-square
-[license-href]: https://npmjs.com/package/strapi-sdk
