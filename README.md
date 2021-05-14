@@ -4,7 +4,6 @@
 
 [![Build Status][actions-src]][actions-href]
 [![Codecov][codecov-src]][codecov-href]
-[![License][license-src]][license-href]
 
 ### Why ?
 
