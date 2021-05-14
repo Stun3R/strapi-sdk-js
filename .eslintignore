@@ -1,0 +1,7 @@
+dist/
+test/
+docs/
+.eslintrc.js
+.commitlint.config.js
+.husky.config.js
+.jest.config.js
