@@ -2,7 +2,7 @@
 
 # Rewrite of Strapi SDK
 
-![Actions](https://github.com/Stun3R/strapi-sdk/actions/workflows/main.yml/badge.svg)
+[![Build Status][actions-src]][actions-href]
 [![Codecov][codecov-src]][codecov-href]
 [![License][license-src]][license-href]
 
@@ -35,6 +35,11 @@ The first version does not suit me anymore in relation to the skills I had and t
 [MIT License](./LICENSE)
 
 <!-- Badges -->
+[actions-src]: https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FStun3R%2Fstrapi-sdk%2Fbadge%3Fref%3Dmain&style=flat-square
+[actions-href]: https://actions-badge.atrox.dev/Stun3R/strapi-sdk/goto?ref=main
+
 [codecov-src]: https://img.shields.io/codecov/c/github/Stun3R/strapi-sdk.svg?style=flat-square
 [codecov-href]: https://codecov.io/gh/Stun3R/strapi-sdk
 
+[license-src]: https://img.shields.io/npm/l/strapi-sdk.svg?style=flat-square
+[license-href]: https://npmjs.com/package/strapi-sdk
