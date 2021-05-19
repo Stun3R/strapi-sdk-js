@@ -1,6 +1,6 @@
 {
   "name": "strapi-sdk",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "📦 Javascript SDK for your Strapi API",
   "keywords": [
     "strapi",
@@ -36,15 +36,27 @@
       "url": "https://thibautdavid.com"
     }
   ],
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.es.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "strapi-sdk": "./bin/cli.js"
+  },
   "files": [
-    "dist"
+    "./dist",
+    "./bin"
   ],
   "scripts": {
     "start": "siroc build --watch",
     "build": "siroc build",
+    "clean": "rm -rf bin dist coverage",
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix",
     "test": "run-s build lint test:unit",
@@ -60,14 +72,25 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "@graphql-codegen/core": "^1.17.9",
+    "@graphql-codegen/typescript": "^1.22.0",
+    "@graphql-tools/load": "^6.2.8",
+    "@graphql-tools/url-loader": "^6.10.1",
+    "@types/fs-extra": "^9.0.11",
+    "chalk": "^4.1.1",
+    "commander": "^7.2.0",
+    "enquirer": "^2.3.6",
+    "fs-extra": "^10.0.0",
+    "graphql": "^15.5.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "12.1.4",
     "@commitlint/config-conventional": "12.1.4",
     "@release-it/conventional-changelog": "2.0.1",
     "@types/jest": "26.0.23",
-    "@typescript-eslint/eslint-plugin": "4.23.0",
-    "@typescript-eslint/parser": "4.23.0",
+    "@typescript-eslint/eslint-plugin": "4.24.0",
+    "@typescript-eslint/parser": "4.24.0",
     "commitizen": "4.2.4",
     "cz-conventional-changelog": "3.3.0",
     "dotenv-cli": "4.0.0",
@@ -79,6 +102,7 @@
     "release-it": "14.6.2",
     "sinon": "10.0.0",
     "siroc": "0.10.1",
+    "standard-version": "^9.3.0",
     "ts-jest": "26.5.6",
     "typescript": "4.2.4"
   }
