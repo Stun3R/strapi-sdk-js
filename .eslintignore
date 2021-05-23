@@ -2,6 +2,7 @@ dist/
 bin/
 test/
 docs/
+example/
 .eslintrc.js
 .commitlint.config.js
 .husky.config.js

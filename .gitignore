@@ -43,6 +43,7 @@ bower_components
 build/Release
 build/
 dist/
+bin/
 
 
 # Dependency directories
