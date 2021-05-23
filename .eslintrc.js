@@ -11,6 +11,16 @@ module.exports = {
     sourceType: "module",
   },
   rules: {
-    // Special ESLint rules or overrides go here.
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-unsafe-return": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-this-alias": [
+      "error",
+      {
+        allowDestructuring: true, // Allow `const { props, state } = this`; false by default
+        allowedNames: ["self"], // Allow `const self = this`; `[]` by default
+      },
+    ],
   },
 };
