@@ -1494,7 +1494,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/sinon@^10.0.0":
+"@types/sinon@10.0.0":
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-10.0.0.tgz#eecc3847af03d45ffe53d55aaaaf6ecb28b5e584"
   integrity sha512-jDZ55oCKxqlDmoTBBbBBEx+N8ZraUVhggMZ9T5t+6/Dh8/4NiOjSUfpLrPiEwxQDlAe3wpAkoXhWvE6LibtsMQ==
