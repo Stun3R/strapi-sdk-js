@@ -78,6 +78,7 @@
     "@graphql-tools/load": "^6.2.8",
     "@graphql-tools/url-loader": "^6.10.1",
     "@types/fs-extra": "^9.0.11",
+    "@types/js-cookie": "^2.2.6",
     "@types/qs": "^6.9.6",
     "axios": "^0.21.1",
     "chalk": "^4.1.1",
@@ -86,6 +87,7 @@
     "enquirer": "^2.3.6",
     "fs-extra": "^10.0.0",
     "graphql": "^15.5.0",
+    "js-cookie": "^2.2.1",
     "qs": "^6.10.1"
   },
   "devDependencies": {

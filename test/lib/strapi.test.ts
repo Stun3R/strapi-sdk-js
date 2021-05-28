@@ -1,5 +1,6 @@
 import Strapi from "../../src";
 import sinon from "sinon";
+import Cookies from "js-cookie";
 
 interface TestContext {
   strapi: Strapi;
@@ -47,24 +48,24 @@ describe("Strapi SDK", () => {
         })
       );
     });
-  });
 
-  test("Request with custom axios config", async () => {
-    await context.strapi.request("get", "/users", {
-      headers: {
-        Authorization: "Bearer jwt",
-      },
-    });
-
-    expect(
-      context.axiosRequest.calledWithExactly({
+    test("Request with custom axios config", async () => {
+      await context.strapi.request("get", "/users", {
         headers: {
           Authorization: "Bearer jwt",
         },
-        method: "get",
-        url: "/users",
-      })
-    ).toBe(true);
+      });
+
+      expect(
+        context.axiosRequest.calledWithExactly({
+          headers: {
+            Authorization: "Bearer jwt",
+          },
+          method: "get",
+          url: "/users",
+        })
+      ).toBe(true);
+    });
   });
 
   describe("Catch Strapi error request", () => {
@@ -201,6 +202,295 @@ describe("Strapi SDK", () => {
     expect(response).toMatchObject({
       isStrapi: false,
       response: "Network Error",
+    });
+  });
+
+  describe("Users & Permissions", () => {
+    test("Register", async () => {
+      context.axiosRequest.resolves({
+        data: {
+          user: {},
+          jwt: "XXX",
+        },
+      });
+
+      const response = await context.strapi.register({
+        email: "john@doe.com",
+        username: "John Doe",
+        password: "password",
+      });
+
+      expect(
+        context.axiosRequest.calledWith({
+          method: "post",
+          url: "/auth/local/register",
+          data: {
+            email: "john@doe.com",
+            username: "John Doe",
+            password: "password",
+          },
+        })
+      ).toBe(true);
+
+      expect(response).toEqual({ user: {}, jwt: "XXX" });
+
+      expect(
+        context.strapi.axios.defaults.headers.common["Authorization"]
+      ).toBe("Bearer XXX");
+
+      delete context.strapi.axios.defaults.headers.common["Authorization"];
+      Cookies.remove("strapi_jwt");
+    });
+
+    test("Login", async () => {
+      context.axiosRequest.resolves({
+        data: {
+          user: {},
+          jwt: "XXX",
+        },
+      });
+
+      const response = await context.strapi.login({
+        identifier: "john@doe.com",
+        password: "password",
+      });
+
+      expect(
+        context.axiosRequest.calledWith({
+          method: "post",
+          url: "/auth/local",
+          data: {
+            identifier: "john@doe.com",
+            password: "password",
+          },
+        })
+      ).toBe(true);
+
+      expect(response).toEqual({ user: {}, jwt: "XXX" });
+      expect(
+        context.strapi.axios.defaults.headers.common["Authorization"]
+      ).toBe("Bearer XXX");
+
+      delete context.strapi.axios.defaults.headers.common["Authorization"];
+      Cookies.remove("strapi_jwt");
+    });
+
+    test("Forgot Password", async () => {
+      await context.strapi.forgotPassword({
+        email: "john@doe.com",
+      });
+
+      expect(
+        context.axiosRequest.calledWith({
+          method: "post",
+          url: "/auth/forgot-password",
+          data: {
+            email: "john@doe.com",
+          },
+        })
+      ).toBe(true);
+    });
+
+    test("Reset Password", async () => {
+      context.axiosRequest.resolves({
+        data: {
+          user: {},
+          jwt: "XXX",
+        },
+      });
+
+      const response = await context.strapi.resetPassword({
+        code: "XXX",
+        password: "password",
+        passwordConfirmation: "password",
+      });
+
+      expect(
+        context.axiosRequest.calledWith({
+          method: "post",
+          url: "/auth/reset-password",
+          data: {
+            code: "XXX",
+            password: "password",
+            passwordConfirmation: "password",
+          },
+        })
+      ).toBe(true);
+
+      expect(response).toEqual({ user: {}, jwt: "XXX" });
+
+      expect(
+        context.strapi.axios.defaults.headers.common["Authorization"]
+      ).toBe("Bearer XXX");
+
+      delete context.strapi.axios.defaults.headers.common["Authorization"];
+      Cookies.remove("strapi_jwt");
+    });
+
+    test("Send Email Confirmation", async () => {
+      await context.strapi.sendEmailConfirmation({
+        email: "john@doe.com",
+      });
+
+      expect(
+        context.axiosRequest.calledWith({
+          method: "post",
+          url: "/auth/send-email-confirmation",
+          data: {
+            email: "john@doe.com",
+          },
+        })
+      ).toBe(true);
+    });
+
+    test("Get Authentication Provider", () => {
+      const url = context.strapi.getAuthenticationProvider("github");
+
+      expect(url).toBe("http://strapi-host/connect/github");
+    });
+
+    test("Authentication with third party token", async () => {
+      context.axiosRequest.resolves({
+        data: {
+          user: {},
+          jwt: "XXX",
+        },
+      });
+
+      const response = await context.strapi.authenticateProvider(
+        "github",
+        "myAccessToken"
+      );
+
+      expect(
+        context.axiosRequest.calledWith({
+          method: "get",
+          url: "/auth/github/callback",
+          params: {
+            access_token: "myAccessToken",
+          },
+        })
+      ).toBe(true);
+
+      expect(response).toEqual({ user: {}, jwt: "XXX" });
+      expect(
+        context.strapi.axios.defaults.headers.common["Authorization"]
+      ).toBe("Bearer XXX");
+
+      delete context.strapi.axios.defaults.headers.common["Authorization"];
+      Cookies.remove("strapi_jwt");
+    });
+
+    test("Authentication with third party token on searchParams", async () => {
+      Object.defineProperty(window, "location", {
+        value: {
+          search: "?access_token=myAccessToken",
+        },
+      });
+
+      context.axiosRequest.resolves({
+        data: {
+          user: {},
+          jwt: "XXX",
+        },
+      });
+
+      const response = await context.strapi.authenticateProvider("github");
+
+      expect(
+        context.axiosRequest.calledWith({
+          method: "get",
+          url: "/auth/github/callback",
+          params: {
+            access_token: "myAccessToken",
+          },
+        })
+      ).toBe(true);
+
+      expect(response).toEqual({ user: {}, jwt: "XXX" });
+      expect(
+        context.strapi.axios.defaults.headers.common["Authorization"]
+      ).toBe("Bearer XXX");
+
+      delete context.strapi.axios.defaults.headers.common["Authorization"];
+      Cookies.remove("strapi_jwt");
+    });
+
+    test("Logout", async () => {
+      context.axiosRequest.resolves({
+        data: {
+          user: {},
+          jwt: "XXX",
+        },
+      });
+
+      await context.strapi.login({
+        identifier: "john@doe.com",
+        password: "password",
+      });
+
+      expect(
+        context.strapi.axios.defaults.headers.common["Authorization"]
+      ).toBe("Bearer XXX");
+
+      context.strapi.logout();
+
+      expect(
+        context.strapi.axios.defaults.headers.common["Authorization"]
+      ).toBe(undefined);
+    });
+  });
+
+  describe("Token Management", () => {
+    test("Set Token in Cookies", () => {
+      context.strapi.setToken("XXX");
+
+      expect(
+        context.strapi.axios.defaults.headers.common["Authorization"]
+      ).toBe("Bearer XXX");
+
+      expect(Cookies.get("strapi_jwt")).toBe("XXX");
+
+      delete context.strapi.axios.defaults.headers.common["Authorization"];
+      Cookies.remove("strapi_jwt");
+    });
+
+    test("Set Token in localStorage", () => {
+      context.strapi.options.store.useLocalStorage = true;
+      context.strapi.setToken("XXX");
+
+      expect(
+        context.strapi.axios.defaults.headers.common["Authorization"]
+      ).toBe("Bearer XXX");
+
+      expect(window.localStorage.getItem("strapi_jwt")).toBe("XXX");
+
+      delete context.strapi.axios.defaults.headers.common["Authorization"];
+      window.localStorage.removeItem("strapi_jwt");
+      context.strapi.options.store.useLocalStorage = false;
+    });
+
+    test("Remove Token in Cookies", () => {
+      context.strapi.setToken("XXX");
+      context.strapi.removeToken();
+
+      expect(
+        context.strapi.axios.defaults.headers.common["Authorization"]
+      ).toBe(undefined);
+
+      expect(Cookies.get("strapi_jwt")).toBe(undefined);
+    });
+
+    test("Remove Token in localStorage", () => {
+      context.strapi.options.store.useLocalStorage = true;
+      context.strapi.setToken("XXX");
+      context.strapi.removeToken();
+
+      expect(
+        context.strapi.axios.defaults.headers.common["Authorization"]
+      ).toBe(undefined);
+
+      expect(window.localStorage.getItem("strapi_jwt")).toBe(null);
     });
   });
 
