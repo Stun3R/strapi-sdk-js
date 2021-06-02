@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/Stun3R/strapi-sdk/compare/v0.3.1...v0.4.0) (2021-06-02)
+
+
+### Features
+
+* **user:** add user object, getter, setter & fetch methods ([e18089a](https://github.com/Stun3R/strapi-sdk/commit/e18089ae31446eeaff49c6e8a01250bc5cbe14ac))
+
 ### [0.3.1](https://github.com/Stun3R/strapi-sdk/compare/v0.3.0...v0.3.1) (2021-06-02)
 
 ## [0.3.0](https://github.com/Stun3R/strapi-sdk/compare/v0.2.0...v0.3.0) (2021-05-28)
