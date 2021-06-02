@@ -28,7 +28,6 @@ import { isBrowser } from "./utils";
 // Strapi options' default values
 const defaults: StrapiDefaultOptions = {
   url: process.env.STRAPI_URL || "http://localhost:1337",
-  contentTypes: [],
   store: {
     key: "strapi_jwt",
     httpOnly: false,
@@ -48,7 +47,6 @@ export default class Strapi {
    * @constructor
    * @param {StrapiOptions} options? - Options in order to configure API URL, list your Content Types & extend the axios configuration
    * @param {string} options.url? - Your Strapi API URL, Default: process.env.STRAPI_URL || http://localhost::1337
-   * @param {string[] | StrapiContentType[]} options.contentTypes? - The list of your Content type on your Strapi API
    * @param {StoreConfig} options.store? - Config the way you want to store JWT (Cookie or LocalStorage)
    * @param {AxiosRequestConfig} options.axiosOptions? - The list of your Content type on your Strapi API
    */
@@ -62,61 +60,6 @@ export default class Strapi {
       paramsSerializer: qs.stringify,
       ...this.options.axiosOptions,
     });
-
-    // Generate shortcuts methods
-    for (let contentType of this.options.contentTypes) {
-      let type: "collection" | "single" = "collection";
-      let key: string;
-      if (typeof contentType === "object") {
-        key = contentType.name;
-        type = contentType.type;
-        contentType = contentType.name;
-      } else {
-        key = contentType;
-        type = "collection";
-      }
-
-      if (Strapi.prototype.hasOwnProperty(key)) return;
-
-      Object.defineProperty(Strapi.prototype, key, {
-        get() {
-          const self = this;
-          return {
-            single: {
-              find(...args: never[]) {
-                return self.find(contentType, ...args);
-              },
-              update(...args: never[]) {
-                return self.update(contentType, ...args);
-              },
-              delete(...args: never[]) {
-                return self.delete(contentType, ...args);
-              },
-            },
-            collection: {
-              find(...args: never[]) {
-                return self.find(contentType, ...args);
-              },
-              findOne(...args: never[]) {
-                return self.findOne(contentType, ...args);
-              },
-              count(...args: never[]) {
-                return self.count(contentType, ...args);
-              },
-              create(...args: never[]) {
-                return self.create(contentType, ...args);
-              },
-              update(...args: never[]) {
-                return self.update(contentType, ...args);
-              },
-              delete(...args: never[]) {
-                return self.delete(contentType, ...args);
-              },
-            },
-          }[type];
-        },
-      });
-    }
 
     // Synchronize token if already exist
     this.syncToken();
@@ -134,30 +77,24 @@ export default class Strapi {
     method: Method,
     url: string,
     axiosConfig?: AxiosRequestConfig
-  ): Promise<AxiosResponse<T>> {
+  ): Promise<T> {
     try {
       const response: AxiosResponse<T> = await this.axios.request<T>({
         method,
         url,
         ...axiosConfig,
       });
-      return response;
+      return response.data;
     } catch (error) {
       // Strapi error or not
       if (!error.response) {
         throw {
-          isStrapi: false,
-          response: error.message,
+          status: 500,
+          message: error.message,
+          original: error,
         };
       } else {
-        const {
-          status,
-          statusText,
-          headers,
-          config,
-          request,
-          data,
-        }: AxiosResponse = error.response;
+        const { status, data }: AxiosResponse = error.response;
 
         // format error message
         let message;
@@ -172,16 +109,9 @@ export default class Strapi {
         }
 
         throw {
-          isStrapi: true,
-          response: {
-            status,
-            statusText,
-            message,
-            original: data,
-            headers,
-            config,
-            request,
-          },
+          status,
+          message,
+          original: data,
         };
       }
     }
@@ -198,15 +128,10 @@ export default class Strapi {
     data: StrapiAuthenticationData
   ): Promise<StrapiAuthenticationResponse> {
     this.removeToken();
-    const {
-      data: { user, jwt },
-    }: AxiosResponse<StrapiAuthenticationResponse> = await this.request<StrapiAuthenticationResponse>(
-      "post",
-      "/auth/local",
-      {
+    const { user, jwt }: StrapiAuthenticationResponse =
+      await this.request<StrapiAuthenticationResponse>("post", "/auth/local", {
         data,
-      }
-    );
+      });
     this.setToken(jwt);
     return { user, jwt };
   }
@@ -224,15 +149,14 @@ export default class Strapi {
     data: StrapiRegistrationData
   ): Promise<StrapiAuthenticationResponse> {
     this.removeToken();
-    const {
-      data: { user, jwt },
-    }: AxiosResponse<StrapiAuthenticationResponse> = await this.request<StrapiAuthenticationResponse>(
-      "post",
-      "/auth/local/register",
-      {
-        data,
-      }
-    );
+    const { user, jwt }: StrapiAuthenticationResponse =
+      await this.request<StrapiAuthenticationResponse>(
+        "post",
+        "/auth/local/register",
+        {
+          data,
+        }
+      );
     this.setToken(jwt);
     return { user, jwt };
   }
@@ -242,11 +166,9 @@ export default class Strapi {
    *
    * @param  {StrapiForgotPasswordData} data - Forgot password data: `email`
    * @param  {string} data.email - Email of the user who forgot his password
-   * @returns Promise<AxiosResponse>
+   * @returns Promise<void>
    */
-  public async forgotPassword(
-    data: StrapiForgotPasswordData
-  ): Promise<AxiosResponse> {
+  public async forgotPassword(data: StrapiForgotPasswordData): Promise<void> {
     this.removeToken();
     return this.request("post", "/auth/forgot-password", { data });
   }
@@ -264,15 +186,14 @@ export default class Strapi {
     data: StrapiResetPasswordData
   ): Promise<StrapiAuthenticationResponse> {
     this.removeToken();
-    const {
-      data: { user, jwt },
-    }: AxiosResponse<StrapiAuthenticationResponse> = await this.request(
-      "post",
-      "/auth/reset-password",
-      {
-        data,
-      }
-    );
+    const { user, jwt }: StrapiAuthenticationResponse =
+      await this.request<StrapiAuthenticationResponse>(
+        "post",
+        "/auth/reset-password",
+        {
+          data,
+        }
+      );
     this.setToken(jwt);
     return { user, jwt };
   }
@@ -282,11 +203,11 @@ export default class Strapi {
    *
    * @param  {StrapiEmailConfirmationData} data - Email confirmation data: `email`
    * @param  {string} data.email - Email of the user who want to be confirmed
-   * @returns Promise<AxiosResponse>
+   * @returns Promise<void>
    */
   public async sendEmailConfirmation(
     data: StrapiEmailConfirmationData
-  ): Promise<AxiosResponse> {
+  ): Promise<void> {
     return this.request("post", "/auth/send-email-confirmation", {
       data,
     });
@@ -321,9 +242,7 @@ export default class Strapi {
       });
       if (params.access_token) access_token = params.access_token as string;
     }
-    const {
-      data: { user, jwt },
-    }: AxiosResponse<StrapiAuthenticationResponse> = await this.request(
+    const { user, jwt }: StrapiAuthenticationResponse = await this.request(
       "get",
       `/auth/${provider}/callback`,
       {
@@ -348,12 +267,12 @@ export default class Strapi {
    *
    * @param  {string} contentType - Content type's name pluralized
    * @param  {AxiosRequestConfig["params"]} params? - Filter and order queries
-   * @returns Promise<AxiosResponse<T>>
+   * @returns Promise<T>
    */
   public find<T>(
     contentType: string,
     params?: AxiosRequestConfig["params"]
-  ): Promise<AxiosResponse<T>> {
+  ): Promise<T> {
     return this.request<T>("get", `/${contentType}`, { params });
   }
 
@@ -362,12 +281,9 @@ export default class Strapi {
    *
    * @param  {string} contentType - Content type's name pluralized
    * @param  {string|number} id - ID of entry
-   * @returns Promise<AxiosResponse<T>>
+   * @returns Promise<T>
    */
-  public findOne<T>(
-    contentType: string,
-    id: string | number
-  ): Promise<AxiosResponse<T>> {
+  public findOne<T>(contentType: string, id: string | number): Promise<T> {
     return this.request<T>("get", `/${contentType}/${id}`);
   }
 
@@ -376,12 +292,12 @@ export default class Strapi {
    *
    * @param  {string} contentType - Content type's name pluralized
    * @param  {AxiosRequestConfig["params"]} params? - Filter and order queries
-   * @returns Promise<AxiosResponse<T>>
+   * @returns Promise<T>
    */
   public count<T>(
     contentType: string,
     params?: AxiosRequestConfig["params"]
-  ): Promise<AxiosResponse<T>> {
+  ): Promise<T> {
     return this.request<T>("get", `/${contentType}/count`, { params });
   }
 
@@ -390,12 +306,12 @@ export default class Strapi {
    *
    * @param  {string} contentType - Content type's name pluralized
    * @param  {AxiosRequestConfig["data"]} data - New entry
-   * @returns Promise<AxiosResponse<T>>
+   * @returns Promise<T>
    */
   public create<T>(
     contentType: string,
     data: AxiosRequestConfig["data"]
-  ): Promise<AxiosResponse<T>> {
+  ): Promise<T> {
     return this.request<T>("post", `/${contentType}`, { data });
   }
 
@@ -405,13 +321,13 @@ export default class Strapi {
    * @param  {string} contentType - Content type's name pluralized
    * @param  {string|number} id - ID of entry to be updated
    * @param  {AxiosRequestConfig["data"]} data - New entry data
-   * @returns Promise<AxiosResponse<T>>
+   * @returns Promise<T>
    */
   public update<T>(
     contentType: string,
     id: string | number,
     data: AxiosRequestConfig["data"]
-  ): Promise<AxiosResponse<T>> {
+  ): Promise<T> {
     return this.request<T>("put", `/${contentType}/${id}`, { data });
   }
 
@@ -420,12 +336,9 @@ export default class Strapi {
    *
    * @param  {string} contentType - Content type's name pluralized
    * @param  {string|number} id - ID of entry to be deleted
-   * @returns Promise<AxiosResponse<T>>
+   * @returns Promise<T>
    */
-  public delete<T>(
-    contentType: string,
-    id: string | number
-  ): Promise<AxiosResponse<T>> {
+  public delete<T>(contentType: string, id: string | number): Promise<T> {
     return this.request<T>("delete", `/${contentType}/${id}`);
   }
 
@@ -433,16 +346,14 @@ export default class Strapi {
    * Fetch Strapi API through graphQL
    *
    * @param  {AxiosRequestConfig["data"]} query - GraphQL Query
-   * @returns Promise<AxiosResponse<T>>
+   * @returns Promise<T>
    */
-  public async graphql<T>(
-    query: AxiosRequestConfig["data"]
-  ): Promise<AxiosResponse<T>> {
+  public async graphql<T>(query: AxiosRequestConfig["data"]): Promise<T> {
     const response: AxiosResponse = await this.request("post", "/graphql", {
       data: query,
     });
-    response.data = Object.values(response.data.data)[0];
-    return response;
+    response.data = Object.values(response.data)[0];
+    return response.data;
   }
 
   /**

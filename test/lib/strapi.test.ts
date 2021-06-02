@@ -13,12 +13,6 @@ describe("Strapi SDK", () => {
   beforeEach(() => {
     const strapi = new Strapi({
       url: "http://strapi-host/",
-      contentTypes: [
-        {
-          name: "restaurants",
-          type: "collection",
-        },
-      ],
       axiosOptions: {},
     });
 
@@ -96,24 +90,20 @@ describe("Strapi SDK", () => {
       }
 
       expect(response).toMatchObject({
-        isStrapi: true,
-        response: {
-          status: "400",
-          statusText: "Bad Request",
-          message: {
-            id: "Auth.form.error.email.invalid",
-          },
-          original: {
-            message: [
-              {
-                messages: [
-                  {
-                    id: "Auth.form.error.email.invalid",
-                  },
-                ],
-              },
-            ],
-          },
+        status: "400",
+        message: {
+          id: "Auth.form.error.email.invalid",
+        },
+        original: {
+          message: [
+            {
+              messages: [
+                {
+                  id: "Auth.form.error.email.invalid",
+                },
+              ],
+            },
+          ],
         },
       });
     });
@@ -141,20 +131,16 @@ describe("Strapi SDK", () => {
       }
 
       expect(response).toMatchObject({
-        isStrapi: true,
-        response: {
-          status: "400",
-          statusText: "Bad Request",
-          message: {
-            error: "Strapi Error",
-          },
-          original: {
-            message: [
-              {
-                error: "Strapi Error",
-              },
-            ],
-          },
+        status: "400",
+        message: {
+          error: "Strapi Error",
+        },
+        original: {
+          message: [
+            {
+              error: "Strapi Error",
+            },
+          ],
         },
       });
     });
@@ -178,13 +164,9 @@ describe("Strapi SDK", () => {
       }
 
       expect(response).toMatchObject({
-        isStrapi: true,
-        response: {
-          status: "400",
-          statusText: "Bad Request",
-          message: "Strapi error",
-          original: { message: "Strapi error" },
-        },
+        status: "400",
+        message: "Strapi error",
+        original: { message: "Strapi error" },
       });
     });
   });
@@ -192,7 +174,7 @@ describe("Strapi SDK", () => {
   test("Catch Network error request", async () => {
     context.axiosRequest.rejects(new Error("Network Error"));
 
-    let response = false;
+    let response;
     try {
       await context.strapi.request("get", "/users");
     } catch (error) {
@@ -200,8 +182,9 @@ describe("Strapi SDK", () => {
     }
 
     expect(response).toMatchObject({
-      isStrapi: false,
-      response: "Network Error",
+      message: "Network Error",
+      original: response.original,
+      status: 500,
     });
   });
 
@@ -604,9 +587,7 @@ describe("Strapi SDK", () => {
         })
       ).toBe(true);
 
-      expect(response).toEqual({
-        data: [{ name: "La Fourchette", description: "" }],
-      });
+      expect(response).toEqual([{ name: "La Fourchette", description: "" }]);
     });
   });
 });
