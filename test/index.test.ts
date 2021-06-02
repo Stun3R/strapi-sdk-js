@@ -9,6 +9,7 @@ describe("Creation of SDK instance", () => {
 
     expect(Object.getOwnPropertyNames(Object.getPrototypeOf(strapi))).toEqual([
       "constructor",
+      "user",
       "request",
       "login",
       "register",
@@ -25,12 +26,19 @@ describe("Creation of SDK instance", () => {
       "update",
       "delete",
       "graphql",
+      "getUser",
+      "setUser",
+      "fetchUser",
       "syncToken",
       "setToken",
       "removeToken",
     ]);
 
-    expect(Object.getOwnPropertyNames(strapi)).toEqual(["options", "axios"]);
+    expect(Object.getOwnPropertyNames(strapi)).toEqual([
+      "_user",
+      "options",
+      "axios",
+    ]);
   });
 
   test("Instance with existing token in localStorage", () => {
