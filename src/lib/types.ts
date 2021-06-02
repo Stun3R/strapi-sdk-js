@@ -15,11 +15,6 @@ export type StrapiAuthenticationProvider =
   | "reddit"
   | "auth0";
 
-export interface StrapiContentType {
-  name: string;
-  type: "collection" | "single";
-}
-
 export interface StoreConfig {
   key: string;
   useLocalStorage?: boolean;
@@ -29,17 +24,17 @@ export interface StoreConfig {
 
 export interface StrapiOptions {
   url?: string;
-  contentTypes?: string[] | StrapiContentType[];
   store?: StoreConfig;
   axiosOptions?: AxiosRequestConfig;
 }
 
 export interface StrapiDefaultOptions {
   url: string;
-  contentTypes: string[] | StrapiContentType[];
   store: StoreConfig;
   axiosOptions: AxiosRequestConfig;
 }
+
+export type StrapiUser = Record<string, unknown> | null;
 
 export interface StrapiAuthenticationResponse {
   user: Record<string, unknown>;

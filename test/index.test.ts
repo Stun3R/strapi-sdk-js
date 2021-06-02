@@ -9,6 +9,7 @@ describe("Creation of SDK instance", () => {
 
     expect(Object.getOwnPropertyNames(Object.getPrototypeOf(strapi))).toEqual([
       "constructor",
+      "user",
       "request",
       "login",
       "register",
@@ -25,123 +26,19 @@ describe("Creation of SDK instance", () => {
       "update",
       "delete",
       "graphql",
+      "getUser",
+      "setUser",
+      "fetchUser",
       "syncToken",
       "setToken",
       "removeToken",
     ]);
 
-    expect(Object.getOwnPropertyNames(strapi)).toEqual(["options", "axios"]);
-  });
-
-  test("Instance with contentTypes", () => {
-    const strapi: any = new Strapi({
-      contentTypes: ["restaurants"],
-    });
-    expect(Object.getOwnPropertyNames(Object.getPrototypeOf(strapi))).toEqual([
-      "constructor",
-      "request",
-      "login",
-      "register",
-      "forgotPassword",
-      "resetPassword",
-      "sendEmailConfirmation",
-      "getAuthenticationProvider",
-      "authenticateProvider",
-      "logout",
-      "find",
-      "findOne",
-      "count",
-      "create",
-      "update",
-      "delete",
-      "graphql",
-      "syncToken",
-      "setToken",
-      "removeToken",
-      "restaurants",
+    expect(Object.getOwnPropertyNames(strapi)).toEqual([
+      "_user",
+      "options",
+      "axios",
     ]);
-
-    expect(Object.keys(strapi.restaurants)).toEqual([
-      "find",
-      "findOne",
-      "count",
-      "create",
-      "update",
-      "delete",
-    ]);
-  });
-
-  test("Instance with contentTypes collection object", () => {
-    const strapi: any = new Strapi({
-      url: "http://strapi-host",
-      contentTypes: [
-        {
-          type: "collection",
-          name: "restaurants",
-        },
-      ],
-    });
-
-    expect(strapi.options).toEqual({
-      url: "http://strapi-host",
-      contentTypes: [
-        {
-          type: "collection",
-          name: "restaurants",
-        },
-      ],
-      store: {
-        cookieOptions: {
-          path: "/",
-        },
-        httpOnly: false,
-        key: "strapi_jwt",
-        useLocalStorage: false,
-      },
-      axiosOptions: {},
-    });
-
-    expect(Object.keys(strapi.restaurants)).toEqual([
-      "find",
-      "findOne",
-      "count",
-      "create",
-      "update",
-      "delete",
-    ]);
-  });
-
-  test("Instance with contentTypes single object", () => {
-    const strapi: any = new Strapi({
-      url: "http://strapi-host",
-      contentTypes: [
-        {
-          type: "single",
-          name: "homepage",
-        },
-      ],
-    });
-
-    expect(strapi.options).toEqual({
-      url: "http://strapi-host",
-      contentTypes: [
-        {
-          type: "single",
-          name: "homepage",
-        },
-      ],
-      store: {
-        cookieOptions: {
-          path: "/",
-        },
-        httpOnly: false,
-        key: "strapi_jwt",
-        useLocalStorage: false,
-      },
-      axiosOptions: {},
-    });
-
-    expect(Object.keys(strapi.homepage)).toEqual(["find", "update", "delete"]);
   });
 
   test("Instance with existing token in localStorage", () => {

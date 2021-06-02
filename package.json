@@ -1,6 +1,6 @@
 {
   "name": "strapi-sdk",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "📦 Javascript SDK for your Strapi API",
   "keywords": [
     "strapi",
@@ -46,12 +46,8 @@
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
-  "bin": {
-    "strapi-sdk": "./bin/cli.js"
-  },
   "files": [
-    "./dist",
-    "./bin"
+    "./dist"
   ],
   "scripts": {
     "start": "siroc build --watch",
@@ -73,20 +69,10 @@
     }
   },
   "dependencies": {
-    "@graphql-codegen/core": "^1.17.9",
-    "@graphql-codegen/typescript": "^1.22.0",
-    "@graphql-tools/load": "^6.2.8",
-    "@graphql-tools/url-loader": "^6.10.1",
-    "@types/fs-extra": "^9.0.11",
     "@types/js-cookie": "^2.2.6",
     "@types/qs": "^6.9.6",
     "axios": "^0.21.1",
-    "chalk": "^4.1.1",
-    "commander": "^7.2.0",
     "defu": "^5.0.0",
-    "enquirer": "^2.3.6",
-    "fs-extra": "^10.0.0",
-    "graphql": "^15.5.0",
     "js-cookie": "^2.2.1",
     "qs": "^6.10.1"
   },
@@ -95,7 +81,7 @@
     "@commitlint/config-conventional": "12.1.4",
     "@release-it/conventional-changelog": "2.0.1",
     "@types/jest": "26.0.23",
-    "@types/sinon": "10.0.1",
+    "@types/sinon": "10.0.2",
     "@typescript-eslint/eslint-plugin": "4.25.0",
     "@typescript-eslint/parser": "4.25.0",
     "commitizen": "4.2.4",
