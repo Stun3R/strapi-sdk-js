@@ -20,6 +20,7 @@ import type {
   StrapiOptions,
   StrapiRegistrationData,
   StrapiResetPasswordData,
+  StrapiUser,
 } from "./types";
 
 // Load utils methods
@@ -40,6 +41,7 @@ const defaults: StrapiDefaultOptions = {
 export default class Strapi {
   public axios: AxiosInstance;
   public options: StrapiDefaultOptions;
+  private _user: StrapiUser = null;
 
   /**
    * Strapi SDK Constructor
@@ -65,13 +67,21 @@ export default class Strapi {
     this.syncToken();
   }
 
+  get user(): StrapiUser {
+    return this._user;
+  }
+
+  set user(user: StrapiUser) {
+    this._user = user;
+  }
+
   /**
    * Basic axios request
    *
    * @param  {Method} method - HTTP method
    * @param  {string} url - Custom or Strapi API URL
    * @param  {AxiosRequestConfig} axiosConfig? - Custom Axios config
-   * @returns Promise<AxiosResponse<T>>
+   * @returns Promise<T>
    */
   public async request<T>(
     method: Method,
@@ -133,6 +143,7 @@ export default class Strapi {
         data,
       });
     this.setToken(jwt);
+    this.setUser(user);
     return { user, jwt };
   }
 
@@ -158,6 +169,7 @@ export default class Strapi {
         }
       );
     this.setToken(jwt);
+    this.setUser(user);
     return { user, jwt };
   }
 
@@ -195,6 +207,7 @@ export default class Strapi {
         }
       );
     this.setToken(jwt);
+    this.setUser(user);
     return { user, jwt };
   }
 
@@ -250,6 +263,7 @@ export default class Strapi {
       }
     );
     this.setToken(jwt);
+    this.setUser(user);
     return { user, jwt };
   }
 
@@ -259,6 +273,7 @@ export default class Strapi {
    * @returns void
    */
   public logout(): void {
+    this.setUser(null);
     this.removeToken();
   }
 
@@ -354,6 +369,40 @@ export default class Strapi {
     });
     response.data = Object.values(response.data)[0];
     return response.data;
+  }
+  /**
+   * Retrieve local data of the logged-in user
+   *
+   * @returns StrapiUser
+   */
+  public getUser(): StrapiUser {
+    return this._user;
+  }
+
+  /**
+   * Define local data of the logged-in user
+   *
+   * @param  {StrapiUser} user - New user data
+   * @returns void
+   */
+  public setUser(user: StrapiUser): void {
+    this._user = user;
+  }
+
+  /**
+   * Refresh local data of the logged-in user
+   *
+   * @returns Promise<StrapiUser>
+   */
+  public async fetchUser(): Promise<StrapiUser> {
+    try {
+      const user = await this.findOne<StrapiUser>("users", "me");
+      this.setUser(user);
+    } catch (e) {
+      this.logout();
+    }
+
+    return this._user;
   }
 
   /**

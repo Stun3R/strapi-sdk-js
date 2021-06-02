@@ -34,6 +34,8 @@ export interface StrapiDefaultOptions {
   axiosOptions: AxiosRequestConfig;
 }
 
+export type StrapiUser = Record<string, unknown> | null;
+
 export interface StrapiAuthenticationResponse {
   user: Record<string, unknown>;
   jwt: string;

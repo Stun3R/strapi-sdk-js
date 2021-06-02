@@ -189,10 +189,68 @@ describe("Strapi SDK", () => {
   });
 
   describe("Users & Permissions", () => {
+    test("Get user", async () => {
+      context.strapi.user = { username: "John Doe" };
+
+      expect(context.strapi.getUser()).toEqual({ username: "John Doe" });
+    });
+
+    test("Fetch user", async () => {
+      context.axiosRequest.resolves({
+        data: {
+          username: "John Doe",
+          email: "john@doe.com",
+        },
+      });
+
+      await context.strapi.fetchUser();
+
+      expect(
+        context.axiosRequest.calledWith({
+          method: "get",
+          url: "/users/me",
+        })
+      ).toBe(true);
+
+      expect(context.strapi.user).toEqual({
+        username: "John Doe",
+        email: "john@doe.com",
+      });
+    });
+
+    test("Catch error on Fetch user", async () => {
+      context.axiosRequest.rejects({
+        response: {
+          status: "401",
+          statusText: "Unauthorized",
+          data: {
+            message: "Unauthorized",
+          },
+        },
+      });
+
+      await context.strapi.fetchUser();
+
+      expect(
+        context.axiosRequest.calledWith({
+          method: "get",
+          url: "/users/me",
+        })
+      ).toBe(true);
+
+      expect(context.strapi.user).toBe(null);
+      expect(
+        context.strapi.axios.defaults.headers.common["Authorization"]
+      ).toBe(undefined);
+    });
+
     test("Register", async () => {
       context.axiosRequest.resolves({
         data: {
-          user: {},
+          user: {
+            username: "John Doe",
+            email: "john@doe.com",
+          },
           jwt: "XXX",
         },
       });
@@ -215,11 +273,22 @@ describe("Strapi SDK", () => {
         })
       ).toBe(true);
 
-      expect(response).toEqual({ user: {}, jwt: "XXX" });
+      expect(response).toEqual({
+        user: {
+          username: "John Doe",
+          email: "john@doe.com",
+        },
+        jwt: "XXX",
+      });
 
       expect(
         context.strapi.axios.defaults.headers.common["Authorization"]
       ).toBe("Bearer XXX");
+
+      expect(context.strapi.user).toStrictEqual({
+        username: "John Doe",
+        email: "john@doe.com",
+      });
 
       delete context.strapi.axios.defaults.headers.common["Authorization"];
       Cookies.remove("strapi_jwt");
@@ -228,7 +297,10 @@ describe("Strapi SDK", () => {
     test("Login", async () => {
       context.axiosRequest.resolves({
         data: {
-          user: {},
+          user: {
+            username: "John Doe",
+            email: "john@doe.com",
+          },
           jwt: "XXX",
         },
       });
@@ -249,13 +321,26 @@ describe("Strapi SDK", () => {
         })
       ).toBe(true);
 
-      expect(response).toEqual({ user: {}, jwt: "XXX" });
+      expect(response).toEqual({
+        user: {
+          username: "John Doe",
+          email: "john@doe.com",
+        },
+        jwt: "XXX",
+      });
+
       expect(
         context.strapi.axios.defaults.headers.common["Authorization"]
       ).toBe("Bearer XXX");
 
+      expect(context.strapi.user).toStrictEqual({
+        username: "John Doe",
+        email: "john@doe.com",
+      });
+
       delete context.strapi.axios.defaults.headers.common["Authorization"];
       Cookies.remove("strapi_jwt");
+      context.strapi.user = null;
     });
 
     test("Forgot Password", async () => {
