@@ -20,15 +20,14 @@ The first version does not suit me anymore in relation to the skills I had and t
 - [x]  Start from scratch
 - [x]  Add project management package: Siroc, Commitlint, Jest, Eslint/Prettier, Release-it, Commitizen,
 - [x]  GraphQL Type generation → CLI with prompt
-- [ ]  Add better **Typescript support** → Templates methods, Responses types, Interfaces
+- [x]  Add better **Typescript support** → Templates methods, Responses types, Interfaces
 - [x]  Remove **verbose mode** → Now we can use the Treeshaking for the HttpClient's response
-- [ ]  **httpOnly support** → Set boolean in config to enable/disable token methods
 - **Methods**
     - [x]  CRUD → find, findOne, create, update, delete
     - [x]  GraphQL method
-    - [ ]  Auth → login, register, forgot, reset, sendEmailConfirmation, getProviderAuthUrl,  AuthenticateProvider, logout
-    - [ ]  User Object
-    - [ ]  Token
+    - [x]  Auth → login, register, forgot, reset, sendEmailConfirmation, getProviderAuthUrl,  AuthenticateProvider, logout
+    - [x]  User Object
+    - [x]  Token
     - [ ]  Upload
 
 ## License
