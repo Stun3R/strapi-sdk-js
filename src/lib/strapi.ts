@@ -368,14 +368,6 @@ export default class Strapi {
     response.data = Object.values(response.data)[0];
     return response.data;
   }
-  /**
-   * Retrieve local data of the logged-in user
-   *
-   * @returns StrapiUser
-   */
-  public getUser(): StrapiUser {
-    return this._user;
-  }
 
   /**
    * Define local data of the logged-in user

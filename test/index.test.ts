@@ -26,7 +26,6 @@ describe("Creation of SDK instance", () => {
       "update",
       "delete",
       "graphql",
-      "getUser",
       "setUser",
       "fetchUser",
       "syncToken",
