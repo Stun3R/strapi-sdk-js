@@ -13,7 +13,7 @@ import Cookies from "js-cookie";
 import type {
   StrapiAuthenticationData,
   StrapiAuthenticationResponse,
-  StrapiAuthenticationProvider,
+  StrapiAuthProvider,
   StrapiDefaultOptions,
   StrapiEmailConfirmationData,
   StrapiForgotPasswordData,
@@ -228,24 +228,22 @@ export default class Strapi {
   /**
    * Get the correct URL to authenticate with provider
    *
-   * @param  {StrapiAuthenticationProvider} provider - Provider name
+   * @param  {StrapiAuthProvider} provider - Provider name
    * @returns string
    */
-  public getAuthenticationProvider(
-    provider: StrapiAuthenticationProvider
-  ): string {
+  public getProviderAuthenticationUrl(provider: StrapiAuthProvider): string {
     return new URL(`/connect/${provider}`, this.options.url).href;
   }
 
   /**
    * Authenticate user with the token present on the URL or in `params`
    *
-   * @param  {StrapiAuthenticationProvider} provider - Provider name
+   * @param  {StrapiAuthProvider} provider - Provider name
    * @param  {string} access_token? - Access Token return from Strapi
    * @returns Promise<StrapiAuthenticationResponse>
    */
   public async authenticateProvider(
-    provider: StrapiAuthenticationProvider,
+    provider: StrapiAuthProvider,
     access_token?: string
   ): Promise<StrapiAuthenticationResponse> {
     this.removeToken();

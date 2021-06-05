@@ -412,7 +412,7 @@ describe("Strapi SDK", () => {
     });
 
     test("Get Authentication Provider", () => {
-      const url = context.strapi.getAuthenticationProvider("github");
+      const url = context.strapi.getProviderAuthenticationUrl("github");
 
       expect(url).toBe("http://strapi-host/connect/github");
     });
