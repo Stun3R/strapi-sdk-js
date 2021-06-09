@@ -1,0 +1,18 @@
+{
+  "title": "Strapi SDK",
+  "url": "https://strapi-sdk-js.netlify.app",
+  "logo": {
+    "light": "/logo-light.png",
+    "dark": "/logo-dark.png"
+  },
+  "header": {
+    "title": false,
+    "logo": true
+  },
+  "colors": {
+    "primary": "#8e75ff"
+  },
+  "github": "Stun3R/strapi-sdk",
+  "defaultBranch": "main",
+  "twitter": "@Stun3R_"
+}

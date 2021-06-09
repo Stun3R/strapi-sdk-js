@@ -18,7 +18,6 @@ export type StrapiAuthProvider =
 export interface StoreConfig {
   key: string;
   useLocalStorage?: boolean;
-  httpOnly?: boolean;
   cookieOptions?: CookieAttributes;
 }
 

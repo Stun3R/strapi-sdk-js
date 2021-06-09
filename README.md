@@ -11,7 +11,6 @@ The first version does not suit me anymore in relation to the skills I had and t
 
 ### Main goal of this SDK
 
-- A Typescript project that supports httpOnly, GraphQL & does not have a greedy & heavy HTTP client
 - It must handle basic methods as well as CRUD, authentication & file upload
 - If possible a CLI that allows to generate GraphQL types/mutations found on the user's Strapi project
 

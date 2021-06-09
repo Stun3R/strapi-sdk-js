@@ -31,14 +31,13 @@ const defaults: StrapiDefaultOptions = {
   url: process.env.STRAPI_URL || "http://localhost:1337",
   store: {
     key: "strapi_jwt",
-    httpOnly: false,
     useLocalStorage: false,
     cookieOptions: { path: "/" },
   },
   axiosOptions: {},
 };
 
-export default class Strapi {
+export class Strapi {
   public axios: AxiosInstance;
   public options: StrapiDefaultOptions;
   private _user: StrapiUser = null;
