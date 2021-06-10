@@ -1,4 +1,4 @@
-# strapi-sdk-js
+# strapi-sdk-docs
 
 ## Setup
 

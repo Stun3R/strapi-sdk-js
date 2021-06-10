@@ -19,7 +19,7 @@ You can easily use them by importing them.
 
 **Example with `StrapiOptions`**
 ```ts
-import Strapi, { StrapiOptions } from 'strapi-sdk-js/types'
+import Strapi, { StrapiOptions } from 'strapi-sdk-js'
 
 const options: StrapiOptions = {
   url: 'http://strapi-host/'
