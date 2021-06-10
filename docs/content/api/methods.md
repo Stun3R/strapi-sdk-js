@@ -222,3 +222,25 @@ Remove token from Axios headers & [chosen storage](options#store).
 ```js
 strapi.removeToken()
 ```
+
+## Extends
+
+### axios
+
+This SDK uses `axios` under the hood, you can access the `axios` instance directly from there:
+
+```js
+strapi.axios
+```
+
+OR if you defined custom routes in your Strapi API that go out of the REST scope or if you want to extend the `axios request config`, you can do as below::
+
+```js
+const response = await strapi.request('get', '/restaurants', {
+  headers: {
+    foo: 'bar',
+  },
+})
+```
+
+> See the [axios config](https://github.com/axios/axios#request-config)

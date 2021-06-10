@@ -1,7 +1,7 @@
 ---
 title: Command Line Interface (CLI)
 menuTitle: Command Line Interface
-description: "Generate Typescript's Types based on your Strapi content types. 📚"
+description: "Generate Typescript's Types based on your Strapi content types. 💡"
 position: 8
 category: "💡 Going Further"
 features:

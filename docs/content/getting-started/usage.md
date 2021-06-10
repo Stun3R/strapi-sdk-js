@@ -118,19 +118,15 @@ strapi.user
 
 ## Advanced
 
-### Extend Axios
+### Accessing axios
 
-If you defined custom routes in your Strapi API that go out of the REST scope, you can use the `request` method:
+This SDK uses `axios` under the hood, you can access the `axios` instance directly from there:
 
 ```js
-const response = await strapi.request('get', '/my-custom-route', {
-  params: {
-    _sort: 'name:ASC',
-  },
-})
+strapi.axios
 ```
 
-OR if you want to extend the axios request config (a custom header per example), you can do it with the same `request` method:
+OR if you defined custom routes in your Strapi API that go out of the REST scope or if you want to extend the `axios request config`, you can do as below::
 
 ```js
 const response = await strapi.request('get', '/restaurants', {
