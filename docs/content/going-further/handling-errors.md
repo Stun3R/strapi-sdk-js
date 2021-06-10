@@ -44,7 +44,7 @@ In order to help you, we decided to provide you a formatted error object when an
   ```
 
   </d-code-block>
-  <d-code-block label="Error formatted">
+  <d-code-block label="Formatted error">
 
   ```js
   {
