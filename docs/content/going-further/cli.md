@@ -3,7 +3,7 @@ title: Command Line Interface (CLI)
 menuTitle: Command Line Interface
 description: "Generate Typescript's Types based on your Strapi content types. 📚"
 position: 8
-category: "📚 Guide"
+category: "💡 Going Further"
 features:
   - Generate Typescript's types based on your content types
   - Usage of GraphQL Code Generator to generate types

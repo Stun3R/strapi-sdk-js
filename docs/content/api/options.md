@@ -32,7 +32,7 @@ Store's configuration in order to set `key` for the cookie name as well as local
 **Example**
 
 ```js
-import Strapi from 'strapi-sdk'
+import Strapi from 'strapi-sdk-js'
 
 const strapi = new Strapi({
   store: {

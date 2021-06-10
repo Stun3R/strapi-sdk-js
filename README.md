@@ -34,8 +34,8 @@ The first version does not suit me anymore in relation to the skills I had and t
 [MIT License](./LICENSE)
 
 <!-- Badges -->
-[actions-src]: https://github.com/Stun3R/strapi-sdk/actions/workflows/main.yml/badge.svg
-[actions-href]: https://github.com/Stun3R/strapi-sdk/actions/workflows/main.yml
+[actions-src]: https://github.com/Stun3R/strapi-sdk-js/actions/workflows/main.yml/badge.svg
+[actions-href]: https://github.com/Stun3R/strapi-sdk-js/actions/workflows/main.yml
 
-[codecov-src]: https://img.shields.io/codecov/c/github/Stun3R/strapi-sdk.svg?style=flat-square
-[codecov-href]: https://codecov.io/gh/Stun3R/strapi-sdk
+[codecov-src]: https://img.shields.io/codecov/c/github/Stun3R/strapi-sdk-js.svg?style=flat-square
+[codecov-href]: https://codecov.io/gh/Stun3R/strapi-sdk-js

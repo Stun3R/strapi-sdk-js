@@ -11,7 +11,7 @@ features:
 <img src="/preview-light.png" class="light-img" width="1280" height="640" alt=""/>
 <img src="/preview-dark.png" class="dark-img" width="1280" height="640" alt=""/>
 
-This SDK is built for your [Strapi](https://strapi.io) API.
+Thanks this SDK you can trigger your [Strapi](https://strapi.io) API in your **<span class="text-primary-500">Javascript</span>**/**<span class="text-primary-500">Typescript</span>** project.
 
 ## Features
 

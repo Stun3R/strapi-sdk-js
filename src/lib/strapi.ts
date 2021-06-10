@@ -395,7 +395,7 @@ export class Strapi {
   }
 
   /**
-   * Sync token between storage & header when SDK is instanciate
+   * Sync token between storage & header when SDK is instantiate
    *
    * @returns void
    */

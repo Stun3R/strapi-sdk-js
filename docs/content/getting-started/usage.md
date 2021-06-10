@@ -7,10 +7,10 @@ category: "🚀 Getting Started"
 
 ## New instance
 
-Here is how you can instanciate the Strapi SDK. ***Note that the displayed options are the defaults one.*** 😉
+Here is how you can instantiate the Strapi SDK. ***Note that the displayed options are the default ones.*** 😉
 
 ```js
-import Strapi from "strapi-sdk"
+import Strapi from "strapi-sdk-js"
 
 const strapi = new Strapi()
 // OR with options
@@ -120,7 +120,7 @@ strapi.user
 
 ### Extend Axios
 
-If you defined custom routes in your Strapi API that goes out of the REST scope, you can use the `request` method:
+If you defined custom routes in your Strapi API that go out of the REST scope, you can use the `request` method:
 
 ```js
 const response = await strapi.request('get', '/my-custom-route', {
