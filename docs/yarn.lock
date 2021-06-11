@@ -4996,7 +4996,7 @@ doctypes@^1.1.0:
   resolved "https://registry.yarnpkg.com/doctypes/-/doctypes-1.1.0.tgz#ea80b106a87538774e8a3a4a5afe293de489e0a9"
   integrity sha1-6oCxBqh1OHdOijpKWv4pPeSJ4Kk=
 
-docus@^0.1.5:
+docus@0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/docus/-/docus-0.1.5.tgz#7d60f678425b4bc12cc16f2d89c31767f3e06d60"
   integrity sha512-xH0mgT/6vc6v1fUSLLdl12BZLMHwqVfYVOR/kUchHt/uZCKmst/hLsbglkwSva05OjULykSLYZaZ4tqJ1b6hew==
