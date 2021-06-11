@@ -1,0 +1,15 @@
+{
+  "name": "strapi-sdk-docs",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "docus": "^0.1.5",
+    "nuxt": "^2.14.7"
+  },
+  "devDependencies": {}
+}
