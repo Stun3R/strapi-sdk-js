@@ -10,7 +10,6 @@
 ### Features
 
 * **user:** add user object, getter, setter & fetch methods ([e18089a](https://github.com/Stun3R/strapi-sdk-js/commit/e18089ae31446eeaff49c6e8a01250bc5cbe14ac))
-* add auth & token methods ([a554ee9](https://github.com/Stun3R/strapi-sdk-js/commit/a554ee9930f3dc87e792afaba571e84143707528))
-* add crud methods, typescript support & graphql method ([cbe3b47](https://github.com/Stun3R/strapi-sdk-js/commit/cbe3b475dcdf49e3d6a37d594de2c69db8e185f3))
-* **cli:** add prompt in order to generate types from graphql schema ([20510f8](https://github.com/Stun3R/strapi-sdk-js/commit/20510f8a59609d6b4bbad4dafdfe3aa1a838ee55))
+* **auth:** add auth & token methods ([a554ee9](https://github.com/Stun3R/strapi-sdk-js/commit/a554ee9930f3dc87e792afaba571e84143707528))
+* **core:** add crud methods, typescript support & graphql method ([cbe3b47](https://github.com/Stun3R/strapi-sdk-js/commit/cbe3b475dcdf49e3d6a37d594de2c69db8e185f3))
 
