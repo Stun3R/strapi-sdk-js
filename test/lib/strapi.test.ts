@@ -189,12 +189,6 @@ describe("Strapi SDK", () => {
   });
 
   describe("Users & Permissions", () => {
-    test("Get user", async () => {
-      context.strapi.user = { username: "John Doe" };
-
-      expect(context.strapi.getUser()).toEqual({ username: "John Doe" });
-    });
-
     test("Fetch user", async () => {
       context.axiosRequest.resolves({
         data: {
@@ -412,7 +406,7 @@ describe("Strapi SDK", () => {
     });
 
     test("Get Authentication Provider", () => {
-      const url = context.strapi.getAuthenticationProvider("github");
+      const url = context.strapi.getProviderAuthenticationUrl("github");
 
       expect(url).toBe("http://strapi-host/connect/github");
     });

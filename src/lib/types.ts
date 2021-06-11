@@ -1,7 +1,7 @@
 import type { AxiosRequestConfig } from "axios";
 import type { CookieAttributes } from "js-cookie";
 
-export type StrapiAuthenticationProvider =
+export type StrapiAuthProvider =
   | "github"
   | "facebook"
   | "google"
@@ -18,7 +18,6 @@ export type StrapiAuthenticationProvider =
 export interface StoreConfig {
   key: string;
   useLocalStorage?: boolean;
-  httpOnly?: boolean;
   cookieOptions?: CookieAttributes;
 }
 

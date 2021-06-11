@@ -1,6 +1,6 @@
 {
-  "name": "strapi-sdk",
-  "version": "0.4.0",
+  "name": "strapi-sdk-js",
+  "version": "0.0.0",
   "description": "📦 Javascript SDK for your Strapi API",
   "keywords": [
     "strapi",
@@ -15,13 +15,13 @@
     "graphqL",
     "javascript"
   ],
-  "homepage": "",
+  "homepage": "https://strapi-sdk-js.netlify.app",
   "bugs": {
-    "url": "https://github.com/Stun3R/strapi-sdk/issues"
+    "url": "https://github.com/Stun3R/strapi-sdk-js/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:Stun3R/strapi-sdk.git"
+    "url": "git@github.com:Stun3R/strapi-sdk-js.git"
   },
   "license": "MIT",
   "author": {
@@ -95,7 +95,6 @@
     "release-it": "14.7.0",
     "sinon": "11.1.1",
     "siroc": "0.11.0",
-    "standard-version": "9.3.0",
     "ts-jest": "26.5.6",
     "typescript": "4.2.4"
   }
