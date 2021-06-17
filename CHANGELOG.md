@@ -1,3 +1,12 @@
+## 1.0.1 (2021-06-17)
+
+
+### Bug Fixes
+
+* **npm:** dist folder is missing when installing package ([8629d3d](https://github.com/Stun3R/strapi-sdk-js/commit/8629d3d85f399925f1697a5ab39881f47e1fe5fa)) @lhillebrandt
+* **dist:** change path in order to take dist inside npm package ([b494a35](https://github.com/Stun3R/strapi-sdk-js/commit/b494a352cb5559a8e9a2e2e931ee30a67836ef82))
+* **package.json:** remove trailing slash from dist folder in files ([7d3000c](https://github.com/Stun3R/strapi-sdk-js/commit/7d3000c15f63443d03971bc510cecf86ae530983))
+
 # 1.0.0 (2021-06-11)
 
 
