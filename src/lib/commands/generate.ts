@@ -22,21 +22,12 @@ interface GenerateOptions {
   host: string;
 }
 
-interface SDKBridgeContentType {
-  name: string;
-  type: "singleType" | "collectionType";
-}
-
-interface SDKBridgeSchema {
+interface StrapiJSONSchema {
   $schema: string;
   title: string;
+  kind: "singleType" | "collectionType";
   type: "object";
   properties: JSONSchema;
-}
-
-interface SDKBridgeResponse {
-  contentTypes: SDKBridgeContentType[];
-  schema: SDKBridgeSchema[];
 }
 
 // Prompt's configuration
@@ -52,10 +43,6 @@ const promptOptions = [
 // Generation options
 const scope = {
   outputDir: "./models",
-  contentTypes: {
-    outputName: "content-types.json",
-    filePath: "./models/content-types.json",
-  },
   schema: {
     outputName: "types.ts",
     filePath: "./models/types.ts",
@@ -73,24 +60,22 @@ const scope = {
 export const generate = async (): Promise<void> => {
   try {
     // Get Token from .env
-    const token = process.env.STRAPI_SDK_BRIDGE_TOKEN as string;
+    const token = process.env.STRAPI_JSONSCHEMA_TOKEN as string;
     // Call the prompt to get host param
     const options: GenerateOptions = await prompt(promptOptions);
 
     try {
       // Call SDK Bridge
-      const { data }: AxiosResponse<SDKBridgeResponse> =
-        await axios.get<SDKBridgeResponse>(`${options.host}/sdk-bridge`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-      // Generate content types
-      await generateContentTypes(data.contentTypes);
+      const { data }: AxiosResponse<StrapiJSONSchema[]> = await axios.get<
+        StrapiJSONSchema[]
+      >(`${options.host}/json-schema`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       // Generate Typescript types
-      await generateTypes(data.schema);
+      await generateTypes(data);
       process.exit(0);
     } catch (error) {
       // Check if error is from Strapi
@@ -111,26 +96,8 @@ export const generate = async (): Promise<void> => {
   }
 };
 
-const generateContentTypes = async (contentTypes: SDKBridgeContentType[]) => {
-  try {
-    // Create output directorie recursively.
-    await ensureDir(scope.outputDir);
-
-    // Write the generated content Types.
-    await outputJson(scope.contentTypes.filePath, contentTypes);
-
-    // Log the success.
-    consola.success(
-      `Successfully generated content types at ${scope.contentTypes.filePath}.`
-    );
-  } catch (error) {
-    consola.error(error);
-    process.exit(1);
-  }
-};
-
 export const generateTypes = async (
-  schema: SDKBridgeSchema[]
+  schema: StrapiJSONSchema[]
 ): Promise<void> => {
   try {
     // Create output directory if doesn't exist.
@@ -145,7 +112,9 @@ export const generateTypes = async (
       const type = await compile(
         schema[index],
         schema[index].title,
-        index > 0 ? {} : { bannerComment: scope.schema.bannerComment }
+        index > 0
+          ? { unknownAny: true }
+          : { bannerComment: scope.schema.bannerComment, unknownAny: true }
       );
 
       // Write the generated types.
@@ -154,7 +123,7 @@ export const generateTypes = async (
 
     // Log the success.
     consola.success(
-      `Successfully generated types at ${scope.contentTypes.filePath}.`
+      `Successfully generated types at ${scope.schema.filePath}.`
     );
   } catch (error) {
     consola.error(error);
