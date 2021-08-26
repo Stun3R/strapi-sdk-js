@@ -43,7 +43,7 @@ await strapi.create('restaurants', { name: '' })
 
 Update a content type entry by id. It returns the updated entry.
 ```js
-await strapi.update('restaurants', { name: '' })
+await strapi.update('restaurants', 1, { name: '' })
 ```
 
 ### `delete(contentType, id)`
