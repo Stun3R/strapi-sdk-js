@@ -1,3 +1,12 @@
+## [1.0.2](https://github.com/Stun3R/strapi-sdk-js/compare/v1.0.1...v1.0.2) (2021-08-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependency js-cookie to v3 ([54be993](https://github.com/Stun3R/strapi-sdk-js/commit/54be993f1c02949fb320786bca409681eb6c9ed0))
+* **deps:** update dependency nuxt to v2.15.7 ([062c012](https://github.com/Stun3R/strapi-sdk-js/commit/062c0121f63746c728f895fcf4b608e3e820826d))
+* **deps:** update dependency nuxt to v2.15.8 ([598dacd](https://github.com/Stun3R/strapi-sdk-js/commit/598dacdeab43252d92405fc67882de2c00609b48))
+
 ## 1.0.1 (2021-06-17)
 
 
