@@ -5,6 +5,7 @@ import axios, {
   AxiosResponse,
   Method,
 } from "axios";
+import { join } from "path";
 import defu from "defu";
 import qs from "qs";
 import Cookies from "js-cookie";
@@ -20,6 +21,7 @@ import type {
   StrapiOptions,
   StrapiRegistrationData,
   StrapiResetPasswordData,
+  StrapiResponse,
   StrapiUser,
 } from "./types";
 
@@ -90,7 +92,7 @@ export class Strapi {
     try {
       const response: AxiosResponse<T> = await this.axios.request<T>({
         method,
-        url,
+        url: join("/api", url),
         ...axiosConfig,
       });
       return response.data;
@@ -279,13 +281,15 @@ export class Strapi {
    *
    * @param  {string} contentType - Content type's name pluralized
    * @param  {AxiosRequestConfig["params"]} params? - Filter and order queries
-   * @returns Promise<T>
+   * @returns Promise<StrapiResponse<T>>
    */
   public find<T>(
     contentType: string,
     params?: AxiosRequestConfig["params"]
-  ): Promise<T> {
-    return this.request<T>("get", `/${contentType}`, { params });
+  ): Promise<StrapiResponse<T>> {
+    return this.request<StrapiResponse<T>>("get", `/${contentType}`, {
+      params,
+    });
   }
 
   /**
@@ -293,24 +297,13 @@ export class Strapi {
    *
    * @param  {string} contentType - Content type's name pluralized
    * @param  {string|number} id - ID of entry
-   * @returns Promise<T>
+   * @returns Promise<StrapiResponse<T>>
    */
-  public findOne<T>(contentType: string, id: string | number): Promise<T> {
-    return this.request<T>("get", `/${contentType}/${id}`);
-  }
-
-  /**
-   * Count {content-type} entries
-   *
-   * @param  {string} contentType - Content type's name pluralized
-   * @param  {AxiosRequestConfig["params"]} params? - Filter and order queries
-   * @returns Promise<T>
-   */
-  public count<T>(
+  public findOne<T>(
     contentType: string,
-    params?: AxiosRequestConfig["params"]
-  ): Promise<T> {
-    return this.request<T>("get", `/${contentType}/count`, { params });
+    id: string | number
+  ): Promise<StrapiResponse<T>> {
+    return this.request<StrapiResponse<T>>("get", `/${contentType}/${id}`);
   }
 
   /**
@@ -318,13 +311,15 @@ export class Strapi {
    *
    * @param  {string} contentType - Content type's name pluralized
    * @param  {AxiosRequestConfig["data"]} data - New entry
-   * @returns Promise<T>
+   * @returns Promise<StrapiResponse<T>>
    */
   public create<T>(
     contentType: string,
     data: AxiosRequestConfig["data"]
-  ): Promise<T> {
-    return this.request<T>("post", `/${contentType}`, { data });
+  ): Promise<StrapiResponse<T>> {
+    return this.request<StrapiResponse<T>>("post", `/${contentType}`, {
+      data: { data },
+    });
   }
 
   /**
@@ -333,14 +328,16 @@ export class Strapi {
    * @param  {string} contentType - Content type's name pluralized
    * @param  {string|number} id - ID of entry to be updated
    * @param  {AxiosRequestConfig["data"]} data - New entry data
-   * @returns Promise<T>
+   * @returns Promise<StrapiResponse<T>>
    */
   public update<T>(
     contentType: string,
     id: string | number,
     data: AxiosRequestConfig["data"]
-  ): Promise<T> {
-    return this.request<T>("put", `/${contentType}/${id}`, { data });
+  ): Promise<StrapiResponse<T>> {
+    return this.request<StrapiResponse<T>>("put", `/${contentType}/${id}`, {
+      data: { data },
+    });
   }
 
   /**
@@ -348,24 +345,13 @@ export class Strapi {
    *
    * @param  {string} contentType - Content type's name pluralized
    * @param  {string|number} id - ID of entry to be deleted
-   * @returns Promise<T>
+   * @returns Promise<StrapiResponse<T>>
    */
-  public delete<T>(contentType: string, id: string | number): Promise<T> {
-    return this.request<T>("delete", `/${contentType}/${id}`);
-  }
-
-  /**
-   * Fetch Strapi API through graphQL
-   *
-   * @param  {AxiosRequestConfig["data"]} query - GraphQL Query
-   * @returns Promise<T>
-   */
-  public async graphql<T>(query: AxiosRequestConfig["data"]): Promise<T> {
-    const response: AxiosResponse = await this.request("post", "/graphql", {
-      data: query,
-    });
-    response.data = Object.values(response.data)[0];
-    return response.data;
+  public delete<T>(
+    contentType: string,
+    id: string | number
+  ): Promise<StrapiResponse<T>> {
+    return this.request<StrapiResponse<T>>("delete", `/${contentType}/${id}`);
   }
 
   /**
@@ -385,7 +371,7 @@ export class Strapi {
    */
   public async fetchUser(): Promise<StrapiUser> {
     try {
-      const user = await this.findOne<StrapiUser>("users", "me");
+      const user = await this.request<StrapiUser>("get", "/users/me");
       this.setUser(user);
     } catch (e) {
       this.logout();

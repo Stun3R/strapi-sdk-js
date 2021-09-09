@@ -35,6 +35,11 @@ export interface StrapiDefaultOptions {
 
 export type StrapiUser = Record<string, unknown> | null;
 
+export interface StrapiResponse<T> {
+  data: T;
+  meta: Record<string, number>;
+}
+
 export interface StrapiAuthenticationResponse {
   user: Record<string, unknown>;
   jwt: string;

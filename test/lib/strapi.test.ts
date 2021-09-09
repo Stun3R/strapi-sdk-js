@@ -56,7 +56,7 @@ describe("Strapi SDK", () => {
             Authorization: "Bearer jwt",
           },
           method: "get",
-          url: "/users",
+          url: "/api/users",
         })
       ).toBe(true);
     });
@@ -202,7 +202,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "get",
-          url: "/users/me",
+          url: "/api/users/me",
         })
       ).toBe(true);
 
@@ -228,7 +228,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "get",
-          url: "/users/me",
+          url: "/api/users/me",
         })
       ).toBe(true);
 
@@ -258,7 +258,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "post",
-          url: "/auth/local/register",
+          url: "/api/auth/local/register",
           data: {
             email: "john@doe.com",
             username: "John Doe",
@@ -307,7 +307,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "post",
-          url: "/auth/local",
+          url: "/api/auth/local",
           data: {
             identifier: "john@doe.com",
             password: "password",
@@ -345,7 +345,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "post",
-          url: "/auth/forgot-password",
+          url: "/api/auth/forgot-password",
           data: {
             email: "john@doe.com",
           },
@@ -370,7 +370,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "post",
-          url: "/auth/reset-password",
+          url: "/api/auth/reset-password",
           data: {
             code: "XXX",
             password: "password",
@@ -397,7 +397,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "post",
-          url: "/auth/send-email-confirmation",
+          url: "/api/auth/send-email-confirmation",
           data: {
             email: "john@doe.com",
           },
@@ -427,7 +427,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "get",
-          url: "/auth/github/callback",
+          url: "/api/auth/github/callback",
           params: {
             access_token: "myAccessToken",
           },
@@ -462,7 +462,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "get",
-          url: "/auth/github/callback",
+          url: "/api/auth/github/callback",
           params: {
             access_token: "myAccessToken",
           },
@@ -568,7 +568,7 @@ describe("Strapi SDK", () => {
           params: {
             _sort: "name:ASC",
           },
-          url: "/restaurants",
+          url: "/api/restaurants",
         })
       ).toBe(true);
     });
@@ -579,23 +579,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWithExactly({
           method: "get",
-          url: "/restaurants/1",
-        })
-      ).toBe(true);
-    });
-
-    test("count - Count {content-type} entries", async () => {
-      await context.strapi.count("restaurants", {
-        name_contains: "baguette",
-      });
-
-      expect(
-        context.axiosRequest.calledWithExactly({
-          method: "get",
-          params: {
-            name_contains: "baguette",
-          },
-          url: "/restaurants/count",
+          url: "/api/restaurants/1",
         })
       ).toBe(true);
     });
@@ -608,9 +592,11 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWithExactly({
           method: "post",
-          url: "/restaurants",
+          url: "/api/restaurants",
           data: {
-            name: "La Fourchette",
+            data: {
+              name: "La Fourchette",
+            },
           },
         })
       ).toBe(true);
@@ -624,9 +610,11 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWithExactly({
           method: "put",
-          url: "/restaurants/1",
+          url: "/api/restaurants/1",
           data: {
-            username: "La Fourchette",
+            data: {
+              username: "La Fourchette",
+            },
           },
         })
       ).toBe(true);
@@ -638,35 +626,9 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWithExactly({
           method: "delete",
-          url: "/restaurants/1",
+          url: "/api/restaurants/1",
         })
       ).toBe(true);
-    });
-  });
-
-  describe("GraphQL", () => {
-    test("GraphQL support", async () => {
-      context.axiosRequest.resolves({
-        data: {
-          data: { restaurants: [{ name: "La Fourchette", description: "" }] },
-        },
-      });
-
-      const response = await context.strapi.graphql({
-        query: `query { restaurants { id name } }`,
-      });
-
-      expect(
-        context.axiosRequest.calledWithExactly({
-          method: "post",
-          url: "/graphql",
-          data: {
-            query: `query { restaurants { id name } }`,
-          },
-        })
-      ).toBe(true);
-
-      expect(response).toEqual([{ name: "La Fourchette", description: "" }]);
     });
   });
 });
