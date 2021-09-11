@@ -23,12 +23,14 @@ export interface StoreConfig {
 
 export interface StrapiOptions {
   url?: string;
+  prefix?: string;
   store?: StoreConfig;
   axiosOptions?: AxiosRequestConfig;
 }
 
 export interface StrapiDefaultOptions {
   url: string;
+  prefix: string;
   store: StoreConfig;
   axiosOptions: AxiosRequestConfig;
 }

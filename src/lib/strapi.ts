@@ -5,7 +5,6 @@ import axios, {
   AxiosResponse,
   Method,
 } from "axios";
-import { join } from "path";
 import defu from "defu";
 import qs from "qs";
 import Cookies from "js-cookie";
@@ -31,6 +30,7 @@ import { isBrowser } from "./utils";
 // Strapi options' default values
 const defaults: StrapiDefaultOptions = {
   url: process.env.STRAPI_URL || "http://localhost:1337",
+  prefix: "/api",
   store: {
     key: "strapi_jwt",
     useLocalStorage: false,
@@ -59,7 +59,7 @@ export class Strapi {
 
     // create axios instance
     this.axios = axios.create({
-      baseURL: this.options.url,
+      baseURL: new URL(this.options.prefix, this.options.url).href,
       paramsSerializer: qs.stringify,
       ...this.options.axiosOptions,
     });
@@ -92,7 +92,7 @@ export class Strapi {
     try {
       const response: AxiosResponse<T> = await this.axios.request<T>({
         method,
-        url: join("/api", url),
+        url,
         ...axiosConfig,
       });
       return response.data;

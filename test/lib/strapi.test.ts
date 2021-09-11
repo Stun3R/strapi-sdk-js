@@ -56,7 +56,7 @@ describe("Strapi SDK", () => {
             Authorization: "Bearer jwt",
           },
           method: "get",
-          url: "/api/users",
+          url: "/users",
         })
       ).toBe(true);
     });
@@ -202,7 +202,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "get",
-          url: "/api/users/me",
+          url: "/users/me",
         })
       ).toBe(true);
 
@@ -228,7 +228,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "get",
-          url: "/api/users/me",
+          url: "/users/me",
         })
       ).toBe(true);
 
@@ -258,7 +258,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "post",
-          url: "/api/auth/local/register",
+          url: "/auth/local/register",
           data: {
             email: "john@doe.com",
             username: "John Doe",
@@ -307,7 +307,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "post",
-          url: "/api/auth/local",
+          url: "/auth/local",
           data: {
             identifier: "john@doe.com",
             password: "password",
@@ -345,7 +345,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "post",
-          url: "/api/auth/forgot-password",
+          url: "/auth/forgot-password",
           data: {
             email: "john@doe.com",
           },
@@ -370,7 +370,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "post",
-          url: "/api/auth/reset-password",
+          url: "/auth/reset-password",
           data: {
             code: "XXX",
             password: "password",
@@ -397,7 +397,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "post",
-          url: "/api/auth/send-email-confirmation",
+          url: "/auth/send-email-confirmation",
           data: {
             email: "john@doe.com",
           },
@@ -427,7 +427,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "get",
-          url: "/api/auth/github/callback",
+          url: "/auth/github/callback",
           params: {
             access_token: "myAccessToken",
           },
@@ -462,7 +462,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWith({
           method: "get",
-          url: "/api/auth/github/callback",
+          url: "/auth/github/callback",
           params: {
             access_token: "myAccessToken",
           },
@@ -568,7 +568,7 @@ describe("Strapi SDK", () => {
           params: {
             _sort: "name:ASC",
           },
-          url: "/api/restaurants",
+          url: "/restaurants",
         })
       ).toBe(true);
     });
@@ -579,7 +579,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWithExactly({
           method: "get",
-          url: "/api/restaurants/1",
+          url: "/restaurants/1",
         })
       ).toBe(true);
     });
@@ -592,7 +592,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWithExactly({
           method: "post",
-          url: "/api/restaurants",
+          url: "/restaurants",
           data: {
             data: {
               name: "La Fourchette",
@@ -610,7 +610,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWithExactly({
           method: "put",
-          url: "/api/restaurants/1",
+          url: "/restaurants/1",
           data: {
             data: {
               username: "La Fourchette",
@@ -626,7 +626,7 @@ describe("Strapi SDK", () => {
       expect(
         context.axiosRequest.calledWithExactly({
           method: "delete",
-          url: "/api/restaurants/1",
+          url: "/restaurants/1",
         })
       ).toBe(true);
     });
