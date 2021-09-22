@@ -315,10 +315,12 @@ export class Strapi {
    */
   public create<T>(
     contentType: string,
-    data: AxiosRequestConfig["data"]
+    data: AxiosRequestConfig["data"],
+    params?: { fields: Array<string> }
   ): Promise<StrapiResponse<T>> {
     return this.request<StrapiResponse<T>>("post", `/${contentType}`, {
       data: { data },
+      params,
     });
   }
 
@@ -333,10 +335,12 @@ export class Strapi {
   public update<T>(
     contentType: string,
     id: string | number,
-    data: AxiosRequestConfig["data"]
+    data: AxiosRequestConfig["data"],
+    params?: { fields: Array<string> }
   ): Promise<StrapiResponse<T>> {
     return this.request<StrapiResponse<T>>("put", `/${contentType}/${id}`, {
       data: { data },
+      params,
     });
   }
 
@@ -349,9 +353,12 @@ export class Strapi {
    */
   public delete<T>(
     contentType: string,
-    id: string | number
+    id: string | number,
+    params?: { fields: Array<string> }
   ): Promise<StrapiResponse<T>> {
-    return this.request<StrapiResponse<T>>("delete", `/${contentType}/${id}`);
+    return this.request<StrapiResponse<T>>("delete", `/${contentType}/${id}`, {
+      params,
+    });
   }
 
   /**

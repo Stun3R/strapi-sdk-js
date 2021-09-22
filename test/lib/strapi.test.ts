@@ -585,9 +585,13 @@ describe("Strapi SDK", () => {
     });
 
     test("create - Create a {content-type} entry", async () => {
-      await context.strapi.create("restaurants", {
-        name: "La Fourchette",
-      });
+      await context.strapi.create(
+        "restaurants",
+        {
+          name: "La Fourchette",
+        },
+        { fields: ["id", "name"] }
+      );
 
       expect(
         context.axiosRequest.calledWithExactly({
@@ -598,14 +602,22 @@ describe("Strapi SDK", () => {
               name: "La Fourchette",
             },
           },
+          params: {
+            fields: ["id", "name"],
+          },
         })
       ).toBe(true);
     });
 
     test("update - Update a {content-type} entry", async () => {
-      await context.strapi.update("restaurants", 1, {
-        username: "La Fourchette",
-      });
+      await context.strapi.update(
+        "restaurants",
+        1,
+        {
+          username: "La Fourchette",
+        },
+        { fields: ["name"] }
+      );
 
       expect(
         context.axiosRequest.calledWithExactly({
@@ -616,17 +628,23 @@ describe("Strapi SDK", () => {
               username: "La Fourchette",
             },
           },
+          params: {
+            fields: ["name"],
+          },
         })
       ).toBe(true);
     });
 
     test("delete - Delete a {content-type} entry", async () => {
-      await context.strapi.delete("restaurants", 1);
+      await context.strapi.delete("restaurants", 1, { fields: ["name"] });
 
       expect(
         context.axiosRequest.calledWithExactly({
           method: "delete",
           url: "/restaurants/1",
+          params: {
+            fields: ["name"],
+          },
         })
       ).toBe(true);
     });
