@@ -37,9 +37,33 @@ export interface StrapiDefaultOptions {
 
 export type StrapiUser = Record<string, unknown> | null;
 
+export interface PaginationByPage {
+  page: number;
+  pageSize: number;
+  withCount?: boolean;
+}
+
+export interface PaginationByOffset {
+  start: number;
+  limit: number;
+  withCount?: boolean;
+}
+
+export interface StrapiBasicRequestParams {
+  fields?: Array<string>;
+  populate?: string | Array<string>;
+}
+
+export interface StrapiRequestParams extends StrapiBasicRequestParams {
+  sort?: string | Array<string>;
+  pagination?: PaginationByOffset | PaginationByPage;
+  filters?: Record<string, unknown>;
+  publicationState?: "live" | "preview";
+}
+
 export interface StrapiResponse<T> {
   data: T;
-  meta: Record<string, number>;
+  meta: Record<string, unknown>;
 }
 
 export interface StrapiAuthenticationResponse {

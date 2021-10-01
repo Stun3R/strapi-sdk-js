@@ -28,7 +28,7 @@ describe("Strapi SDK", () => {
     test("Basic Axios Request", async () => {
       await context.strapi.request("get", "/users", {
         params: {
-          _sort: "username:ASC",
+          sort: "username",
         },
       });
 
@@ -37,7 +37,7 @@ describe("Strapi SDK", () => {
           method: "get",
           url: "/users",
           params: {
-            _sort: "username:ASC",
+            sort: "username",
           },
         })
       );
@@ -559,14 +559,14 @@ describe("Strapi SDK", () => {
   describe("Entries", () => {
     test("find - Get a list of {content-type} entries", async () => {
       await context.strapi.find("restaurants", {
-        _sort: "name:ASC",
+        sort: "name",
       });
 
       expect(
         context.axiosRequest.calledWith({
           method: "get",
           params: {
-            _sort: "name:ASC",
+            sort: "name",
           },
           url: "/restaurants",
         })
@@ -574,12 +574,17 @@ describe("Strapi SDK", () => {
     });
 
     test("findOne - Get a specific {content-type} entry", async () => {
-      await context.strapi.findOne("restaurants", 1);
+      await context.strapi.findOne("restaurants", 1, {
+        fields: ["name"],
+      });
 
       expect(
         context.axiosRequest.calledWithExactly({
           method: "get",
           url: "/restaurants/1",
+          params: {
+            fields: ["name"],
+          },
         })
       ).toBe(true);
     });
