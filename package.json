@@ -70,7 +70,7 @@
     }
   },
   "dependencies": {
-    "@types/js-cookie": "^2.2.6",
+    "@types/js-cookie": "^3.0.0",
     "@types/qs": "^6.9.6",
     "axios": "^0.21.1",
     "defu": "^5.0.0",
