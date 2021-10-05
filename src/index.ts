@@ -7,7 +7,7 @@ export type {
   StrapiAuthProvider,
   StrapiAuthenticationData,
   StrapiAuthenticationResponse,
-  StrapiBasicRequestParams,
+  StrapiBaseRequestParams,
   StrapiDefaultOptions,
   StrapiEmailConfirmationData,
   StrapiForgotPasswordData,

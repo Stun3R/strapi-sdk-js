@@ -14,7 +14,7 @@ import type {
   StrapiAuthenticationData,
   StrapiAuthenticationResponse,
   StrapiAuthProvider,
-  StrapiBasicRequestParams,
+  StrapiBaseRequestParams,
   StrapiDefaultOptions,
   StrapiEmailConfirmationData,
   StrapiForgotPasswordData,
@@ -299,13 +299,13 @@ export class Strapi {
    *
    * @param  {string} contentType - Content type's name pluralized
    * @param  {string|number} id - ID of entry
-   * @param  {StrapiBasicRequestParams} params? - Fields selection & Relations population
+   * @param  {StrapiBaseRequestParams} params? - Fields selection & Relations population
    * @returns Promise<StrapiResponse<T>>
    */
   public findOne<T>(
     contentType: string,
     id: string | number,
-    params?: StrapiBasicRequestParams
+    params?: StrapiBaseRequestParams
   ): Promise<StrapiResponse<T>> {
     return this.request<StrapiResponse<T>>("get", `/${contentType}/${id}`, {
       params,
@@ -317,13 +317,13 @@ export class Strapi {
    *
    * @param  {string} contentType - Content type's name pluralized
    * @param  {AxiosRequestConfig["data"]} data - New entry
-   * @param  {StrapiBasicRequestParams} params? - Fields selection & Relations population
+   * @param  {StrapiBaseRequestParams} params? - Fields selection & Relations population
    * @returns Promise<StrapiResponse<T>>
    */
   public create<T>(
     contentType: string,
     data: AxiosRequestConfig["data"],
-    params?: StrapiBasicRequestParams
+    params?: StrapiBaseRequestParams
   ): Promise<StrapiResponse<T>> {
     return this.request<StrapiResponse<T>>("post", `/${contentType}`, {
       data: { data },
@@ -337,14 +337,14 @@ export class Strapi {
    * @param  {string} contentType - Content type's name pluralized
    * @param  {string|number} id - ID of entry to be updated
    * @param  {AxiosRequestConfig["data"]} data - New entry data
-   * @param  {StrapiBasicRequestParams} params? - Fields selection & Relations population
+   * @param  {StrapiBaseRequestParams} params? - Fields selection & Relations population
    * @returns Promise<StrapiResponse<T>>
    */
   public update<T>(
     contentType: string,
     id: string | number,
     data: AxiosRequestConfig["data"],
-    params?: StrapiBasicRequestParams
+    params?: StrapiBaseRequestParams
   ): Promise<StrapiResponse<T>> {
     return this.request<StrapiResponse<T>>("put", `/${contentType}/${id}`, {
       data: { data },
@@ -357,13 +357,13 @@ export class Strapi {
    *
    * @param  {string} contentType - Content type's name pluralized
    * @param  {string|number} id - ID of entry to be deleted
-   * @param  {StrapiBasicRequestParams} params? - Fields selection & Relations population
+   * @param  {StrapiBaseRequestParams} params? - Fields selection & Relations population
    * @returns Promise<StrapiResponse<T>>
    */
   public delete<T>(
     contentType: string,
     id: string | number,
-    params?: StrapiBasicRequestParams
+    params?: StrapiBaseRequestParams
   ): Promise<StrapiResponse<T>> {
     return this.request<StrapiResponse<T>>("delete", `/${contentType}/${id}`, {
       params,

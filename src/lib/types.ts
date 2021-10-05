@@ -49,12 +49,12 @@ export interface PaginationByOffset {
   withCount?: boolean;
 }
 
-export interface StrapiBasicRequestParams {
+export interface StrapiBaseRequestParams {
   fields?: Array<string>;
   populate?: string | Array<string>;
 }
 
-export interface StrapiRequestParams extends StrapiBasicRequestParams {
+export interface StrapiRequestParams extends StrapiBaseRequestParams {
   sort?: string | Array<string>;
   pagination?: PaginationByOffset | PaginationByPage;
   filters?: Record<string, unknown>;
