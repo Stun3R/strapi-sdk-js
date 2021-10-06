@@ -7,6 +7,7 @@ category: "🖥 API"
 ---
 
 ### `find(contentType, params)`
+<badge>v2.0.0+</badge>
 - Returns `Promise<StrapiResponse<T>>`
 
 Get a list of content type entries matching the query filters. **Strapi v4** comes with brand new query filters, you can read more about it [here](https://strapi.io/documentation/developer-docs/latest/developer-resources/content-api/content-api.html#api-parameters) for available parameters.
@@ -36,6 +37,7 @@ To know more about query filters type, see [here](types#strapirequestparams)
 
 
 ### `findOne(contentType, id, params)`
+<badge>v2.0.0+</badge>
 - Returns `Promise<StrapiResponse<T>>`
 
 Get a specific content type entry by id. You can add query filters in order to select the returning `fields` & `populate` relations.
@@ -55,6 +57,7 @@ To know more about query filters type, see [here](types#strapibaserequestparams)
 
 
 ### `create(contentType, data, params)`
+<badge>v2.0.0+</badge>
 - Returns `Promise<StrapiResponse<T>>`
 
 Create a content type entry and returns its value. You can add query filters in order to select the returning `fields` & `populate` relations. 
@@ -74,6 +77,7 @@ To know more about query filters type, see [here](types#strapibaserequestparams)
 
 
 ### `update(contentType, id, data, params)`
+<badge>v2.0.0+</badge>
 - Returns `Promise<StrapiResponse<T>>`
 
 Update a content type entry by id. It returns the updated entry. You can add query filters in order to select the returning `fields` & `populate` relations.
@@ -93,6 +97,7 @@ To know more about query filters type, see [here](types#strapibaserequestparams)
 
 
 ### `delete(contentType, id, params)`
+<badge>v2.0.0+</badge>
 - Returns `Promise<StrapiResponse<T>>`
 
 Delete a content type entry by id. It returns the deleted entry. You can add query filters in order to select the returning `fields` & `populate` relations.
