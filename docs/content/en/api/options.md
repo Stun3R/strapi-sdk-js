@@ -1,5 +1,6 @@
 ---
 title: Options
+subtitle: "Learn how to configure your Strapi SDK. 🖥"
 description: "Learn how to configure your Strapi SDK. 🖥"
 position: 6
 category: "🖥 API"

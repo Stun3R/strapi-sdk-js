@@ -59,6 +59,7 @@ export interface StrapiRequestParams extends StrapiBaseRequestParams {
   pagination?: PaginationByOffset | PaginationByPage;
   filters?: Record<string, unknown>;
   publicationState?: "live" | "preview";
+  _locale?: string;
 }
 
 export interface StrapiResponse<T> {

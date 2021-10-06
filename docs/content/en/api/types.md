@@ -1,5 +1,6 @@
 ---
 title: Types
+subtitle: "Because this package has been designed using Typescript, it natively supports it. 🖥"
 description: "Because this package has been designed using Typescript, it natively supports it. 🖥"
 position: 7
 category: "🖥 API"
@@ -49,6 +50,72 @@ interface StoreConfig {
   cookieOptions?: CookieAttributes;
 }
 ```
+
+### `StrapiBaseRequestParams`
+<badge>v2.0.0+</badge>
+- Strapi query filters used in [findOne](methods#findOne), [create](methods#create), [update](methods#update), [delete](methods#delete) methods.
+
+```ts
+interface StrapiBaseRequestParams {
+  fields?: Array<string>;
+  populate?: string | Array<string>;
+}
+```
+> To know more about how to use it, see [Strapi REST API](https://github.com/strapi/rfcs/blob/v4/rest-api/rfcs/xxxx-v4-rest-api.md#retrieving-data)
+
+
+### `StrapiRequestParams`
+<badge>v2.0.0+</badge>
+- Strapi query filters used in [find](methods#findOne) methods.
+
+```ts
+interface StrapiRequestParams extends StrapiBaseRequestParams {
+  sort?: string | Array<string>;
+  pagination?: PaginationByOffset | PaginationByPage;
+  filters?: Record<string, unknown>;
+  publicationState?: "live" | "preview";
+  _locale?: string;
+}
+```
+> To know more about how to use it, see [Strapi REST API](https://github.com/strapi/rfcs/blob/v4/rest-api/rfcs/xxxx-v4-rest-api.md#retrieving-data)
+
+
+### `PaginationByPage`
+<badge>v2.0.0+</badge>
+- In Strapi v4, results can be paginated. Use the following types in [StrapiRequestParams](#StrapiRequestParams) in order to **paginate those results by page**.
+
+```ts
+interface PaginationByPage {
+  page: number;
+  pageSize: number;
+  withCount?: boolean;
+}
+```
+
+### `PaginationByOffset`
+<badge>v2.0.0+</badge>
+- In Strapi v4, results can be paginated. Use the following types in [StrapiRequestParams](#StrapiRequestParams) in order to **paginate those results by offset**.
+
+```ts
+export interface PaginationByOffset {
+  start: number;
+  limit: number;
+  withCount?: boolean;
+}
+```
+
+### `StrapiResponse<T>`
+<badge>v2.0.0+</badge>
+- With Strapi V4 comes a new response object. Now you will have access a `data` object (the response data itself) & one `meta` object (information about pagination, publication state, available locales, etc).
+
+```ts
+export interface StrapiResponse<T> {
+  data: T;
+  meta: Record<string, unknown>;
+}
+```
+> To know more about how to use it, see [Strapi unified response format](https://github.com/strapi/rfcs/blob/v4/rest-api/rfcs/xxxx-v4-rest-api.md#fetching-entities)
+
 
 ### `StrapiAuthProvider`
 - Used for `provider` parameter in [getProviderAuthenticationUrl](methods#getproviderauthenticationurlprovider) & [authenticateProvider](methods#authenticateproviderprovider-access_token) methods.

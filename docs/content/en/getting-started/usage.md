@@ -1,5 +1,6 @@
 ---
 title: Usage
+subtitle: "Learn how to use this SDK. 📚"
 description: "Learn how to use this SDK. 📚"
 position: 3
 category: "🚀 Getting Started"
@@ -16,6 +17,7 @@ const strapi = new Strapi()
 // OR with options
 const strapi = new Strapi({
   url: process.env.STRAPI_URL || "http://localhost:1337",
+  prefix: '/api' // only works in v2
   store: {
     key: "strapi_jwt",
     useLocalStorage: false,
@@ -45,7 +47,12 @@ await strapi.find("restaurants", { ...params })
 > See more in [Methods](/api/methods)
 
 ## GraphQL
+<alert type="info">
 
+This method is only available in **v1**.
+
+</alert>
+  
 Good news! You can do GraphQL queries through this SDK 🥳
 
 ```js

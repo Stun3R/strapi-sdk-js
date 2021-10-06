@@ -1,9 +1,16 @@
 ---
 title: Handling Errors
+subtitle: "Discover how to handle errors from Strapi. 💡"
 description: "Discover how to handle errors from Strapi. 💡"
 position: 9
 category: "💡 Going Further"
 ---
+
+<alert type="info">
+
+The following error handling will change with the new error format coming in Strapi v4
+
+</alert>
 
 Sometimes errors can be tricky to handle, especially Strapi's one 🤔
 You don't know what type of error message you receive & what kind of object you'll have in the response from Strapi.
@@ -23,8 +30,8 @@ In order to help you, we decided to provide you a formatted error object when an
 
 ### Example
 
-<d-code-group>
-  <d-code-block label="Response" active>
+<code-group>
+  <code-block label="Response" active>
 
   ```js
   {
@@ -43,8 +50,8 @@ In order to help you, we decided to provide you a formatted error object when an
   },
   ```
 
-  </d-code-block>
-  <d-code-block label="Formatted error">
+  </code-block>
+  <code-block label="Formatted error">
 
   ```js
   {
@@ -62,5 +69,5 @@ In order to help you, we decided to provide you a formatted error object when an
   }
   ```
 
-  </d-code-block>
-</d-code-group>
+  </code-block>
+</code-group>
