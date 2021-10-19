@@ -82,7 +82,7 @@ describe("Strapi SDK", () => {
         },
       });
 
-      let response = false;
+      let response = null;
       try {
         await context.strapi.request("get", "/users");
       } catch (error) {
@@ -123,7 +123,7 @@ describe("Strapi SDK", () => {
         },
       });
 
-      let response = false;
+      let response = null;
       try {
         await context.strapi.request("get", "/users");
       } catch (error) {
@@ -156,7 +156,7 @@ describe("Strapi SDK", () => {
         },
       });
 
-      let response = false;
+      let response = null;
       try {
         await context.strapi.request("get", "/users");
       } catch (error) {
@@ -174,16 +174,17 @@ describe("Strapi SDK", () => {
   test("Catch Network error request", async () => {
     context.axiosRequest.rejects(new Error("Network Error"));
 
-    let response;
+    let response: { original: Record<string, unknown> } = { original: {} };
     try {
       await context.strapi.request("get", "/users");
     } catch (error) {
-      response = error;
+      const e = error as { original: Record<string, unknown> };
+      response = e;
     }
 
     expect(response).toMatchObject({
       message: "Network Error",
-      original: response.original,
+      original: response.original || {},
       status: 500,
     });
   });
@@ -641,32 +642,6 @@ describe("Strapi SDK", () => {
           url: "/restaurants/1",
         })
       ).toBe(true);
-    });
-  });
-
-  describe("GraphQL", () => {
-    test("GraphQL support", async () => {
-      context.axiosRequest.resolves({
-        data: {
-          data: { restaurants: [{ name: "La Fourchette", description: "" }] },
-        },
-      });
-
-      const response = await context.strapi.graphql({
-        query: `query { restaurants { id name } }`,
-      });
-
-      expect(
-        context.axiosRequest.calledWithExactly({
-          method: "post",
-          url: "/graphql",
-          data: {
-            query: `query { restaurants { id name } }`,
-          },
-        })
-      ).toBe(true);
-
-      expect(response).toEqual([{ name: "La Fourchette", description: "" }]);
     });
   });
 });
