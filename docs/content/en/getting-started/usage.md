@@ -49,7 +49,7 @@ await strapi.find("restaurants", { ...params })
 ## GraphQL
 <alert type="info">
 
-This method is only available in **v1**.
+This method is no longer supported in **v2** since it is better to use a true GraphQL client.
 
 </alert>
   
