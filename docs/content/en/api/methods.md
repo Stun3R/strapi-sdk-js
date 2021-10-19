@@ -343,7 +343,7 @@ Perform GraphQL request throught `axios POST request`
 
 <alert type="warning">
 
-This method is no longer supported in **v2** since it is better to use a true GraphQL client.
+This method is no longer supported in **v1.1.0 & newer** since it is better to use a true GraphQL client.
 
 </alert>
 

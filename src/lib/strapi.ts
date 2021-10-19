@@ -1,5 +1,6 @@
 // Module dependencies & types
 import axios, {
+  AxiosError,
   AxiosInstance,
   AxiosRequestConfig,
   AxiosResponse,
@@ -99,15 +100,18 @@ export class Strapi {
       });
       return response.data;
     } catch (error) {
+      const e = error as AxiosError<{ message: unknown }>;
+
       // Strapi error or not
-      if (!error.response) {
+      if (!e.response) {
         throw {
           status: 500,
-          message: error.message,
+          message: e.message,
           original: error,
         };
       } else {
-        const { status, data }: AxiosResponse = error.response;
+        const { status, data }: AxiosResponse<{ message: unknown }> =
+          e.response;
 
         // format error message
         let message;

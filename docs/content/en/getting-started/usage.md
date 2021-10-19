@@ -52,8 +52,6 @@ await strapi.find("restaurants", { ...params })
 This method is no longer supported in **v2** since it is better to use a true GraphQL client.
 
 </alert>
-  
-Good news! You can do GraphQL queries through this SDK 🥳
 
 ```js
 await strapi.graphql({
