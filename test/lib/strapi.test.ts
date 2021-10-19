@@ -643,30 +643,4 @@ describe("Strapi SDK", () => {
       ).toBe(true);
     });
   });
-
-  describe("GraphQL", () => {
-    test("GraphQL support", async () => {
-      context.axiosRequest.resolves({
-        data: {
-          data: { restaurants: [{ name: "La Fourchette", description: "" }] },
-        },
-      });
-
-      const response = await context.strapi.graphql({
-        query: `query { restaurants { id name } }`,
-      });
-
-      expect(
-        context.axiosRequest.calledWithExactly({
-          method: "post",
-          url: "/graphql",
-          data: {
-            query: `query { restaurants { id name } }`,
-          },
-        })
-      ).toBe(true);
-
-      expect(response).toEqual([{ name: "La Fourchette", description: "" }]);
-    });
-  });
 });

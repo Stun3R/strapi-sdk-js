@@ -12,7 +12,6 @@
     "http",
     "rest",
     "restful",
-    "graphqL",
     "javascript"
   ],
   "homepage": "https://strapi-sdk-js.netlify.app",
