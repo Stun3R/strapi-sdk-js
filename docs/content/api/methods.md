@@ -104,6 +104,12 @@ Perform GraphQL request throught `axios POST request`
   </d-code-block>
 </d-code-group>
 
+<d-alert type="warning">
+
+This method is no longer supported in **v1.1.0 & newer** since it is better to use a true GraphQL client.
+
+</d-alert>
+
 
 ### `register(data)`
 - Returns `Promise<StrapiAuthenticationResponse>`

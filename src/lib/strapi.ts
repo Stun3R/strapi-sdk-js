@@ -96,7 +96,7 @@ export class Strapi {
       });
       return response.data;
     } catch (error) {
-      const e = error as AxiosError;
+      const e = error as AxiosError<{ message: unknown }>;
 
       // Strapi error or not
       if (!e.response) {
@@ -106,7 +106,8 @@ export class Strapi {
           original: error,
         };
       } else {
-        const { status, data }: AxiosResponse = e.response;
+        const { status, data }: AxiosResponse<{ message: unknown }> =
+          e.response;
 
         // format error message
         let message;
@@ -355,20 +356,6 @@ export class Strapi {
    */
   public delete<T>(contentType: string, id: string | number): Promise<T> {
     return this.request<T>("delete", `/${contentType}/${id}`);
-  }
-
-  /**
-   * Fetch Strapi API through graphQL
-   *
-   * @param  {AxiosRequestConfig["data"]} query - GraphQL Query
-   * @returns Promise<T>
-   */
-  public async graphql<T>(query: AxiosRequestConfig["data"]): Promise<T> {
-    const response: AxiosResponse = await this.request("post", "/graphql", {
-      data: query,
-    });
-    response.data = Object.values(response.data)[0];
-    return response.data;
   }
 
   /**
