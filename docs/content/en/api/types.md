@@ -30,7 +30,7 @@ const strapi = new Strapi(options)
 ```
 
 ### `StrapiOptions`
-- Options in order to configure [new Strapi SDK instance](/guide/usage#new-instance).
+- Options in order to configure [new Strapi SDK instance](getting-started/usage#new-instance).
 
 ```ts
 interface StrapiConfig {
@@ -41,7 +41,7 @@ interface StrapiConfig {
 ```
 
 ### `StoreConfig`
-- Used for [store](options#store) configuration in [Strapi SDK instanciation](/guide/usage#new-instance).
+- Used for [store](options#store) configuration in [Strapi SDK instanciation](getting-started/usage#new-instance).
 
 ```ts
 interface StoreConfig {
