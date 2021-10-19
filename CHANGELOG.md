@@ -1,3 +1,24 @@
+# [1.1.0](https://github.com/Stun3R/strapi-sdk-js/compare/v1.0.2...v1.1.0) (2021-10-19)
+
+
+### Bug Fixes
+
+* add axioserror type on error ([1140bbb](https://github.com/Stun3R/strapi-sdk-js/commit/1140bbb990c37e492aa8d457a1e65ff5a0ac24ed))
+* **deps:** update dependency @types/js-cookie to v3 ([88483aa](https://github.com/Stun3R/strapi-sdk-js/commit/88483aa0ff841c440716bbe1014ff8a6ef58c27f))
+* **deps:** update dependency axios to ^0.23.0 ([854e84e](https://github.com/Stun3R/strapi-sdk-js/commit/854e84e02cdb818a69dddfecb8c1530f791609c4))
+* missing comma after dependencies ([6efe03b](https://github.com/Stun3R/strapi-sdk-js/commit/6efe03b1713c5df97a077d3c5db43022d3fcc3f6))
+* **tests:** switch response type to follow latest change ([362b5d9](https://github.com/Stun3R/strapi-sdk-js/commit/362b5d911ffb9fbeb37de7678dd60b97c7dbf2f6))
+
+
+### Code Refactoring
+
+* drop of graphql methods support ([eebd7a3](https://github.com/Stun3R/strapi-sdk-js/commit/eebd7a34ddbce216ba0e8b3f5a3f95c0a0a5add5))
+
+
+### BREAKING CHANGES
+
+* GraphQL is no longer supported in v1.1.0
+
 ## [1.0.2](https://github.com/Stun3R/strapi-sdk-js/compare/v1.0.1...v1.0.2) (2021-08-30)
 
 
