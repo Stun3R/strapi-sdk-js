@@ -74,7 +74,7 @@ interface StrapiRequestParams extends StrapiBaseRequestParams {
   pagination?: PaginationByOffset | PaginationByPage;
   filters?: Record<string, unknown>;
   publicationState?: "live" | "preview";
-  _locale?: string;
+  _locale?: StrapiLocale;
 }
 ```
 > To know more about how to use it, see [Strapi REST API](https://github.com/strapi/rfcs/blob/v4/rest-api/rfcs/xxxx-v4-rest-api.md#retrieving-data)
@@ -103,6 +103,15 @@ export interface PaginationByOffset {
   withCount?: boolean;
 }
 ```
+
+### `StrapiLocale`
+<badge>v2.0.0+</badge>
+- With this new version, we decided to give you access to all locales that are available in Strapi. This type is used in [StrapiRequestParams](#StrapiRequestParams) in order to **retrieve content by locale**.
+
+```ts
+export type StrapiLocale = | "af" | "af-NA" | "af-ZA" | "agq" ...
+```
+> See [full list of available locales](https://github.com/strapi/strapi/blob/master/packages/strapi-plugin-i18n/constants/iso-locales.json)
 
 ### `StrapiResponse<T>`
 <badge>v2.0.0+</badge>

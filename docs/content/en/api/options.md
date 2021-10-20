@@ -15,6 +15,15 @@ URL of the Strapi server.
 Environment variable `STRAPI_URL` can be used to override `url`.
 
 
+## `prefix`
+<badge>v2.0.0+</badge>
+- Type: `string`
+- Default: `/api`
+
+In **Strapi v4** you are able to change the prefix of API endpoint. By default it is `/api` in order to request your API on `http://localhost:1337/api` but you can configure depends on your needs.
+> To see how to configure it on Strapi, see [API configuration](https://docs-next.strapi.io/developer-docs/latest/setup-deployment-guides/configurations/optional/api.html#api-configuration)
+
+
 ## `store`
 - Type: `StoreConfig`
 
