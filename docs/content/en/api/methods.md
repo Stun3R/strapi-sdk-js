@@ -1,10 +1,114 @@
 ---
 title: Methods
+subtitle: "Discover how to use this beautiful SDK. 🖥"
 description: "Discover how to use this beautiful SDK. 🖥"
 position: 5
 category: "🖥 API"
 ---
 
+## v2 CRUD
+<alert>
+
+This section provide explanation about SDK v1 CRUD methods which supports **Strapi v4**
+
+</alert>
+
+### `find(contentType, params)`
+<badge>v2.0.0+</badge>
+- Returns `Promise<StrapiResponse<T>>`
+
+Get a list of content type entries matching the query filters. **Strapi v4** comes with brand new query filters, you can read more about it [here](https://strapi.io/documentation/developer-docs/latest/developer-resources/content-api/content-api.html#api-parameters) for available parameters.
+```js
+await strapi.find('restaurants', {
+  filters: {
+    name: {
+      $eq: 'La Fourchette'
+    }
+  },
+  sort: 'name:asc',
+  pagination: {
+    start: 0,
+    limit: 0
+  },
+  fields: [...];
+  populate: [...] || '';
+  publicationState: 'live';
+  _locale: 'all'
+})
+```
+> To know more about query filters type, see [here](types#strapirequestparams)
+
+
+### `findOne(contentType, id, params)`
+<badge>v2.0.0+</badge>
+- Returns `Promise<StrapiResponse<T>>`
+
+Get a specific content type entry by id. You can add query filters in order to select the returning `fields` & `populate` relations.
+```js
+await strapi.findOne('restaurants', 1)
+// with query filters
+await strapi.findOne('restaurants', 1, {
+  fields: ['id', 'name']
+  populate: ['menu'],
+})
+```
+> To know more about query filters type, see [here](types#strapibaserequestparams)
+
+
+### `create(contentType, data, params)`
+<badge>v2.0.0+</badge>
+- Returns `Promise<StrapiResponse<T>>`
+
+Create a content type entry and returns its value. You can add query filters in order to select the returning `fields` & `populate` relations. 
+```js
+await strapi.create('restaurants', { name: '' })
+// with query filters
+await strapi.create('restaurants', 1, {
+  fields: ['id', 'name']
+  populate: ['menu'],
+})
+```
+> To know more about query filters type, see [here](types#strapibaserequestparams)
+
+
+### `update(contentType, id, data, params)`
+<badge>v2.0.0+</badge>
+- Returns `Promise<StrapiResponse<T>>`
+
+Update a content type entry by id. It returns the updated entry. You can add query filters in order to select the returning `fields` & `populate` relations.
+```js
+await strapi.update('restaurants', 1, { name: '' })
+// with query filters
+await strapi.update('restaurants', 1, {
+  fields: ['id', 'name']
+  populate: ['menu'],
+})
+```
+> To know more about query filters type, see [here](types#strapibaserequestparams)
+
+
+### `delete(contentType, id, params)`
+<badge>v2.0.0+</badge>
+- Returns `Promise<StrapiResponse<T>>`
+
+Delete a content type entry by id. It returns the deleted entry. You can add query filters in order to select the returning `fields` & `populate` relations.
+```js
+await strapi.delete('restaurants', 1)
+// with query filters
+await strapi.delete('restaurants', 1, {
+  fields: ['id', 'name']
+  populate: ['menu'],
+})
+```
+> To know more about query filters type, see [here](types#strapibaserequestparams)
+
+
+## v1 CRUD
+<alert type="info">
+
+This section provide explanation about SDK v1 CRUD methods which supports **Strapi v3**.
+
+</alert>
 
 ### `find(contentType, params)`
 - Returns `Promise<T>`
@@ -29,6 +133,13 @@ Count content type entries matching the query filters. You can read [here](https
 ```js
 await strapi.findOne('restaurants', 1)
 ```
+
+<alert type="warning">
+
+This method is no longer supported in **v2** since Strapi provide a new [unified response format](https://github.com/strapi/rfcs/blob/v4/rest-api/rfcs/xxxx-v4-rest-api.md#fetching-entities).
+
+</alert>
+
 
 ### `create(contentType, data)`
 - Returns `Promise<T>`
@@ -59,8 +170,8 @@ await strapi.delete('restaurants', 1)
 
 Perform GraphQL request throught `axios POST request`
 
-<d-code-group>
-  <d-code-block label="Directly in methods" active>
+<code-group>
+  <code-block label="Directly in methods" active>
 
   ```js
 
@@ -74,8 +185,8 @@ Perform GraphQL request throught `axios POST request`
   });
   ```
 
-  </d-code-block>
-  <d-code-block label="With graphql-tag">
+  </code-block>
+  <code-block label="With graphql-tag">
 
   ```js{}[restaurants.js]
   import gql from "graphql-tag";
@@ -101,15 +212,17 @@ Perform GraphQL request throught `axios POST request`
   ```
 
 
-  </d-code-block>
-</d-code-group>
+  </code-block>
+</code-group>
 
-<d-alert type="warning">
+<alert type="warning">
 
-This method is no longer supported in **v1.1.0 & newer** since it is better to use a true GraphQL client.
+This method is no longer supported in **v1.1.0 & newer** since it is better to use a real GraphQL client.
 
-</d-alert>
+</alert>
 
+
+## Authentication
 
 ### `register(data)`
 - Returns `Promise<StrapiAuthenticationResponse>`
@@ -203,7 +316,7 @@ Set local data of the logged-in user
 ```js
 strapi.setUser(user)
 ```
-<d-alert type="info">You can also use `strapi.user` in order to set user data and get it.</d-alert>
+<alert type="info">You can also use `strapi.user` in order to set user data and get it.</alert>
 
 
 ### `fetchUser()`

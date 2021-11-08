@@ -1,6 +1,8 @@
 import Strapi from "../../src";
 import sinon from "sinon";
 import Cookies from "js-cookie";
+import { StrapiError } from "../../dist";
+import { AxiosError } from "axios";
 
 interface TestContext {
   strapi: Strapi;
@@ -28,7 +30,7 @@ describe("Strapi SDK", () => {
     test("Basic Axios Request", async () => {
       await context.strapi.request("get", "/users", {
         params: {
-          _sort: "username:ASC",
+          sort: "username",
         },
       });
 
@@ -37,7 +39,7 @@ describe("Strapi SDK", () => {
           method: "get",
           url: "/users",
           params: {
-            _sort: "username:ASC",
+            sort: "username",
           },
         })
       );
@@ -63,110 +65,37 @@ describe("Strapi SDK", () => {
   });
 
   describe("Catch Strapi error request", () => {
-    test("Array error message", async () => {
+    test("Basic error", async () => {
       context.axiosRequest.rejects({
         response: {
-          status: "400",
-          statusText: "Bad Request",
           data: {
-            message: [
-              {
-                messages: [
-                  {
-                    id: "Auth.form.error.email.invalid",
-                  },
-                ],
-              },
-            ],
-          },
-        },
-      });
-
-      let response = null;
-      try {
-        await context.strapi.request("get", "/users");
-      } catch (error) {
-        response = error;
-      }
-
-      expect(response).toMatchObject({
-        status: "400",
-        message: {
-          id: "Auth.form.error.email.invalid",
-        },
-        original: {
-          message: [
-            {
-              messages: [
-                {
-                  id: "Auth.form.error.email.invalid",
-                },
-              ],
+            data: null,
+            error: {
+              status: 404,
+              name: "NotFoundError",
+              message: "Not Found",
+              details: {},
             },
-          ],
-        },
-      });
-    });
-
-    test("Object error message", async () => {
-      context.axiosRequest.rejects({
-        response: {
-          status: "400",
-          statusText: "Bad Request",
-          data: {
-            message: [
-              {
-                error: "Strapi Error",
-              },
-            ],
           },
         },
       });
 
-      let response = null;
+      let response: AxiosError<StrapiError> | null = null;
       try {
         await context.strapi.request("get", "/users");
       } catch (error) {
-        response = error;
+        const e = error as AxiosError<StrapiError>;
+        response = e;
       }
 
       expect(response).toMatchObject({
-        status: "400",
-        message: {
-          error: "Strapi Error",
+        data: null,
+        error: {
+          status: 404,
+          name: "NotFoundError",
+          message: "Not Found",
+          details: {},
         },
-        original: {
-          message: [
-            {
-              error: "Strapi Error",
-            },
-          ],
-        },
-      });
-    });
-
-    test("Simple string error", async () => {
-      context.axiosRequest.rejects({
-        response: {
-          status: "400",
-          statusText: "Bad Request",
-          data: {
-            message: "Strapi error",
-          },
-        },
-      });
-
-      let response = null;
-      try {
-        await context.strapi.request("get", "/users");
-      } catch (error) {
-        response = error;
-      }
-
-      expect(response).toMatchObject({
-        status: "400",
-        message: "Strapi error",
-        original: { message: "Strapi error" },
       });
     });
   });
@@ -174,18 +103,25 @@ describe("Strapi SDK", () => {
   test("Catch Network error request", async () => {
     context.axiosRequest.rejects(new Error("Network Error"));
 
-    let response: { original: Record<string, unknown> } = { original: {} };
+    let response: StrapiError = {
+      data: null,
+      error: { status: 0, name: "", message: "", details: {} },
+    };
     try {
       await context.strapi.request("get", "/users");
     } catch (error) {
-      const e = error as { original: Record<string, unknown> };
+      const e = error as StrapiError;
       response = e;
     }
 
     expect(response).toMatchObject({
-      message: "Network Error",
-      original: response.original || {},
-      status: 500,
+      data: null,
+      error: {
+        status: 500,
+        name: "UnknownError",
+        message: "Network Error",
+        details: response.error.details || {},
+      },
     });
   });
 
@@ -560,14 +496,14 @@ describe("Strapi SDK", () => {
   describe("Entries", () => {
     test("find - Get a list of {content-type} entries", async () => {
       await context.strapi.find("restaurants", {
-        _sort: "name:ASC",
+        sort: "name",
       });
 
       expect(
         context.axiosRequest.calledWith({
           method: "get",
           params: {
-            _sort: "name:ASC",
+            sort: "name",
           },
           url: "/restaurants",
         })
@@ -575,71 +511,82 @@ describe("Strapi SDK", () => {
     });
 
     test("findOne - Get a specific {content-type} entry", async () => {
-      await context.strapi.findOne("restaurants", 1);
+      await context.strapi.findOne("restaurants", 1, {
+        fields: ["name"],
+      });
 
       expect(
         context.axiosRequest.calledWithExactly({
           method: "get",
           url: "/restaurants/1",
-        })
-      ).toBe(true);
-    });
-
-    test("count - Count {content-type} entries", async () => {
-      await context.strapi.count("restaurants", {
-        name_contains: "baguette",
-      });
-
-      expect(
-        context.axiosRequest.calledWithExactly({
-          method: "get",
           params: {
-            name_contains: "baguette",
+            fields: ["name"],
           },
-          url: "/restaurants/count",
         })
       ).toBe(true);
     });
 
     test("create - Create a {content-type} entry", async () => {
-      await context.strapi.create("restaurants", {
-        name: "La Fourchette",
-      });
+      await context.strapi.create(
+        "restaurants",
+        {
+          name: "La Fourchette",
+        },
+        { fields: ["id", "name"] }
+      );
 
       expect(
         context.axiosRequest.calledWithExactly({
           method: "post",
           url: "/restaurants",
           data: {
-            name: "La Fourchette",
+            data: {
+              name: "La Fourchette",
+            },
+          },
+          params: {
+            fields: ["id", "name"],
           },
         })
       ).toBe(true);
     });
 
     test("update - Update a {content-type} entry", async () => {
-      await context.strapi.update("restaurants", 1, {
-        username: "La Fourchette",
-      });
+      await context.strapi.update(
+        "restaurants",
+        1,
+        {
+          username: "La Fourchette",
+        },
+        { fields: ["name"] }
+      );
 
       expect(
         context.axiosRequest.calledWithExactly({
           method: "put",
           url: "/restaurants/1",
           data: {
-            username: "La Fourchette",
+            data: {
+              username: "La Fourchette",
+            },
+          },
+          params: {
+            fields: ["name"],
           },
         })
       ).toBe(true);
     });
 
     test("delete - Delete a {content-type} entry", async () => {
-      await context.strapi.delete("restaurants", 1);
+      await context.strapi.delete("restaurants", 1, { fields: ["name"] });
 
       expect(
         context.axiosRequest.calledWithExactly({
           method: "delete",
           url: "/restaurants/1",
+          params: {
+            fields: ["name"],
+          },
         })
       ).toBe(true);
     });
