@@ -564,6 +564,16 @@ export interface StrapiRequestParams extends StrapiBaseRequestParams {
   _locale?: StrapiLocale;
 }
 
+export interface StrapiError {
+  data: null;
+  error: {
+    status: number;
+    name: string;
+    message: string;
+    details: Record<string, unknown>;
+  };
+}
+
 export interface StrapiResponse<T> {
   data: T;
   meta: Record<string, unknown>;

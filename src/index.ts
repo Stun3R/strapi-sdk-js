@@ -10,6 +10,7 @@ export type {
   StrapiBaseRequestParams,
   StrapiDefaultOptions,
   StrapiEmailConfirmationData,
+  StrapiError,
   StrapiForgotPasswordData,
   StrapiLocale,
   StrapiOptions,

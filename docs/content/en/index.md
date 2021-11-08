@@ -3,6 +3,7 @@ title: Introduction
 description: "This Strapi SDK will allow you to trigger easily your Strapi API"
 position: 1
 features:
+  - Supports Strapi v4
   - RESTful methods
   - Simplified request responses
   - Formatted error handling

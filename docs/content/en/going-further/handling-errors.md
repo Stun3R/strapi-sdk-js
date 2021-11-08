@@ -6,13 +6,29 @@ position: 9
 category: "💡 Going Further"
 ---
 
-<alert type="info">
+## v2
 
-The following error handling will change with the new error format coming in Strapi v4
+Thanks to **Strapi v4**, handling errors is no longer a huge waste of time 🙌🏻
+You have now a well formated error object that has the follwing format:
+```js
+{
+  data: null,
+  error: {
+    status: "", // HTTP status
+    name: "", // Strapi error name ('ApplicationError' or 'ValidationError')
+    message: "", // A human reable error message
+    details: {
+      // error info specific to the error type
+    }
+  }
+}
+```
+> To know more about it, see [Strapi Error Handling](https://docs-next.strapi.io/developer-docs/latest/developer-resources/error-handling.html#receiving-errors)
 
-</alert>
 
-Sometimes errors can be tricky to handle, especially Strapi's one 🤔
+## v1
+
+**Strapi v3** errors can be tricky to handle, especially Strapi's one 🤔
 You don't know what type of error message you receive & what kind of object you'll have in the response from Strapi.
 
 

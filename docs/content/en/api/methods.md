@@ -6,6 +6,13 @@ position: 5
 category: "🖥 API"
 ---
 
+## v2 CRUD
+<alert>
+
+This section provide explanation about SDK v1 CRUD methods which supports **Strapi v4**
+
+</alert>
+
 ### `find(contentType, params)`
 <badge>v2.0.0+</badge>
 - Returns `Promise<StrapiResponse<T>>`
@@ -29,11 +36,7 @@ await strapi.find('restaurants', {
   _locale: 'all'
 })
 ```
-<alert>
-
-To know more about query filters type, see [here](types#strapirequestparams)
-
-</alert>
+> To know more about query filters type, see [here](types#strapirequestparams)
 
 
 ### `findOne(contentType, id, params)`
@@ -49,11 +52,7 @@ await strapi.findOne('restaurants', 1, {
   populate: ['menu'],
 })
 ```
-<alert>
-
-To know more about query filters type, see [here](types#strapibaserequestparams)
-
-</alert>
+> To know more about query filters type, see [here](types#strapibaserequestparams)
 
 
 ### `create(contentType, data, params)`
@@ -69,11 +68,7 @@ await strapi.create('restaurants', 1, {
   populate: ['menu'],
 })
 ```
-<alert>
-
-To know more about query filters type, see [here](types#strapibaserequestparams)
-
-</alert>
+> To know more about query filters type, see [here](types#strapibaserequestparams)
 
 
 ### `update(contentType, id, data, params)`
@@ -89,11 +84,7 @@ await strapi.update('restaurants', 1, {
   populate: ['menu'],
 })
 ```
-<alert>
-
-To know more about query filters type, see [here](types#strapibaserequestparams)
-
-</alert>
+> To know more about query filters type, see [here](types#strapibaserequestparams)
 
 
 ### `delete(contentType, id, params)`
@@ -109,12 +100,129 @@ await strapi.delete('restaurants', 1, {
   populate: ['menu'],
 })
 ```
-<alert>
+> To know more about query filters type, see [here](types#strapibaserequestparams)
 
-To know more about query filters type, see [here](types#strapibaserequestparams)
+
+## v1 CRUD
+<alert type="info">
+
+This section provide explanation about SDK v1 CRUD methods which supports **Strapi v3**.
 
 </alert>
 
+### `find(contentType, params)`
+- Returns `Promise<T>`
+
+Get a list of content type entries matching the query filters. You can read [here](https://strapi.io/documentation/developer-docs/latest/developer-resources/content-api/content-api.html#api-parameters) for available parameters.
+```js
+await strapi.find('restaurants', { name: 'La Fourchette' })
+```
+
+### `findOne(contentType, id)`
+- Returns `Promise<T>`
+
+Get a specific content type entry by id.
+```js
+await strapi.findOne('restaurants', 1)
+```
+
+### `count(contentType, params)`
+- Returns `Promise<T>`
+
+Count content type entries matching the query filters. You can read [here](https://strapi.io/documentation/developer-docs/latest/developer-resources/content-api/content-api.html#api-parameters) for available parameters.
+```js
+await strapi.findOne('restaurants', 1)
+```
+
+<alert type="warning">
+
+This method is no longer supported in **v2** since Strapi provide a new [unified response format](https://github.com/strapi/rfcs/blob/v4/rest-api/rfcs/xxxx-v4-rest-api.md#fetching-entities).
+
+</alert>
+
+
+### `create(contentType, data)`
+- Returns `Promise<T>`
+
+Create a content type entry and returns its value.
+```js
+await strapi.create('restaurants', { name: '' })
+```
+
+### `update(contentType, id, data)`
+- Returns `Promise<T>`
+
+Update a content type entry by id. It returns the updated entry.
+```js
+await strapi.update('restaurants', 1, { name: '' })
+```
+
+### `delete(contentType, id)`
+- Returns `Promise<T>`
+
+Delete a content type entry by id. It returns the deleted entry.
+```js
+await strapi.delete('restaurants', 1)
+```
+
+### `graphql(query)`
+- Return `Promise<T>`
+
+Perform GraphQL request throught `axios POST request`
+
+<code-group>
+  <code-block label="Directly in methods" active>
+
+  ```js
+
+  await strapi.graphql({
+    query: `query {
+      restaurants {
+        id
+        name
+      }
+    }`
+  });
+  ```
+
+  </code-block>
+  <code-block label="With graphql-tag">
+
+  ```js{}[restaurants.js]
+  import gql from "graphql-tag";
+
+  export function findRestaurants() {
+    const query = gql`
+      query {
+        restaurants {
+          id
+          name
+        }
+      }`;
+    return query.loc.source.body;
+  }
+  ```
+
+  ```js
+  import { findRestaurants } from 'restaurants.js'
+
+  await strapi.graphql({
+    query: findRestaurants()
+  })
+  ```
+
+
+  </code-block>
+</code-group>
+
+<alert type="warning">
+
+This method is no longer supported in **v1.1.0 & newer** since it is better to use a real GraphQL client.
+
+</alert>
+
+
+## Authentication
 
 ### `register(data)`
 - Returns `Promise<StrapiAuthenticationResponse>`
@@ -233,120 +341,6 @@ Remove token from Axios headers & [chosen storage](options#store).
 ```js
 strapi.removeToken()
 ```
-
-## SDK v1 CRUD
-
-### `find(contentType, params)`
-- Returns `Promise<T>`
-
-Get a list of content type entries matching the query filters. You can read [here](https://strapi.io/documentation/developer-docs/latest/developer-resources/content-api/content-api.html#api-parameters) for available parameters.
-```js
-await strapi.find('restaurants', { name: 'La Fourchette' })
-```
-
-### `findOne(contentType, id)`
-- Returns `Promise<T>`
-
-Get a specific content type entry by id.
-```js
-await strapi.findOne('restaurants', 1)
-```
-
-### `count(contentType, params)`
-- Returns `Promise<T>`
-
-Count content type entries matching the query filters. You can read [here](https://strapi.io/documentation/developer-docs/latest/developer-resources/content-api/content-api.html#api-parameters) for available parameters.
-```js
-await strapi.findOne('restaurants', 1)
-```
-
-<alert type="warning">
-
-This method is no longer supported in **v2** since Strapi provide a new [unified response format](https://github.com/strapi/rfcs/blob/v4/rest-api/rfcs/xxxx-v4-rest-api.md#fetching-entities).
-
-</alert>
-
-
-### `create(contentType, data)`
-- Returns `Promise<T>`
-
-Create a content type entry and returns its value.
-```js
-await strapi.create('restaurants', { name: '' })
-```
-
-### `update(contentType, id, data)`
-- Returns `Promise<T>`
-
-Update a content type entry by id. It returns the updated entry.
-```js
-await strapi.update('restaurants', 1, { name: '' })
-```
-
-### `delete(contentType, id)`
-- Returns `Promise<T>`
-
-Delete a content type entry by id. It returns the deleted entry.
-```js
-await strapi.delete('restaurants', 1)
-```
-
-### `graphql(query)`
-- Return `Promise<T>`
-
-Perform GraphQL request throught `axios POST request`
-
-<code-group>
-  <code-block label="Directly in methods" active>
-
-  ```js
-
-  await strapi.graphql({
-    query: `query {
-      restaurants {
-        id
-        name
-      }
-    }`
-  });
-  ```
-
-  </code-block>
-  <code-block label="With graphql-tag">
-
-  ```js{}[restaurants.js]
-  import gql from "graphql-tag";
-
-  export function findRestaurants() {
-    const query = gql`
-      query {
-        restaurants {
-          id
-          name
-        }
-      }`;
-    return query.loc.source.body;
-  }
-  ```
-
-  ```js
-  import { findRestaurants } from 'restaurants.js'
-
-  await strapi.graphql({
-    query: findRestaurants()
-  })
-  ```
-
-
-  </code-block>
-</code-group>
-
-<alert type="warning">
-
-This method is no longer supported in **v1.1.0 & newer** since it is better to use a true GraphQL client.
-
-</alert>
-
 
 ## Extends
 

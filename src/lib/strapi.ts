@@ -18,6 +18,7 @@ import type {
   StrapiBaseRequestParams,
   StrapiDefaultOptions,
   StrapiEmailConfirmationData,
+  StrapiError,
   StrapiForgotPasswordData,
   StrapiOptions,
   StrapiRegistrationData,
@@ -100,36 +101,20 @@ export class Strapi {
       });
       return response.data;
     } catch (error) {
-      const e = error as AxiosError<{ message: unknown }>;
+      const e = error as AxiosError<StrapiError>;
 
-      // Strapi error or not
       if (!e.response) {
         throw {
-          status: 500,
-          message: e.message,
-          original: error,
+          data: null,
+          error: {
+            status: 500,
+            name: "UnknownError",
+            message: e.message,
+            details: e,
+          },
         };
       } else {
-        const { status, data }: AxiosResponse<{ message: unknown }> =
-          e.response;
-
-        // format error message
-        let message;
-        if (Array.isArray(data.message)) {
-          if (data.message[0].hasOwnProperty("messages")) {
-            message = data.message[0].messages[0];
-          } else {
-            message = data.message[0];
-          }
-        } else {
-          message = data.message;
-        }
-
-        throw {
-          status,
-          message,
-          original: data,
-        };
+        throw e.response.data;
       }
     }
   }

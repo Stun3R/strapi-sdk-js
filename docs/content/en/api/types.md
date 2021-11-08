@@ -115,7 +115,7 @@ export type StrapiLocale = | "af" | "af-NA" | "af-ZA" | "agq" ...
 
 ### `StrapiResponse<T>`
 <badge>v2.0.0+</badge>
-- With Strapi V4 comes a new response object. Now you will have access a `data` object (the response data itself) & one `meta` object (information about pagination, publication state, available locales, etc).
+- With Strapi v4 comes a new response object. Now you will have access a `data` object (the response data itself) & one `meta` object (information about pagination, publication state, available locales, etc).
 
 ```ts
 export interface StrapiResponse<T> {
