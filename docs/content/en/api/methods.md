@@ -33,7 +33,7 @@ await strapi.find('restaurants', {
   fields: [...];
   populate: [...] || '';
   publicationState: 'live';
-  _locale: 'all'
+  locale: 'all'
 })
 ```
 > To know more about query filters type, see [here](types#strapirequestparams)

@@ -561,7 +561,7 @@ export interface StrapiRequestParams extends StrapiBaseRequestParams {
   pagination?: PaginationByOffset | PaginationByPage;
   filters?: Record<string, unknown>;
   publicationState?: "live" | "preview";
-  _locale?: StrapiLocale;
+  locale?: StrapiLocale;
 }
 
 export interface StrapiError {
