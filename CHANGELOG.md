@@ -1,3 +1,5 @@
+## [2.1.1](https://github.com/Stun3R/strapi-sdk-js/compare/v2.1.0...v2.1.1) (2021-11-29)
+
 # [2.0.0](https://github.com/Stun3R/strapi-sdk-js/compare/v1.1.0...v2.0.0) (2021-11-08)
 
 
