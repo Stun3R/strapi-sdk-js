@@ -51,7 +51,7 @@ In order to use this generator you must have installed the GraphQL plugin **on y
 ```bash
 yarn strapi install graphql
 ```
-> For more informations see the [GraphQL plugin](https://strapi.io/documentation/developer-docs/latest/development/plugins/graphql.html) 
+> For more informations see the [GraphQL plugin](https://docs-v3.strapi.io/developer-docs/latest/development/plugins/graphql.html#graphql) 
 
 ### 🕹 Usage
 The usage depend on which package manager you're using:

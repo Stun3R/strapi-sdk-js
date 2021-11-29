@@ -104,7 +104,7 @@ await strapi.sendEmailConfirmation({ email: '' })
 ```js
 window.location = strapi.getAuthenticationProvider('provider');
 ```
-> See [providers list](https://strapi.io/documentation/developer-docs/latest/development/plugins/users-permissions.html#providers)
+> See [providers list](https://docs.strapi.io/developer-docs/latest/plugins/users-permissions.html#providers)
 
 ### Authenticate Provider
 ```js
@@ -112,7 +112,7 @@ await strapi.authenticateProvider('provider', 'access_token')
 // OR with params query
 await strapi.authenticateProvider('provider')
 ```
-> See [providers list](https://strapi.io/documentation/developer-docs/latest/development/plugins/users-permissions.html#providers)
+> See [providers list](https://docs.strapi.io/developer-docs/latest/plugins/users-permissions.html#providers)
 
 ## User
 

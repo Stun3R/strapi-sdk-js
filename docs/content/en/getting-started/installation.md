@@ -18,14 +18,14 @@ Add `strapi-sdk-js` dependency to your project:
   <code-block label="Yarn" active>
 
 ```bash
-yarn add strapi-sdk-js@beta
+yarn add strapi-sdk-js
 ```
 
   </code-block>
   <code-block label="NPM">
 
 ```bash
-npm install --save strapi-sdk-js@beta
+npm install --save strapi-sdk-js
 ```
 
   </code-block>

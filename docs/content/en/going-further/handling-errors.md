@@ -23,7 +23,7 @@ You have now a well formated error object that has the follwing format:
   }
 }
 ```
-> To know more about it, see [Strapi Error Handling](https://docs-next.strapi.io/developer-docs/latest/developer-resources/error-handling.html#receiving-errors)
+> To know more about it, see [Strapi Error Handling](https://docs.strapi.io/developer-docs/latest/developer-resources/error-handling.html#rest-errors)
 
 
 ## v1

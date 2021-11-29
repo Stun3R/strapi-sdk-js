@@ -136,7 +136,7 @@ await strapi.findOne('restaurants', 1)
 
 <alert type="warning">
 
-This method is no longer supported in **v2** since Strapi provide a new [unified response format](https://github.com/strapi/rfcs/blob/v4/rest-api/rfcs/xxxx-v4-rest-api.md#fetching-entities).
+This method is no longer supported in **v2** since Strapi provide a new [unified response format](https://docs.strapi.io/developer-docs/latest/developer-resources/database-apis-reference/rest-api.html#unified-response-format).
 
 </alert>
 
@@ -232,7 +232,7 @@ Register a new [User](methods#setuseruser) & sets the [Token](methods#settokento
 await strapi.register({ username: '', email: '', password:'' })
 ```
 
-> See the [Strapi documentation](https://strapi.io/documentation/developer-docs/latest/development/plugins/users-permissions.html#registration).
+> See the [Strapi documentation](https://docs.strapi.io/developer-docs/latest/plugins/users-permissions.html#registration).
 
 
 ### `login(data)`
@@ -243,7 +243,7 @@ Authenticate a [User](methods#setuseruser) & sets the [Token](methods#settokento
 await strapi.login({ identifier: '', password:'' })
 ```
 
-> See the [Strapi documentation](https://strapi.io/documentation/developer-docs/latest/development/plugins/users-permissions.html#login).
+> See the [Strapi documentation](https://docs.strapi.io/developer-docs/latest/plugins/users-permissions.html#login).
 
 
 ### `forgotPassword(data)`
@@ -254,7 +254,7 @@ Send an email to a user in order to reset his password.
 await strapi.forgotPassword({ email: '' })
 ```
 
-> See the [Strapi documentation](https://strapi.io/documentation/developer-docs/latest/development/plugins/users-permissions.html#forgotten-reset-password).
+> See the [Strapi documentation](https://docs.strapi.io/developer-docs/latest/plugins/users-permissions.html#forgotten-reset-password).
 
 
 ### `resetPassword(data)`
@@ -265,7 +265,7 @@ Reset the user password & sets the [Token](methods#settokentoken)
 await strapi.resetPassword({ code: '', password: '', passwordConfirmation: '' })
 ```
 
-> See the [Strapi documentation](https://strapi.io/documentation/developer-docs/latest/development/plugins/users-permissions.html#forgotten-reset-password).
+> See the [Strapi documentation](https://docs.strapi.io/developer-docs/latest/plugins/users-permissions.html#forgotten-reset-password).
 
 
 ### `sendEmailConfirmation(data)`
@@ -276,7 +276,7 @@ Send programmatically an email to a user in order to confirm his account.
 await strapi.sendEmailConfirmation({ email: '' })
 ```
 
-> See the [Strapi documentation](https://strapi.io/documentation/developer-docs/latest/development/plugins/users-permissions.html#email-validation).
+> See the [Strapi documentation](https://docs.strapi.io/developer-docs/latest/plugins/users-permissions.html#email-validation).
 
 
 ### `getProviderAuthenticationUrl(provider)`
@@ -287,7 +287,7 @@ Get the correct URL of the provider's authentication page to authenticate with i
 strapi.getProviderAuthenticationUrl('provider')
 ```
 
-> For the list of all providers, see [Strapi documentation](https://strapi.io/documentation/developer-docs/latest/development/plugins/users-permissions.html#providers).
+> For the list of all providers, see [Strapi documentation](https://docs.strapi.io/developer-docs/latest/plugins/users-permissions.html#providers).
 
 
 ### `authenticateProvider(provider, access_token)`
@@ -300,7 +300,7 @@ await strapi.authenticateProvider('provider')
 await strapi.authenticateProvider('provider', 'myAccessToken')
 ```
 
-> For the list of all providers, see [Strapi documentation](https://strapi.io/documentation/developer-docs/latest/development/plugins/users-permissions.html#providers).
+> For the list of all providers, see [Strapi documentation](https://docs.strapi.io/developer-docs/latest/plugins/users-permissions.html#providers).
 
 
 ### `logout()`
