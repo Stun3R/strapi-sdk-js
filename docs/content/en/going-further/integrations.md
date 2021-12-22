@@ -53,7 +53,8 @@ export default defineNuxtPlugin(() => {
 
 ```js
 <script setup>
-  const { $strapi } = useNuxtApp(); const restaurants = await
-  $strapi.find("restaurants");
+  const { $strapi } = useNuxtApp();
+  
+  const restaurants = await $strapi.find("restaurants");
 </script>
 ```
