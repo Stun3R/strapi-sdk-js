@@ -41,8 +41,7 @@ import Strapi from "strapi-sdk-js";
 
 export default defineNuxtPlugin(() => {
   const strapi = new Strapi({
-    url: "http://api.isstrapiready.com",
-    prefix: "v1",
+    // options
   });
   return {
     provide: {
@@ -54,7 +53,7 @@ export default defineNuxtPlugin(() => {
 
 ```js
 <script setup>
-  const {$strapi} = useNuxtApp(); const restaurants = await
+  const { $strapi } = useNuxtApp(); const restaurants = await
   $strapi.find("restaurants");
 </script>
 ```
