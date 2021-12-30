@@ -1,3 +1,15 @@
+## [2.1.2](https://github.com/Stun3R/strapi-sdk-js/compare/v2.1.1...v2.1.2) (2021-12-30)
+
+
+### Bug Fixes
+
+* **params:** change type to accept object for populate ([bfa835c](https://github.com/Stun3R/strapi-sdk-js/commit/bfa835c6d01425049f7d675f96316516d59bca5d)), closes [#108](https://github.com/Stun3R/strapi-sdk-js/issues/108)
+
+
+### Features
+
+* add integrations ([439b292](https://github.com/Stun3R/strapi-sdk-js/commit/439b2926e474c06a0e581f9af7c1ad08c5eb7282))
+
 ## [2.1.1](https://github.com/Stun3R/strapi-sdk-js/compare/v2.1.0...v2.1.1) (2021-11-29)
 
 # [2.0.0](https://github.com/Stun3R/strapi-sdk-js/compare/v1.1.0...v2.0.0) (2021-11-08)
