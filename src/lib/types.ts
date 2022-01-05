@@ -553,7 +553,7 @@ export interface PaginationByOffset {
 
 export interface StrapiBaseRequestParams {
   fields?: Array<string>;
-  populate?: string | Array<string>;
+  populate?: string | Array<string> | Record<string, unknown>;
 }
 
 export interface StrapiRequestParams extends StrapiBaseRequestParams {

@@ -7,6 +7,7 @@ category: "🖥 API"
 ---
 
 ## Axios
+
 Here is the list of all `axios` interfaces & types used in this package:
 
 - `AxiosInstance` used for the `strapi.axios` property
@@ -14,22 +15,25 @@ Here is the list of all `axios` interfaces & types used in this package:
 - `Method` (which is a `type`) used for the parameter `method` in the custom [request method](methods#request).
 
 ## Custom
+
 Here is a list of all the custom types & interfaces present in this package.
 
 You can easily use them by importing them.
 
 **Example with `StrapiOptions`**
+
 ```ts
-import Strapi, { StrapiOptions } from 'strapi-sdk-js'
+import Strapi, { StrapiOptions } from "strapi-sdk-js";
 
 const options: StrapiOptions = {
-  url: 'http://strapi-host/'
-}
+  url: "http://strapi-host/",
+};
 
-const strapi = new Strapi(options)
+const strapi = new Strapi(options);
 ```
 
 ### `StrapiOptions`
+
 - Options in order to configure [new Strapi SDK instance](getting-started/usage#new-instance).
 
 ```ts
@@ -41,6 +45,7 @@ interface StrapiConfig {
 ```
 
 ### `StoreConfig`
+
 - Used for [store](options#store) configuration in [Strapi SDK instanciation](getting-started/usage#new-instance).
 
 ```ts
@@ -52,20 +57,24 @@ interface StoreConfig {
 ```
 
 ### `StrapiBaseRequestParams`
+
 <badge>v2.0.0+</badge>
+
 - Strapi query filters used in [findOne](methods#findOne), [create](methods#create), [update](methods#update), [delete](methods#delete) methods.
 
 ```ts
 interface StrapiBaseRequestParams {
   fields?: Array<string>;
-  populate?: string | Array<string>;
+  populate?: string | Array<string> | Record<string, unknown>;
 }
 ```
+
 > To know more about how to use it, see [Strapi REST API](https://github.com/strapi/rfcs/blob/v4/rest-api/rfcs/xxxx-v4-rest-api.md#retrieving-data)
 
-
 ### `StrapiRequestParams`
+
 <badge>v2.0.0+</badge>
+
 - Strapi query filters used in [find](methods#findOne) methods.
 
 ```ts
@@ -77,11 +86,13 @@ interface StrapiRequestParams extends StrapiBaseRequestParams {
   _locale?: StrapiLocale;
 }
 ```
+
 > To know more about how to use it, see [Strapi REST API](https://github.com/strapi/rfcs/blob/v4/rest-api/rfcs/xxxx-v4-rest-api.md#retrieving-data)
 
-
 ### `PaginationByPage`
+
 <badge>v2.0.0+</badge>
+
 - In Strapi v4, results can be paginated. Use the following types in [StrapiRequestParams](#StrapiRequestParams) in order to **paginate those results by page**.
 
 ```ts
@@ -93,7 +104,9 @@ interface PaginationByPage {
 ```
 
 ### `PaginationByOffset`
+
 <badge>v2.0.0+</badge>
+
 - In Strapi v4, results can be paginated. Use the following types in [StrapiRequestParams](#StrapiRequestParams) in order to **paginate those results by offset**.
 
 ```ts
@@ -105,16 +118,21 @@ export interface PaginationByOffset {
 ```
 
 ### `StrapiLocale`
+
 <badge>v2.0.0+</badge>
+
 - With this new version, we decided to give you access to all locales that are available in Strapi. This type is used in [StrapiRequestParams](#StrapiRequestParams) in order to **retrieve content by locale**.
 
 ```ts
 export type StrapiLocale = | "af" | "af-NA" | "af-ZA" | "agq" ...
 ```
+
 > See [full list of available locales](https://github.com/strapi/strapi/blob/master/packages/strapi-plugin-i18n/constants/iso-locales.json)
 
 ### `StrapiResponse<T>`
+
 <badge>v2.0.0+</badge>
+
 - With Strapi v4 comes a new response object. Now you will have access a `data` object (the response data itself) & one `meta` object (information about pagination, publication state, available locales, etc).
 
 ```ts
@@ -123,17 +141,31 @@ export interface StrapiResponse<T> {
   meta: Record<string, unknown>;
 }
 ```
+
 > To know more about how to use it, see [Strapi unified response format](https://github.com/strapi/rfcs/blob/v4/rest-api/rfcs/xxxx-v4-rest-api.md#fetching-entities)
 
-
 ### `StrapiAuthProvider`
+
 - Used for `provider` parameter in [getProviderAuthenticationUrl](methods#getproviderauthenticationurlprovider) & [authenticateProvider](methods#authenticateproviderprovider-access_token) methods.
 
 ```ts
-type StrapiAuthProvider = "github" | "facebook" | "google" | "cognito" | "twitter" | "discord" | "twitch" | "instagram" | "vk" | "linkedin" | "reddit" | "auth0";
+type StrapiAuthProvider =
+  | "github"
+  | "facebook"
+  | "google"
+  | "cognito"
+  | "twitter"
+  | "discord"
+  | "twitch"
+  | "instagram"
+  | "vk"
+  | "linkedin"
+  | "reddit"
+  | "auth0";
 ```
 
 ### `StrapiAuthenticationResponse`
+
 - Return object type in [register](methods#registerdata), [login](methods#logindata), [resetPassword](methods#resetpassworddata) & [authenticateProvider](methods#authenticateproviderprovider-access_token) methods.
 
 ```ts
@@ -144,6 +176,7 @@ interface StrapiAuthenticationResponse {
 ```
 
 ### `StrapiAuthenticationData`
+
 - Used for `data` parameter in [login](methods#logindata) method.
 
 ```ts
@@ -154,6 +187,7 @@ interface StrapiAuthenticationData {
 ```
 
 ### `StrapiRegistrationData`
+
 - Used for `data` parameter in [register](methods#registerdata) method.
 
 ```ts
@@ -165,6 +199,7 @@ interface StrapiRegistrationData {
 ```
 
 ### `StrapiForgotPasswordData`
+
 - Used for `data` parameter in [forgotPassword](methods#forgotpassworddata) method.
 
 ```ts
@@ -174,6 +209,7 @@ interface StrapiForgotPasswordData {
 ```
 
 ### `StrapiResetPasswordData`
+
 - Used for `data` parameter in [resetPassword](methods#resetpassworddata) method.
 
 ```ts
@@ -185,6 +221,7 @@ interface StrapiResetPasswordData {
 ```
 
 ### `StrapiEmailConfirmationData`
+
 - Used for `data` parameter in [sendEmailConfirmation](methods#sendemailconfirmationdata) method.
 
 ```ts
