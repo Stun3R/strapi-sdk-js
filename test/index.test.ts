@@ -21,7 +21,6 @@ describe("Creation of SDK instance", () => {
       "logout",
       "find",
       "findOne",
-      "count",
       "create",
       "update",
       "delete",

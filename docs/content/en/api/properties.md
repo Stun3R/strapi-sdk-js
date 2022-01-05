@@ -1,5 +1,6 @@
 ---
 title: Properties
+subtitle: "Here are the properties you can access. 🖥"
 description: "Here are the properties you can access. 🖥"
 position: 4
 category: "🖥 API"
