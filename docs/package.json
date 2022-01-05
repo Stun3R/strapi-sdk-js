@@ -8,8 +8,10 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "docus": "0.1.5",
+    "@nuxt/content-theme-docs": "^0.8.2",
     "nuxt": "2.15.8"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@nuxtjs/pwa": "^3.3.5"
+  }
 }

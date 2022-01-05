@@ -1,3 +1,28 @@
+## [2.1.2](https://github.com/Stun3R/strapi-sdk-js/compare/v2.1.1...v2.1.2) (2021-12-30)
+
+
+### Bug Fixes
+
+* **params:** change type to accept object for populate ([bfa835c](https://github.com/Stun3R/strapi-sdk-js/commit/bfa835c6d01425049f7d675f96316516d59bca5d)), closes [#108](https://github.com/Stun3R/strapi-sdk-js/issues/108)
+
+
+### Features
+
+* add integrations ([439b292](https://github.com/Stun3R/strapi-sdk-js/commit/439b2926e474c06a0e581f9af7c1ad08c5eb7282))
+
+## [2.1.1](https://github.com/Stun3R/strapi-sdk-js/compare/v2.1.0...v2.1.1) (2021-11-29)
+
+# [2.0.0](https://github.com/Stun3R/strapi-sdk-js/compare/v1.1.0...v2.0.0) (2021-11-08)
+
+
+### Features
+
+* **Strapi v4 support**
+* add params to create, update, delete methods in order to selecting field in response ([a693dac](https://github.com/Stun3R/strapi-sdk-js/commit/a693dac21101260125db8672229644387b2ee3e4))
+* add StrapiLocale type for better autocompletion ([583c5b8](https://github.com/Stun3R/strapi-sdk-js/commit/583c5b8d561426c581f31ed6d335fc322411be71))
+* replace axios request config params by custom type based on strapi rest api parameters ([2047433](https://github.com/Stun3R/strapi-sdk-js/commit/2047433f93aaae9b4eaeb0c7f4b49cccfb46f770))
+* v4 error handling ([4d0eb3f](https://github.com/Stun3R/strapi-sdk-js/commit/4d0eb3f50ed9796e7dd3837cd45a2d926e9679d5))
+
 # [1.1.0](https://github.com/Stun3R/strapi-sdk-js/compare/v1.0.2...v1.1.0) (2021-10-19)
 
 
@@ -17,6 +42,7 @@
 
 ### BREAKING CHANGES
 
+* SDK supports Strapi v4. Every CRUD methods response changed. Please refer to [documentation](https://strapi-sdk-js.netlify.app)
 * GraphQL is no longer supported in v1.1.0
 
 ## [1.0.2](https://github.com/Stun3R/strapi-sdk-js/compare/v1.0.1...v1.0.2) (2021-08-30)
