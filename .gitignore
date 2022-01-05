@@ -102,3 +102,6 @@ typings/
 *.iml
 out
 gen
+
+# Local dev directories
+example/

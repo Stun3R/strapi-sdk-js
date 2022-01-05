@@ -1,8 +1,10 @@
 ---
 title: Introduction
 description: "This Strapi SDK will allow you to trigger easily your Strapi API"
+category: ''
 position: 1
 features:
+  - Supports Strapi v4
   - RESTful methods
   - Simplified request responses
   - Formatted error handling
@@ -15,8 +17,8 @@ Thanks this SDK you can trigger your [Strapi](https://strapi.io) API in your **<
 
 ## Features
 
-<d-list :items="features"></d-list>
+<list :items="features"></list>
 
-<d-alert type="info">
-<p class="flex items-center">Don't hurt your eyes:&nbsp;<d-color-switcher class="inline-flex ml-2"><d-color-switcher></p>
-</d-alert>
+<alert type="info">
+<p class="flex items-center">Don't hurt your eyes:&nbsp;<app-color-switcher class="inline-flex ml-2"><app-color-switcher></p>
+</alert>
