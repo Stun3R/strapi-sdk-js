@@ -1,3 +1,12 @@
+## [2.1.3](https://github.com/Stun3R/strapi-sdk-js/compare/v2.1.2...v2.1.3) (2022-01-05)
+
+
+### Bug Fixes
+
+* **deps:** pin dependencies ([2e6e5a9](https://github.com/Stun3R/strapi-sdk-js/commit/2e6e5a984e3c3bce226bdb0a55218d6707cc0488))
+* **deps:** update dependency @nuxt/content-theme-docs to v0.11.1 ([1541e39](https://github.com/Stun3R/strapi-sdk-js/commit/1541e392bb9e70ee7cdc65fa1362358518c0d084))
+* **deps:** update dependency axios to ^0.24.0 ([4e2a41d](https://github.com/Stun3R/strapi-sdk-js/commit/4e2a41d5a3ffca07cf502d488ce9caea809f4bbc))
+
 ## [2.1.2](https://github.com/Stun3R/strapi-sdk-js/compare/v2.1.1...v2.1.2) (2021-12-30)
 
 
