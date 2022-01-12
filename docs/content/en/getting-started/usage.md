@@ -17,7 +17,7 @@ const strapi = new Strapi()
 // OR with options
 const strapi = new Strapi({
   url: process.env.STRAPI_URL || "http://localhost:1337",
-  prefix: '/api' // only works in v2
+  prefix: '/api', // only works in v2
   store: {
     key: "strapi_jwt",
     useLocalStorage: false,
