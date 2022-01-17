@@ -8,23 +8,23 @@ category: "🚀 Getting Started"
 
 ## New instance
 
-Here is how you can instantiate the Strapi SDK. ***Note that the displayed options are the default ones.*** 😉
+Here is how you can instantiate the Strapi SDK. **_Note that the displayed options are the default ones._** 😉
 
 ```js
-import Strapi from "strapi-sdk-js"
+import Strapi from "strapi-sdk-js";
 
-const strapi = new Strapi()
+const strapi = new Strapi();
 // OR with options
 const strapi = new Strapi({
-  url: process.env.STRAPI_URL || "http://localhost:1337",
-  prefix: '/api' // only works in v2
+  url: "http://localhost:1337",
+  prefix: "/api", // only works in v2
   store: {
     key: "strapi_jwt",
     useLocalStorage: false,
     cookieOptions: { path: "/" },
   },
   axiosOptions: {},
-})
+});
 ```
 
 > See [options](/api/options) for available options.
@@ -41,12 +41,13 @@ All contentTypes methods are built around the default Strapi CRUD operations.
 - `delete`
 
 ```js
-await strapi.find("restaurants", { ...params })
+await strapi.find("restaurants", { ...params });
 ```
 
 > See more in [Methods](/api/methods)
 
 ## GraphQL
+
 <alert type="info">
 
 This method is no longer supported in **v2** since it is better to use a real GraphQL client.
@@ -60,8 +61,8 @@ await strapi.graphql({
       id
       name
     }
-  }`
-})
+  }`,
+});
 ```
 
 > See more in [Methods#graphql](/api/methods#graphqlquery)
@@ -71,55 +72,74 @@ await strapi.graphql({
 Here are the methods in order to handle authentication in your application:
 
 ### Register
+
 ```js
-const { user, jwt } = await strapi.register({ email: '', username: '', password: '' })
+const { user, jwt } = await strapi.register({
+  email: "",
+  username: "",
+  password: "",
+});
 ```
 
 ### Login
+
 ```js
-const { user, jwt } = await strapi.login({ identifier: '', password: '' })
+const { user, jwt } = await strapi.login({ identifier: "", password: "" });
 ```
 
 ### Logout
+
 ```js
-strapi.logout()
+strapi.logout();
 ```
 
 ### Forgot Password
+
 ```js
-await strapi.forgotPassword({ email: '' })
+await strapi.forgotPassword({ email: "" });
 ```
 
 ### Reset Password
+
 ```js
-const { user, jwt } = await strapi.resetPassword({ code: '', password: '', passwordConfirmation: '' })
+const { user, jwt } = await strapi.resetPassword({
+  code: "",
+  password: "",
+  passwordConfirmation: "",
+});
 ```
 
 ### Email Confirmation
+
 ```js
-await strapi.sendEmailConfirmation({ email: '' })
+await strapi.sendEmailConfirmation({ email: "" });
 ```
 
 ### Get Auth Provider URL
+
 ```js
-window.location = strapi.getAuthenticationProvider('provider');
+window.location = strapi.getAuthenticationProvider("provider");
 ```
+
 > See [providers list](https://docs.strapi.io/developer-docs/latest/plugins/users-permissions.html#providers)
 
 ### Authenticate Provider
+
 ```js
-await strapi.authenticateProvider('provider', 'access_token')
+await strapi.authenticateProvider("provider", "access_token");
 // OR with params query
-await strapi.authenticateProvider('provider')
+await strapi.authenticateProvider("provider");
 ```
+
 > See [providers list](https://docs.strapi.io/developer-docs/latest/plugins/users-permissions.html#providers)
 
 ## User
 
 Once you're logged in, you can access the `user` object which contains details about authenticated user:
+
 ```js
-strapi.user
-``` 
+strapi.user;
+```
 
 ## Advanced
 
@@ -128,17 +148,17 @@ strapi.user
 This SDK uses `axios` under the hood, you can access the `axios` instance directly from there:
 
 ```js
-strapi.axios
+strapi.axios;
 ```
 
 OR if you defined custom routes in your Strapi API that go out of the REST scope or if you want to extend the `axios request config`, you can do as below::
 
 ```js
-const response = await strapi.request('get', '/restaurants', {
+const response = await strapi.request("get", "/restaurants", {
   headers: {
-    foo: 'bar',
+    foo: "bar",
   },
-})
+});
 ```
 
 > See the [axios config](https://github.com/axios/axios#request-config)
