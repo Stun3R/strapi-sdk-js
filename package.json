@@ -1,6 +1,6 @@
 {
   "name": "strapi-sdk-js",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "📦 Javascript SDK for your Strapi API",
   "keywords": [
     "strapi",
@@ -37,13 +37,13 @@
   ],
   "exports": {
     ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.es.js"
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
     },
     "./package.json": "./package.json"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "files": [
     "dist/"

@@ -33,7 +33,7 @@ import { isBrowser } from "./utils";
 
 // Strapi options' default values
 const defaults: StrapiDefaultOptions = {
-  url: process.env.STRAPI_URL || "http://localhost:1337",
+  url: "http://localhost:1337",
   prefix: "/api",
   store: {
     key: "strapi_jwt",
@@ -53,7 +53,7 @@ export class Strapi {
    *
    * @constructor
    * @param {StrapiOptions} options? - Options in order to configure API URL, list your Content Types & extend the axios configuration
-   * @param {string} options.url? - Your Strapi API URL, Default: process.env.STRAPI_URL || http://localhost::1337
+   * @param {string} options.url? - Your Strapi API URL, Default: http://localhost::1337
    * @param {StoreConfig} options.store? - Config the way you want to store JWT (Cookie or LocalStorage)
    * @param {AxiosRequestConfig} options.axiosOptions? - The list of your Content type on your Strapi API
    */

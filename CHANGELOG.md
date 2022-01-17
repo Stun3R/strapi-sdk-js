@@ -1,3 +1,10 @@
+## [2.1.4](https://github.com/Stun3R/strapi-sdk-js/compare/v2.1.3...v2.1.4) (2022-01-14)
+
+
+### Bug Fixes
+
+* **options:** remove process usage in default to be compatible with more framework ([aaa162d](https://github.com/Stun3R/strapi-sdk-js/commit/aaa162d53bc656a149da8d2aacc9560a42a11d55))
+
 ## [2.1.3](https://github.com/Stun3R/strapi-sdk-js/compare/v2.1.2...v2.1.3) (2022-01-05)
 
 
