@@ -46,7 +46,7 @@ const defaults: StrapiDefaultOptions = {
 export class Strapi {
   public axios: AxiosInstance;
   public options: StrapiDefaultOptions;
-  private _user: StrapiUser = null;
+  private _user: StrapiUser | null = null;
 
   /**
    * Strapi SDK Constructor
@@ -72,11 +72,11 @@ export class Strapi {
     this.syncToken();
   }
 
-  get user(): StrapiUser {
+  get user(): StrapiUser | null {
     return this._user;
   }
 
-  set user(user: StrapiUser) {
+  set user(user: StrapiUser | null) {
     this._user = user;
   }
 
@@ -362,21 +362,21 @@ export class Strapi {
   /**
    * Define local data of the logged-in user
    *
-   * @param  {StrapiUser} user - New user data
+   * @param  {StrapiUser | null} user - New user data
    * @returns void
    */
-  public setUser(user: StrapiUser): void {
+  public setUser(user: StrapiUser | null): void {
     this._user = user;
   }
 
   /**
    * Refresh local data of the logged-in user
    *
-   * @returns Promise<StrapiUser>
+   * @returns Promise<StrapiUser | null>
    */
-  public async fetchUser(): Promise<StrapiUser> {
+  public async fetchUser(): Promise<StrapiUser | null> {
     try {
-      const user = await this.request<StrapiUser>("get", "/users/me");
+      const user = await this.request<StrapiUser | null>("get", "/users/me");
       this.setUser(user);
     } catch (e) {
       this.logout();

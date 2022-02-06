@@ -537,7 +537,9 @@ export interface StrapiDefaultOptions {
   axiosOptions: AxiosRequestConfig;
 }
 
-export type StrapiUser = Record<string, unknown> | null;
+export interface StrapiUser {
+  [key: string]: unknown;
+}
 
 export interface PaginationByPage {
   page: number;
