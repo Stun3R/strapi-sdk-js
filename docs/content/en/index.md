@@ -11,12 +11,12 @@ features:
 <img src="/preview-light.png" class="light-img" width="1280" height="640" alt=""/>
 <img src="/preview-dark.png" class="dark-img" width="1280" height="640" alt=""/>
 
-Thanks this SDK you can trigger your [Strapi](https://strapi.io) API in your **<span class="text-primary-500">Javascript</span>**/**<span class="text-primary-500">Typescript</span>** project.
+Thanks this SDK you can trigger your **[Strapi v3](https://strapi.io)** API in your **<span class="text-primary-500">Javascript</span>**/**<span class="text-primary-500">Typescript</span>** project.
 
 ## Features
 
-<d-list :items="features"></d-list>
+<list :items="features"></list>
 
-<d-alert type="info">
-<p class="flex items-center">Don't hurt your eyes:&nbsp;<d-color-switcher class="inline-flex ml-2"><d-color-switcher></p>
-</d-alert>
+<alert type="info">
+<p class="flex items-center">Don't hurt your eyes:&nbsp;<app-color-switcher class="inline-flex ml-2"><app-color-switcher></p>
+</alert>
