@@ -6,9 +6,9 @@ category: "🚀 Getting Started"
 position: 2
 ---
 
-<alert type="warning">
+<alert type="info">
 
-  If you are using Strapi **< v4**, you have to add **strapi-sdk-js@"<2.0.0"** as dependency.
+If you are using Strapi **< v4**, check out [here](https://v1-strapi-sdk-js.netlify.app) the documentation of the SDK `v1`
 
 </alert>
 
@@ -34,9 +34,9 @@ npm install --save strapi-sdk-js
 Then you can create a new instance by importing `strapi-sdk-js` in your project:
 
 ```js
-import Strapi from 'strapi-sdk-js'
+import Strapi from "strapi-sdk-js";
 
-const strapi = new Strapi()
+const strapi = new Strapi();
 ```
 
 ## Configuration
@@ -44,11 +44,11 @@ const strapi = new Strapi()
 You can pass multiple options to the `constructor`:
 
 ```js
-import Strapi from 'strapi-sdk-js'
+import Strapi from "strapi-sdk-js";
 
 const strapi = new Strapi({
   // Options
-})
+});
 ```
 
 See [options](/api/options) for available options.

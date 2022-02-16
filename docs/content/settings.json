@@ -6,6 +6,6 @@
     "dark": "/logo-dark.png"
   },
   "github": "Stun3R/strapi-sdk-js",
-  "defaultBranch": "v4",
+  "defaultBranch": "develop",
   "twitter": "@Stun3R_"
 }

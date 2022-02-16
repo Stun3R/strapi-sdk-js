@@ -23,8 +23,6 @@ Since **v2.1.4** `process.env.STRAPI_URL` is not taken by default.
 
 ## `prefix`
 
-<badge>v2.0.0+</badge>
-
 - Type: `string`
 - Default: `/api`
 

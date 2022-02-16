@@ -58,8 +58,6 @@ interface StoreConfig {
 
 ### `StrapiBaseRequestParams`
 
-<badge>v2.0.0+</badge>
-
 - Strapi query filters used in [findOne](methods#findOne), [create](methods#create), [update](methods#update), [delete](methods#delete) methods.
 
 ```ts
@@ -72,8 +70,6 @@ interface StrapiBaseRequestParams {
 > To know more about how to use it, see [Strapi REST API](https://github.com/strapi/rfcs/blob/v4/rest-api/rfcs/xxxx-v4-rest-api.md#retrieving-data)
 
 ### `StrapiRequestParams`
-
-<badge>v2.0.0+</badge>
 
 - Strapi query filters used in [find](methods#findOne) methods.
 
@@ -91,8 +87,6 @@ interface StrapiRequestParams extends StrapiBaseRequestParams {
 
 ### `PaginationByPage`
 
-<badge>v2.0.0+</badge>
-
 - In Strapi v4, results can be paginated. Use the following types in [StrapiRequestParams](#StrapiRequestParams) in order to **paginate those results by page**.
 
 ```ts
@@ -104,8 +98,6 @@ interface PaginationByPage {
 ```
 
 ### `PaginationByOffset`
-
-<badge>v2.0.0+</badge>
 
 - In Strapi v4, results can be paginated. Use the following types in [StrapiRequestParams](#StrapiRequestParams) in order to **paginate those results by offset**.
 
@@ -119,8 +111,6 @@ export interface PaginationByOffset {
 
 ### `StrapiLocale`
 
-<badge>v2.0.0+</badge>
-
 - With this new version, we decided to give you access to all locales that are available in Strapi. This type is used in [StrapiRequestParams](#StrapiRequestParams) in order to **retrieve content by locale**.
 
 ```ts
@@ -130,8 +120,6 @@ export type StrapiLocale = | "af" | "af-NA" | "af-ZA" | "agq" ...
 > See [full list of available locales](https://github.com/strapi/strapi/blob/master/packages/strapi-plugin-i18n/constants/iso-locales.json)
 
 ### `StrapiResponse<T>`
-
-<badge>v2.0.0+</badge>
 
 - With Strapi v4 comes a new response object. Now you will have access a `data` object (the response data itself) & one `meta` object (information about pagination, publication state, available locales, etc).
 
