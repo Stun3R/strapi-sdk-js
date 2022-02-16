@@ -6,6 +6,8 @@ position: 5
 category: "🖥 API"
 ---
 
+## CRUD
+
 ### `find(contentType, params)`
 
 - Returns `Promise<T>`
@@ -120,6 +122,8 @@ await strapi.graphql({
 This method is no longer supported in **v1.1.0 & newer** since it is better to use a true GraphQL client.
 
 </alert>
+
+## Authentication
 
 ### `register(data)`
 
