@@ -8,7 +8,7 @@ position: 2
 
 <alert type="info">
 
-If you are using Strapi **< v4**, check out [here](https://v1-strapi-sdk-js.netlify.app) the documentation of the SDK `v1`
+If you are using Strapi **v3**, check out [here](https://v1-strapi-sdk-js.netlify.app) the documentation of the SDK `v1`
 
 </alert>
 
