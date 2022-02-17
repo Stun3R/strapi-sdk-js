@@ -212,17 +212,15 @@ describe("Strapi SDK", () => {
         jwt: "XXX",
       });
 
-      expect(
-        context.strapi.axios.defaults.headers.common["Authorization"]
-      ).toBe("Bearer XXX");
+      expect(context.strapi.getToken()).toBe("XXX");
 
       expect(context.strapi.user).toStrictEqual({
         username: "John Doe",
         email: "john@doe.com",
       });
 
-      delete context.strapi.axios.defaults.headers.common["Authorization"];
-      Cookies.remove("strapi_jwt");
+      context.strapi.removeToken();
+      context.strapi.user = null;
     });
 
     test("Login", async () => {
@@ -260,17 +258,14 @@ describe("Strapi SDK", () => {
         jwt: "XXX",
       });
 
-      expect(
-        context.strapi.axios.defaults.headers.common["Authorization"]
-      ).toBe("Bearer XXX");
+      expect(context.strapi.getToken()).toBe("XXX");
 
       expect(context.strapi.user).toStrictEqual({
         username: "John Doe",
         email: "john@doe.com",
       });
 
-      delete context.strapi.axios.defaults.headers.common["Authorization"];
-      Cookies.remove("strapi_jwt");
+      context.strapi.removeToken();
       context.strapi.user = null;
     });
 
@@ -318,12 +313,9 @@ describe("Strapi SDK", () => {
 
       expect(response).toEqual({ user: {}, jwt: "XXX" });
 
-      expect(
-        context.strapi.axios.defaults.headers.common["Authorization"]
-      ).toBe("Bearer XXX");
-
-      delete context.strapi.axios.defaults.headers.common["Authorization"];
-      Cookies.remove("strapi_jwt");
+      expect(context.strapi.getToken()).toEqual("XXX");
+      context.strapi.removeToken();
+      context.strapi.user = null;
     });
 
     test("Send Email Confirmation", async () => {
@@ -372,12 +364,10 @@ describe("Strapi SDK", () => {
       ).toBe(true);
 
       expect(response).toEqual({ user: {}, jwt: "XXX" });
-      expect(
-        context.strapi.axios.defaults.headers.common["Authorization"]
-      ).toBe("Bearer XXX");
+      expect(context.strapi.getToken()).toEqual("XXX");
 
-      delete context.strapi.axios.defaults.headers.common["Authorization"];
-      Cookies.remove("strapi_jwt");
+      context.strapi.removeToken();
+      context.strapi.user = null;
     });
 
     test("Authentication with third party token on searchParams", async () => {
@@ -407,12 +397,10 @@ describe("Strapi SDK", () => {
       ).toBe(true);
 
       expect(response).toEqual({ user: {}, jwt: "XXX" });
-      expect(
-        context.strapi.axios.defaults.headers.common["Authorization"]
-      ).toBe("Bearer XXX");
+      expect(context.strapi.getToken()).toEqual("XXX");
 
-      delete context.strapi.axios.defaults.headers.common["Authorization"];
-      Cookies.remove("strapi_jwt");
+      context.strapi.removeToken();
+      context.strapi.user = null;
     });
 
     test("Logout", async () => {
@@ -427,30 +415,46 @@ describe("Strapi SDK", () => {
         identifier: "john@doe.com",
         password: "password",
       });
-
-      expect(
-        context.strapi.axios.defaults.headers.common["Authorization"]
-      ).toBe("Bearer XXX");
-
       context.strapi.logout();
 
-      expect(
-        context.strapi.axios.defaults.headers.common["Authorization"]
-      ).toBe(undefined);
+      expect(context.strapi.getToken()).toBe(null);
     });
   });
 
   describe("Token Management", () => {
+    test("Get Token in non DOM env", () => {
+      const windowSpy = jest.spyOn(window, "window", "get");
+      // @ts-ignore
+      windowSpy.mockImplementation(() => undefined);
+
+      expect(context.strapi.getToken()).toBe(null);
+
+      windowSpy.mockRestore();
+    });
+
+    test("Get Token from Cookies", () => {
+      Cookies.set("strapi_jwt", "XXX");
+
+      expect(context.strapi.getToken()).toBe("XXX");
+
+      Cookies.remove("strapi_jwt");
+    });
+
+    test("Get Token from localStorage", () => {
+      context.strapi.options.store.useLocalStorage = true;
+      window.localStorage.setItem("strapi_jwt", "XXX");
+
+      expect(context.strapi.getToken()).toBe("XXX");
+
+      window.localStorage.removeItem("strapi_jwt");
+      context.strapi.options.store.useLocalStorage = false;
+    });
+
     test("Set Token in Cookies", () => {
       context.strapi.setToken("XXX");
 
-      expect(
-        context.strapi.axios.defaults.headers.common["Authorization"]
-      ).toBe("Bearer XXX");
-
       expect(Cookies.get("strapi_jwt")).toBe("XXX");
 
-      delete context.strapi.axios.defaults.headers.common["Authorization"];
       Cookies.remove("strapi_jwt");
     });
 
@@ -458,13 +462,8 @@ describe("Strapi SDK", () => {
       context.strapi.options.store.useLocalStorage = true;
       context.strapi.setToken("XXX");
 
-      expect(
-        context.strapi.axios.defaults.headers.common["Authorization"]
-      ).toBe("Bearer XXX");
-
       expect(window.localStorage.getItem("strapi_jwt")).toBe("XXX");
 
-      delete context.strapi.axios.defaults.headers.common["Authorization"];
       window.localStorage.removeItem("strapi_jwt");
       context.strapi.options.store.useLocalStorage = false;
     });
@@ -473,10 +472,6 @@ describe("Strapi SDK", () => {
       context.strapi.setToken("XXX");
       context.strapi.removeToken();
 
-      expect(
-        context.strapi.axios.defaults.headers.common["Authorization"]
-      ).toBe(undefined);
-
       expect(Cookies.get("strapi_jwt")).toBe(undefined);
     });
 
@@ -484,10 +479,6 @@ describe("Strapi SDK", () => {
       context.strapi.options.store.useLocalStorage = true;
       context.strapi.setToken("XXX");
       context.strapi.removeToken();
-
-      expect(
-        context.strapi.axios.defaults.headers.common["Authorization"]
-      ).toBe(undefined);
 
       expect(window.localStorage.getItem("strapi_jwt")).toBe(null);
     });

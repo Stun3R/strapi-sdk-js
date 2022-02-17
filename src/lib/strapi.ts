@@ -46,7 +46,7 @@ const defaults: StrapiDefaultOptions = {
 export class Strapi {
   public axios: AxiosInstance;
   public options: StrapiDefaultOptions;
-  private _user: StrapiUser = null;
+  public user: StrapiUser = null;
 
   /**
    * Strapi SDK Constructor
@@ -68,16 +68,18 @@ export class Strapi {
       ...this.options.axiosOptions,
     });
 
-    // Synchronize token if already exist
-    this.syncToken();
-  }
+    // Synchronize token before each request
+    this.axios.interceptors.request.use((config) => {
+      const token = this.getToken();
+      if (token) {
+        config.headers = {
+          ...config.headers,
+          Authorization: `Bearer ${token}`,
+        };
+      }
 
-  get user(): StrapiUser {
-    return this._user;
-  }
-
-  set user(user: StrapiUser) {
-    this._user = user;
+      return config;
+    });
   }
 
   /**
@@ -135,7 +137,7 @@ export class Strapi {
         data,
       });
     this.setToken(jwt);
-    this.setUser(user);
+    this.user = user;
     return { user, jwt };
   }
 
@@ -161,7 +163,7 @@ export class Strapi {
         }
       );
     this.setToken(jwt);
-    this.setUser(user);
+    this.user = user;
     return { user, jwt };
   }
 
@@ -199,7 +201,7 @@ export class Strapi {
         }
       );
     this.setToken(jwt);
-    this.setUser(user);
+    this.user = user;
     return { user, jwt };
   }
 
@@ -253,7 +255,7 @@ export class Strapi {
       }
     );
     this.setToken(jwt);
-    this.setUser(user);
+    this.user = user;
     return { user, jwt };
   }
 
@@ -263,7 +265,7 @@ export class Strapi {
    * @returns void
    */
   public logout(): void {
-    this.setUser(null);
+    this.user = null;
     this.removeToken();
   }
 
@@ -360,16 +362,6 @@ export class Strapi {
   }
 
   /**
-   * Define local data of the logged-in user
-   *
-   * @param  {StrapiUser} user - New user data
-   * @returns void
-   */
-  public setUser(user: StrapiUser): void {
-    this._user = user;
-  }
-
-  /**
    * Refresh local data of the logged-in user
    *
    * @returns Promise<StrapiUser>
@@ -377,54 +369,56 @@ export class Strapi {
   public async fetchUser(): Promise<StrapiUser> {
     try {
       const user = await this.request<StrapiUser>("get", "/users/me");
-      this.setUser(user);
+      this.user = user;
     } catch (e) {
       this.logout();
     }
 
-    return this._user;
+    return this.user;
   }
 
   /**
-   * Sync token between storage & header when SDK is instantiate
+   * Retrieve token from chosen storage
    *
-   * @returns void
+   * @returns string | null
    */
-  private syncToken(): void {
+  public getToken(): string | null {
     const { useLocalStorage, key } = this.options.store;
     if (isBrowser()) {
       const token = useLocalStorage
         ? window.localStorage.getItem(key)
-        : Cookies.get(key);
+        : (Cookies.get(key) as string);
 
-      if (token) {
-        this.axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      }
+      if (typeof token === "undefined") return null;
+
+      return token;
     }
+
+    return null;
   }
+
   /**
-   * Set token in Axios headers & in choosen storage
+   * Set token in chosen storage
    *
    * @param  {string} token - Token retrieve from login or register method
    * @returns void
    */
   public setToken(token: string): void {
     const { useLocalStorage, key, cookieOptions } = this.options.store;
-    this.axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     if (isBrowser()) {
       useLocalStorage
         ? window.localStorage.setItem(key, token)
         : Cookies.set(key, token, cookieOptions);
     }
   }
+
   /**
-   * Remove token in Axios headers & in choosen storage (Cookies or Local)
+   * Remove token from chosen storage (Cookies or Local)
    *
    * @returns void
    */
   public removeToken(): void {
     const { useLocalStorage, key } = this.options.store;
-    delete this.axios.defaults.headers.common["Authorization"];
     if (isBrowser()) {
       useLocalStorage
         ? window.localStorage.removeItem(key)
