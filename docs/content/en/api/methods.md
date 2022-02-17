@@ -229,21 +229,45 @@ You often need to fetch your user data. Use this method to fetch the current use
 await strapi.fetchUser();
 ```
 
+### `getToken()`
+
+<badge>v2.2.0+</badge>
+
+- Returns `string | null`
+
+Retrieve your JWT token from [chosen storage](options#store)
+
+```js
+strapi.getToken();
+```
+
 ### `setToken(token)`
 
-Set token in Axios headers as a `Bearer` JWT & store it in [chosen storage](options#store).
+Set your JWT token in Axios headers as a `Bearer` JWT & store it in [chosen storage](options#store).
 
 ```js
 strapi.setToken(token);
 ```
 
+<alert type="warning">
+
+Since **v2.2.0 & newer** it only set token in your chosen storage. We now use [axios interceptors](https://axios-http.com/docs/interceptors) to synchronize token in header.
+
+</alert>
+
 ### `removeToken()`
 
-Remove token from Axios headers & [chosen storage](options#store).
+Remove your JWT token from Axios headers & [chosen storage](options#store).
 
 ```js
 strapi.removeToken();
 ```
+
+<alert type="warning">
+
+Since **v2.2.0 & newer** it only set token in your chosen storage. We now use [axios interceptors](https://axios-http.com/docs/interceptors) to synchronize token in header.
+
+</alert>
 
 ## Extends
 
