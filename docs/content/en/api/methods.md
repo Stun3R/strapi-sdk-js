@@ -109,7 +109,7 @@ await strapi.delete('restaurants', 1, {
 
 - Returns `Promise<StrapiAuthenticationResponse>`
 
-Register a new [User](methods#setuseruser) & sets the [Token](methods#settokentoken).
+Register a new [User](properties#user) & sets the [Token](methods#settokentoken).
 
 ```js
 await strapi.register({ username: "", email: "", password: "" });
@@ -121,7 +121,7 @@ await strapi.register({ username: "", email: "", password: "" });
 
 - Returns `Promise<StrapiAuthenticationResponse>`
 
-Authenticate a [User](methods#setuseruser) & sets the [Token](methods#settokentoken).
+Authenticate a [User](properties#user) & sets the [Token](methods#settokentoken).
 
 ```js
 await strapi.login({ identifier: "", password: "" });
@@ -211,13 +211,19 @@ Set local data of the logged-in user
 strapi.setUser(user);
 ```
 
-<alert type="info">You can also use `strapi.user` in order to set user data and get it.</alert>
+<alert type="warning">
+
+This method is no longer supported in **v2.2.0 & newer** since `getter` & `setter` for `user` properties has been removed.
+
+</alert>
+
+<alert type="info">You can use `strapi.user` in order to set user data and get it.</alert>
 
 ### `fetchUser()`
 
 - Returns `Promise`
 
-You often need to fetch your user data. Use this method to fetch the current user from `/users/me` if a `JWT` is present in your [storage](options#store). It sets the [User](methods#setuseruser).
+You often need to fetch your user data. Use this method to fetch the current user from `/users/me` if a `JWT` is present in your [storage](options#store). It sets the [User](properties#user).
 
 ```js
 await strapi.fetchUser();

@@ -9,7 +9,6 @@ describe("Creation of SDK instance", () => {
 
     expect(Object.getOwnPropertyNames(Object.getPrototypeOf(strapi))).toEqual([
       "constructor",
-      "user",
       "request",
       "login",
       "register",
@@ -24,7 +23,6 @@ describe("Creation of SDK instance", () => {
       "create",
       "update",
       "delete",
-      "setUser",
       "fetchUser",
       "syncToken",
       "setToken",
@@ -32,7 +30,7 @@ describe("Creation of SDK instance", () => {
     ]);
 
     expect(Object.getOwnPropertyNames(strapi)).toEqual([
-      "_user",
+      "user",
       "options",
       "axios",
     ]);
