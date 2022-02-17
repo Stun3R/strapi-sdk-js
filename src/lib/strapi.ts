@@ -46,7 +46,7 @@ const defaults: StrapiDefaultOptions = {
 export class Strapi {
   public axios: AxiosInstance;
   public options: StrapiDefaultOptions;
-  private _user: StrapiUser = null;
+  public user: StrapiUser = null;
 
   /**
    * Strapi SDK Constructor
@@ -70,14 +70,6 @@ export class Strapi {
 
     // Synchronize token if already exist
     this.syncToken();
-  }
-
-  get user(): StrapiUser {
-    return this._user;
-  }
-
-  set user(user: StrapiUser) {
-    this._user = user;
   }
 
   /**
@@ -135,7 +127,7 @@ export class Strapi {
         data,
       });
     this.setToken(jwt);
-    this.setUser(user);
+    this.user = user;
     return { user, jwt };
   }
 
@@ -161,7 +153,7 @@ export class Strapi {
         }
       );
     this.setToken(jwt);
-    this.setUser(user);
+    this.user = user;
     return { user, jwt };
   }
 
@@ -199,7 +191,7 @@ export class Strapi {
         }
       );
     this.setToken(jwt);
-    this.setUser(user);
+    this.user = user;
     return { user, jwt };
   }
 
@@ -253,7 +245,7 @@ export class Strapi {
       }
     );
     this.setToken(jwt);
-    this.setUser(user);
+    this.user = user;
     return { user, jwt };
   }
 
@@ -263,7 +255,7 @@ export class Strapi {
    * @returns void
    */
   public logout(): void {
-    this.setUser(null);
+    this.user = null;
     this.removeToken();
   }
 
@@ -360,16 +352,6 @@ export class Strapi {
   }
 
   /**
-   * Define local data of the logged-in user
-   *
-   * @param  {StrapiUser} user - New user data
-   * @returns void
-   */
-  public setUser(user: StrapiUser): void {
-    this._user = user;
-  }
-
-  /**
    * Refresh local data of the logged-in user
    *
    * @returns Promise<StrapiUser>
@@ -377,12 +359,12 @@ export class Strapi {
   public async fetchUser(): Promise<StrapiUser> {
     try {
       const user = await this.request<StrapiUser>("get", "/users/me");
-      this.setUser(user);
+      this.user = user;
     } catch (e) {
       this.logout();
     }
 
-    return this._user;
+    return this.user;
   }
 
   /**
@@ -402,6 +384,7 @@ export class Strapi {
       }
     }
   }
+
   /**
    * Set token in Axios headers & in choosen storage
    *
@@ -417,6 +400,7 @@ export class Strapi {
         : Cookies.set(key, token, cookieOptions);
     }
   }
+
   /**
    * Remove token in Axios headers & in choosen storage (Cookies or Local)
    *
