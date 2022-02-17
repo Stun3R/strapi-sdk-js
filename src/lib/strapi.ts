@@ -68,8 +68,18 @@ export class Strapi {
       ...this.options.axiosOptions,
     });
 
-    // Synchronize token if already exist
-    this.syncToken();
+    // Synchronize token before each request
+    this.axios.interceptors.request.use((config) => {
+      const token = this.getToken();
+      if (token) {
+        config.headers = {
+          ...config.headers,
+          Authorization: `Bearer ${token}`,
+        };
+      }
+
+      return config;
+    });
   }
 
   /**
@@ -368,32 +378,33 @@ export class Strapi {
   }
 
   /**
-   * Sync token between storage & header when SDK is instantiate
+   * Retrieve token from chosen storage
    *
-   * @returns void
+   * @returns string | null
    */
-  private syncToken(): void {
+  public getToken(): string | null {
     const { useLocalStorage, key } = this.options.store;
     if (isBrowser()) {
       const token = useLocalStorage
         ? window.localStorage.getItem(key)
-        : Cookies.get(key);
+        : (Cookies.get(key) as string);
 
-      if (token) {
-        this.axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      }
+      if (typeof token === "undefined") return null;
+
+      return token;
     }
+
+    return null;
   }
 
   /**
-   * Set token in Axios headers & in choosen storage
+   * Set token in chosen storage
    *
    * @param  {string} token - Token retrieve from login or register method
    * @returns void
    */
   public setToken(token: string): void {
     const { useLocalStorage, key, cookieOptions } = this.options.store;
-    this.axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     if (isBrowser()) {
       useLocalStorage
         ? window.localStorage.setItem(key, token)
@@ -402,13 +413,12 @@ export class Strapi {
   }
 
   /**
-   * Remove token in Axios headers & in choosen storage (Cookies or Local)
+   * Remove token from chosen storage (Cookies or Local)
    *
    * @returns void
    */
   public removeToken(): void {
     const { useLocalStorage, key } = this.options.store;
-    delete this.axios.defaults.headers.common["Authorization"];
     if (isBrowser()) {
       useLocalStorage
         ? window.localStorage.removeItem(key)
