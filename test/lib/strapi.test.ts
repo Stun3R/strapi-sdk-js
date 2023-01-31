@@ -269,6 +269,25 @@ describe("Strapi SDK", () => {
       context.strapi.user = null;
     });
 
+    test("Change Password", async () => {
+      await context.strapi.changePassword({
+        currentPassword: "password",
+        password: "newPassword",
+        passwordConfirmation: "newPassword"
+      });
+      expect(
+        context.axiosRequest.calledWith({
+          method: "post",
+          url: "/auth/change-password",
+          data: {
+            currentPassword: "password",
+            password: "newPassword",
+            passwordConfirmation: "newPassword"
+          }
+        })
+      ).toBe(true);
+    });
+
     test("Forgot Password", async () => {
       await context.strapi.forgotPassword({
         email: "john@doe.com",
