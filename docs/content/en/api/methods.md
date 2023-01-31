@@ -129,6 +129,20 @@ await strapi.login({ identifier: "", password: "" });
 
 > See the [Strapi documentation](https://docs.strapi.io/developer-docs/latest/plugins/users-permissions.html#login).
 
+### `changePassword(data)`
+
+- Returns `Promise<StrapiAuthenticationResponse>`
+
+Changes the password for the currently logged in user.
+
+```js
+await strapi.changePassword({ currentPassword: "", password: "", passwordConfirmation: "" })
+```
+
+<alert type="info">
+This method is new in **Strapi 4.3.3**.
+</alert>
+
 ### `forgotPassword(data)`
 
 - Returns `Promise<void>`
