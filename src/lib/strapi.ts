@@ -26,11 +26,11 @@ import {
   StrapiResetPasswordData,
   StrapiResponse,
   StrapiUser,
+  StrapiChangePasswordData
 } from "./types";
 
 // Load utils methods
 import { isBrowser } from "./utils";
-import { StrapiChangePasswordData } from "./types";
 
 // Strapi options' default values
 const defaults: StrapiDefaultOptions = {
@@ -193,7 +193,7 @@ export class Strapi {
   public async changePassword (
     data: StrapiChangePasswordData
   ): Promise<StrapiAuthenticationResponse> {
-    const { user, jwt }: StrapiAuthenticationData = await this.request<StrapiAuthenticationResponse>(
+    const { user, jwt }: StrapiAuthenticationResponse = await this.request<StrapiAuthenticationResponse>(
       "post", "/auth/change-password",
       {
         data
