@@ -77,8 +77,8 @@
     "qs": "^6.10.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "16.0.1",
-    "@commitlint/config-conventional": "16.0.0",
+    "@commitlint/cli": "16.3.0",
+    "@commitlint/config-conventional": "16.2.4",
     "@release-it/conventional-changelog": "4.1.0",
     "@types/jest": "27.4.0",
     "@types/sinon": "10.0.6",
