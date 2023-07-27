@@ -1,7 +1,7 @@
 import Strapi from "../../src";
 import sinon from "sinon";
 import Cookies from "js-cookie";
-import { StrapiError } from "../../dist";
+import { StrapiError } from "../../src";
 import { AxiosError } from "axios";
 
 interface TestContext {
