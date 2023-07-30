@@ -87,7 +87,7 @@
     "@typescript-eslint/parser": "5.62.0",
     "commitizen": "4.3.0",
     "cz-conventional-changelog": "3.3.0",
-    "dotenv-cli": "4.1.1",
+    "dotenv-cli": "7.2.1",
     "eslint": "8.46.0",
     "husky": "7.0.4",
     "jest": "27.5.1",
