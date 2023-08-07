@@ -1,4 +1,5 @@
 {
   "extends": ["config:base"],
-  "schedule": ["every weekend"]
+  "schedule": ["before 4am on the first day of the month"],
+  "ignorePaths": ["**/docs/**"]
 }
