@@ -11,7 +11,7 @@ import qs from "qs";
 import Cookies from "js-cookie";
 
 // Load custom types
-import type {
+import {
   StrapiAuthenticationData,
   StrapiAuthenticationResponse,
   StrapiAuthProvider,
@@ -26,6 +26,7 @@ import type {
   StrapiResetPasswordData,
   StrapiResponse,
   StrapiUser,
+  StrapiChangePasswordData
 } from "./types";
 
 // Load utils methods
@@ -177,6 +178,30 @@ export class Strapi {
   public async forgotPassword(data: StrapiForgotPasswordData): Promise<void> {
     this.removeToken();
     return this.request("post", "/auth/forgot-password", { data });
+  }
+
+  /**
+   * Change the password of the logged in user.
+   * @author AnnikenYT
+   * 
+   * @param {StrapiChangePasswordData} data - Change password data: `currentPassword`, `password`, `passwordConfirmation`
+   * @param {string} data.currentPassword - The current password of the user
+   * @param {string} data.password - The new password of the user
+   * @param {string} data.passwordConfirmation - Confirmation of the new password of the user
+   * @returns Promise<StrapiAuthenticationResponse>
+   */
+  public async changePassword (
+    data: StrapiChangePasswordData
+  ): Promise<StrapiAuthenticationResponse> {
+    const { user, jwt }: StrapiAuthenticationResponse = await this.request<StrapiAuthenticationResponse>(
+      "post", "/auth/change-password",
+      {
+        data
+      }
+    )
+    this.setToken(jwt)
+    this.user = user
+    return {jwt, user}
   }
 
   /**

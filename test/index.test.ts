@@ -12,6 +12,7 @@ describe("Creation of SDK instance", () => {
       "login",
       "register",
       "forgotPassword",
+      "changePassword",
       "resetPassword",
       "sendEmailConfirmation",
       "getProviderAuthenticationUrl",

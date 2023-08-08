@@ -599,6 +599,12 @@ export interface StrapiForgotPasswordData {
   email: string;
 }
 
+export interface StrapiChangePasswordData {
+  currentPassword: string;
+  password: string;
+  passwordConfirmation: string;
+}
+
 export interface StrapiResetPasswordData {
   code: string;
   password: string;
