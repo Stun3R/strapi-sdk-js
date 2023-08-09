@@ -75,7 +75,8 @@
     "axios": "^0.27.0",
     "defu": "^5.0.0",
     "js-cookie": "^3.0.0",
-    "qs": "^6.10.1"
+    "qs": "^6.10.1",
+    "ufo": "^1.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "17.6.7",

@@ -9,6 +9,7 @@ import axios, {
 import defu from "defu";
 import qs from "qs";
 import Cookies from "js-cookie";
+import { cleanDoubleSlashes, joinURL } from "ufo";
 
 // Load custom types
 import type {
@@ -60,11 +61,18 @@ export class Strapi {
    */
   constructor(options?: StrapiOptions) {
     // merge given options with default values
-    this.options = defu((options as StrapiDefaultOptions) || {}, defaults);
+    const _options = defu(options || {}, defaults);
+
+    // clean url & prefix
+    this.options = {
+      ..._options,
+      url: cleanDoubleSlashes(_options?.url),
+      prefix: cleanDoubleSlashes(_options?.prefix),
+    };
 
     // create axios instance
     this.axios = axios.create({
-      baseURL: new URL(this.options.prefix, this.options.url).href,
+      baseURL: joinURL(this.options.url, this.options.prefix),
       paramsSerializer: qs.stringify,
       ...this.options.axiosOptions,
     });
