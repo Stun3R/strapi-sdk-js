@@ -3,6 +3,7 @@ import sinon from "sinon";
 import Cookies from "js-cookie";
 import { StrapiError } from "../../src";
 import { AxiosError } from "axios";
+import { joinURL } from "ufo";
 
 interface TestContext {
   strapi: Strapi;
@@ -273,7 +274,7 @@ describe("Strapi SDK", () => {
       await context.strapi.changePassword({
         currentPassword: "password",
         password: "newPassword",
-        passwordConfirmation: "newPassword"
+        passwordConfirmation: "newPassword",
       });
       expect(
         context.axiosRequest.calledWith({
@@ -282,8 +283,8 @@ describe("Strapi SDK", () => {
           data: {
             currentPassword: "password",
             password: "newPassword",
-            passwordConfirmation: "newPassword"
-          }
+            passwordConfirmation: "newPassword",
+          },
         })
       ).toBe(true);
     });
@@ -356,7 +357,13 @@ describe("Strapi SDK", () => {
     test("Get Authentication Provider", () => {
       const url = context.strapi.getProviderAuthenticationUrl("github");
 
-      expect(url).toBe("http://strapi-host/connect/github");
+      expect(url).toBe(
+        joinURL(
+          context.strapi.options.url,
+          context.strapi.options.prefix,
+          "connect/github"
+        )
+      );
     });
 
     test("Authentication with third party token", async () => {
