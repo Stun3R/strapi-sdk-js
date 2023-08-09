@@ -261,7 +261,7 @@ export class Strapi {
    * @returns string
    */
   public getProviderAuthenticationUrl(provider: StrapiAuthProvider): string {
-    return new URL(`/connect/${provider}`, this.options.url).href;
+    return joinURL(this.options.url, this.options.prefix, "connect", provider);
   }
 
   /**
