@@ -1,5 +1,5 @@
 {
-  "extends": ["config:base"],
+  "extends": ["config:base", ":semanticCommitTypeAll(chore)"],
   "schedule": ["before 4am on the first day of the month"],
   "ignorePaths": ["**/docs/**"]
 }
