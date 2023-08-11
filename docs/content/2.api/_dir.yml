@@ -1,2 +1,3 @@
 title: 'API'
-icon: heroicons-outline:bookmark-alt
+navigation.redirect: /api/properties
+icon: emojione:desktop-computer
