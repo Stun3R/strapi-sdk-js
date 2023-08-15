@@ -1,3 +1,9 @@
+## [2.3.1](https://github.com/Stun3R/strapi-sdk-js/compare/v2.3.0...v2.3.1) (2023-08-15)
+
+### 👷‍♂️ Build
+
+- build: update the build target to support webpack based frameworks ([e8c10ef](https://github.com/Stun3R/strapi-sdk-js/commit/e8c10ef74f757cb36d622b785c2d3ef4637fee54)), closes [#179](https://github.com/Stun3R/strapi-sdk-js/issues/179)
+
 # [2.3.0](https://github.com/Stun3R/strapi-sdk-js/compare/v2.2.0...v2.3.0) (2023-08-10)
 
 ### 🐛 Bug Fixes
