@@ -24,7 +24,7 @@ export default [
       }),
       commonjs({ include: /node_modules/ }),
       esbuild({
-        target: "esnext",
+        target: "es2018",
       }),
       json(),
     ],
