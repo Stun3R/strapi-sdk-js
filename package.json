@@ -58,6 +58,7 @@
     "test": "run-s build lint test:unit",
     "test:unit": "jest",
     "commit": "git-cz",
+    "docs:release": "dotenv node ./scripts/beforeRelease.js",
     "release": "dotenv release-it --",
     "prepare": "rollup -c"
   },
