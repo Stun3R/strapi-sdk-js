@@ -9,7 +9,7 @@ import axios, {
 import defu from "defu";
 import qs from "qs";
 import Cookies from "js-cookie";
-import ufo from "ufo";
+import { cleanDoubleSlashes, joinURL } from "ufo";
 
 // Load custom types
 import type {
@@ -66,13 +66,13 @@ export class Strapi {
     // clean url & prefix
     this.options = {
       ..._options,
-      url: ufo.cleanDoubleSlashes(_options?.url),
-      prefix: ufo.cleanDoubleSlashes(_options?.prefix),
+      url: cleanDoubleSlashes(_options?.url),
+      prefix: cleanDoubleSlashes(_options?.prefix),
     };
 
     // create axios instance
     this.axios = axios.create({
-      baseURL: ufo.joinURL(this.options.url, this.options.prefix),
+      baseURL: joinURL(this.options.url, this.options.prefix),
       paramsSerializer: qs.stringify,
       ...this.options.axiosOptions,
     });
@@ -261,12 +261,7 @@ export class Strapi {
    * @returns string
    */
   public getProviderAuthenticationUrl(provider: StrapiAuthProvider): string {
-    return ufo.joinURL(
-      this.options.url,
-      this.options.prefix,
-      "connect",
-      provider
-    );
+    return joinURL(this.options.url, this.options.prefix, "connect", provider);
   }
 
   /**
