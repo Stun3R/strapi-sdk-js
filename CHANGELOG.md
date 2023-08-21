@@ -1,3 +1,9 @@
+## [2.3.2](https://github.com/Stun3R/strapi-sdk-js/compare/v2.3.1...v2.3.2) (2023-08-21)
+
+### 👷‍♂️ Build
+
+- build(deps): fix ufo import ([03f3a5d](https://github.com/Stun3R/strapi-sdk-js/commit/03f3a5d0fd674e12cc015cc16aad1b093e697950)), closes [#181](https://github.com/Stun3R/strapi-sdk-js/issues/181) thanks **@flavienrako**
+
 ## [2.3.1](https://github.com/Stun3R/strapi-sdk-js/compare/v2.3.0...v2.3.1) (2023-08-15)
 
 ### 👷‍♂️ Build
