@@ -66,13 +66,13 @@ export class Strapi {
     // clean url & prefix
     this.options = {
       ..._options,
-      url: cleanDoubleSlashes(_options?.url),
-      prefix: cleanDoubleSlashes(_options?.prefix),
+      url: ufo.cleanDoubleSlashes(_options?.url),
+      prefix: ufo.cleanDoubleSlashes(_options?.prefix),
     };
 
     // create axios instance
     this.axios = axios.create({
-      baseURL: joinURL(this.options.url, this.options.prefix),
+      baseURL: ufo.joinURL(this.options.url, this.options.prefix),
       paramsSerializer: qs.stringify,
       ...this.options.axiosOptions,
     });
@@ -261,7 +261,7 @@ export class Strapi {
    * @returns string
    */
   public getProviderAuthenticationUrl(provider: StrapiAuthProvider): string {
-    return joinURL(this.options.url, this.options.prefix, "connect", provider);
+    return ufo.joinURL(this.options.url, this.options.prefix, "connect", provider);
   }
 
   /**
