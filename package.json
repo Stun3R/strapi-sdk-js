@@ -51,7 +51,7 @@
   ],
   "scripts": {
     "start": "rollup -c --watch",
-    "build": "rollup -c",
+    "build": "rm -rf dist && rollup -c",
     "clean": "rm -rf bin dist coverage",
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix",
