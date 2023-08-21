@@ -9,7 +9,7 @@ import axios, {
 import defu from "defu";
 import qs from "qs";
 import Cookies from "js-cookie";
-import { cleanDoubleSlashes, joinURL } from "ufo";
+import * as ufo from "ufo";
 
 // Load custom types
 import type {
