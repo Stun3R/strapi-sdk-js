@@ -3,6 +3,7 @@
 const axios = require("axios");
 const { writeFileSync } = require("fs");
 const { join } = require("path");
+const { execSync } = require("child_process");
 
 const RELEASES_PATH = join(__dirname, "..", "docs", "content", "4.releases.md");
 
@@ -29,6 +30,8 @@ async function main() {
     writeFileSync(RELEASES_PATH, `# Releases\r\n\r\n${releases}`, {
       flag: "w+",
     });
+
+    execSync(`git add ${RELEASES_PATH}`);
 
     console.log("Successfully generated the releases page.");
   } catch (error) {
