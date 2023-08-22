@@ -3,6 +3,7 @@ bin/
 test/
 docs/
 example/
+scripts/
 .eslintrc.js
 .commitlint.config.js
 .husky.config.js
