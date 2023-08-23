@@ -1,31 +1,19 @@
 #!/usr/bin/node
 
-const axios = require("axios");
-const { writeFileSync } = require("fs");
+const { writeFileSync, readFileSync } = require("fs");
 const { join } = require("path");
 const { execSync } = require("child_process");
 
+const CHANGELOG_PATH = join(__dirname, "..", "CHANGELOG.md");
 const RELEASES_PATH = join(__dirname, "..", "docs", "content", "4.releases.md");
+
+const VERSION_REGEX = /\[(.*?)\]\(.*?\) \(.*?\)/g;
 
 async function main() {
   try {
-    const response = await axios.request(
-      `https://api.github.com/repos/Stun3R/strapi-sdk-js/releases`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-        },
-      }
-    );
+    const file = readFileSync(CHANGELOG_PATH, "utf-8");
 
-    const releases = response.data.reduce((acc, cur) => {
-      const name = `## ${cur.name}`;
-      const body = cur.body.replace(/###/g, "####");
-
-      acc += `${name}\r\n\r\n${body}\r\n\r\n`;
-
-      return acc;
-    }, "");
+    releases = file.replace(VERSION_REGEX, "v$1").replace(/###/g, "####");
 
     writeFileSync(RELEASES_PATH, `# Releases\r\n\r\n${releases}`, {
       flag: "w+",
@@ -33,7 +21,7 @@ async function main() {
 
     execSync(`git add ${RELEASES_PATH}`);
 
-    console.log("Successfully generated the releases page.");
+    console.log("✨ Successfully generated the releases page.");
   } catch (error) {
     console.error(error);
   }
