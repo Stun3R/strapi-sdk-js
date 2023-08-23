@@ -1,3 +1,9 @@
+## [2.3.3](https://github.com/Stun3R/strapi-sdk-js/compare/v2.3.1...v2.3.3) (2023-08-23)
+
+### 🐛 Bug Fixes
+
+- **type:** add missing StrapiChangePasswordData to global export ([2317627](https://github.com/Stun3R/strapi-sdk-js/commit/2317627ceefdddbf29d9d2b67b143196c52e7185)) **@mohammadGh**
+
 ## [2.3.2](https://github.com/Stun3R/strapi-sdk-js/compare/v2.3.1...v2.3.2) (2023-08-21)
 
 ### 👷‍♂️ Build
@@ -71,7 +77,7 @@
 
 ## [2.1.1](https://github.com/Stun3R/strapi-sdk-js/compare/v2.1.0...v2.1.1) (2021-11-29)
 
-# [2.0.0](https://github.com/Stun3R/strapi-sdk-js/compare/v1.1.0...v2.0.0) (2021-11-08)
+## [2.0.0](https://github.com/Stun3R/strapi-sdk-js/compare/v1.1.0...v2.0.0) (2021-11-08)
 
 ### 🚀 Features
 
@@ -81,7 +87,7 @@
 - replace axios request config params by custom type based on strapi rest api parameters ([2047433](https://github.com/Stun3R/strapi-sdk-js/commit/2047433f93aaae9b4eaeb0c7f4b49cccfb46f770))
 - v4 error handling ([4d0eb3f](https://github.com/Stun3R/strapi-sdk-js/commit/4d0eb3f50ed9796e7dd3837cd45a2d926e9679d5))
 
-# [1.1.0](https://github.com/Stun3R/strapi-sdk-js/compare/v1.0.2...v1.1.0) (2021-10-19)
+## [1.1.0](https://github.com/Stun3R/strapi-sdk-js/compare/v1.0.2...v1.1.0) (2021-10-19)
 
 ### 🐛 Bug Fixes
 
@@ -108,7 +114,7 @@
 - **deps:** update dependency nuxt to v2.15.7 ([062c012](https://github.com/Stun3R/strapi-sdk-js/commit/062c0121f63746c728f895fcf4b608e3e820826d))
 - **deps:** update dependency nuxt to v2.15.8 ([598dacd](https://github.com/Stun3R/strapi-sdk-js/commit/598dacdeab43252d92405fc67882de2c00609b48))
 
-## 1.0.1 (2021-06-17)
+## [1.0.1](https://github.com/Stun3R/strapi-sdk-js/compare/v1.0.0...v1.0.1) (2021-06-17)
 
 ### 🐛 Bug Fixes
 
@@ -116,7 +122,7 @@
 - **dist:** change path in order to take dist inside npm package ([b494a35](https://github.com/Stun3R/strapi-sdk-js/commit/b494a352cb5559a8e9a2e2e931ee30a67836ef82))
 - **package.json:** remove trailing slash from dist folder in files ([7d3000c](https://github.com/Stun3R/strapi-sdk-js/commit/7d3000c15f63443d03971bc510cecf86ae530983))
 
-# 1.0.0 (2021-06-11)
+## 1.0.0 (2021-06-11)
 
 ### 🐛 Bug Fixes
 
