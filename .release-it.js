@@ -1,6 +1,6 @@
 module.exports = {
   hooks: {
-    "before:git:release": "npm run docs:release",
+    "after:git:bump": "npm run docs:release",
   },
   git: {
     tagName: "v${version}",
