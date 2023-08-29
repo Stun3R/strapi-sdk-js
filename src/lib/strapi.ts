@@ -372,8 +372,8 @@ export class Strapi {
     data: AxiosRequestConfig["data"],
     params?: StrapiBaseRequestParams
   ): Promise<StrapiResponse<T>> {
-    return this.request<StrapiResponse<T>>("put", `/${contentType}/${id}`, {
-      data: { data },
+    return this.request<StrapiResponse<T>>("put", `/${contentType}/${id}`, 
+      data,
       params,
     });
   }
