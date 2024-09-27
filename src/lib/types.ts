@@ -575,6 +575,8 @@ export interface StrapiError {
 }
 
 export interface StrapiSystemFields {
+  /** @deprecated use documentId instead */
+  id: number | string;
   documentId: string;
   locale?: string;
 }
