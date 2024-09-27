@@ -579,28 +579,28 @@ export interface StrapiSystemFields {
   locale?: string;
 }
 
-export type StrapiData<T> = T extends object
+export type StrapiResponseData<T> = T extends object
   ? T extends Array<infer U>
-    ? Array<StrapiData<U>> // Handle arrays
+    ? Array<StrapiResponseData<U>> // Handle arrays
     : T extends Record<string, unknown>
-    ? { [K in keyof T]: StrapiData<T[K]> } & StrapiSystemFields
+    ? { [K in keyof T]: StrapiResponseData<T[K]> } & StrapiSystemFields
     : T
   : T;
 
 export interface StrapiResponse<T> {
-  data: StrapiData<T>;
-  meta: StrapiMeta;
+  data: StrapiResponseData<T>;
+  meta: StrapiResponseMeta;
 }
 
 // Pagination interface for optional pagination info in the meta field
-export interface Pagination {
+export interface StrapiResponseMetaPagination {
   page: number;
   pageSize: number;
 }
 
 // Meta field can be Record<string, unknown> or optionally contain pagination info
-export interface StrapiMeta extends Record<string, unknown> {
-  pagination?: Pagination;
+export interface StrapiResponseMeta extends Record<string, unknown> {
+  pagination?: StrapiResponseMetaPagination;
 }
 
 
