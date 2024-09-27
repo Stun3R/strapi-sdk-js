@@ -560,7 +560,7 @@ export interface StrapiRequestParams extends StrapiBaseRequestParams {
   sort?: string | Array<string>;
   pagination?: PaginationByOffset | PaginationByPage;
   filters?: Record<string, unknown>;
-  publicationState?: "live" | "preview";
+  state?: "draft" | "published";
   locale?: StrapiLocale;
 }
 
@@ -574,10 +574,35 @@ export interface StrapiError {
   };
 }
 
-export interface StrapiResponse<T> {
-  data: T;
-  meta: Record<string, unknown>;
+export interface StrapiSystemFields {
+  documentId: string;
+  locale?: string;
 }
+
+export type StrapiData<T> = T extends object
+  ? T extends Array<infer U>
+    ? Array<StrapiData<U>> // Handle arrays
+    : T extends Record<string, unknown>
+    ? { [K in keyof T]: StrapiData<T[K]> } & StrapiSystemFields
+    : T
+  : T;
+
+export interface StrapiResponse<T> {
+  data: StrapiData<T>;
+  meta: StrapiMeta;
+}
+
+// Pagination interface for optional pagination info in the meta field
+export interface Pagination {
+  page: number;
+  pageSize: number;
+}
+
+// Meta field can be Record<string, unknown> or optionally contain pagination info
+export interface StrapiMeta extends Record<string, unknown> {
+  pagination?: Pagination;
+}
+
 
 export interface StrapiAuthenticationResponse {
   user: Record<string, unknown>;
