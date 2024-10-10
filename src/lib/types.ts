@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosStatic } from "axios";
+import { AxiosRequestConfig, AxiosStatic } from "axios";
 import type { CookieAttributes } from "js-cookie";
 
 export type StrapiAuthProvider =
