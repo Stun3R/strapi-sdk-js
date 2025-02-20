@@ -401,9 +401,13 @@ export class Strapi {
    *
    * @returns Promise<StrapiUser>
    */
-  public async fetchUser(): Promise<StrapiUser> {
+  public async fetchUser(
+    params?: StrapiBaseRequestParams
+  ): Promise<StrapiUser> {
     try {
-      const user = await this.request<StrapiUser>("get", "/users/me");
+      const user = await this.request<StrapiUser>("get", "/users/me", {
+        params,
+      });
       this.user = user;
     } catch (e) {
       this.logout();
