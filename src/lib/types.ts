@@ -593,6 +593,7 @@ export interface StrapiRegistrationData {
   username: string;
   email: string;
   password: string;
+  [k: string]: unknown;
 }
 
 export interface StrapiForgotPasswordData {
