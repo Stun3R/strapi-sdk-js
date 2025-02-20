@@ -1,3 +1,14 @@
+
+
+## [2.3.4](https://github.com/Stun3R/strapi-sdk-js/compare/v2.3.3...v2.3.4) (2025-02-20)
+
+
+### Bug Fixes
+
+* **auth:** add params option to the strapi.fetchUser method ([3781536](https://github.com/Stun3R/strapi-sdk-js/commit/3781536c7a94d1c298f5ac8259dcc9bb925972c8)), closes [#195](https://github.com/Stun3R/strapi-sdk-js/issues/195)
+* **auth:** allows custom property for register ([b2cafc5](https://github.com/Stun3R/strapi-sdk-js/commit/b2cafc5c5e2d1593bf00093915274a2d7ae7fceb)), closes [#198](https://github.com/Stun3R/strapi-sdk-js/issues/198)
+* import nuxt composables from #imports ([59d7e1e](https://github.com/Stun3R/strapi-sdk-js/commit/59d7e1e34c194ead826a9e79ea2b015362da25ae))
+
 ## [2.3.3](https://github.com/Stun3R/strapi-sdk-js/compare/v2.3.1...v2.3.3) (2023-08-23)
 
 ### 🐛 Bug Fixes
