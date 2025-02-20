@@ -141,6 +141,7 @@ describe("Strapi SDK", () => {
         context.axiosRequest.calledWith({
           method: "get",
           url: "/users/me",
+          params: undefined,
         })
       ).toBe(true);
 
@@ -167,6 +168,7 @@ describe("Strapi SDK", () => {
         context.axiosRequest.calledWith({
           method: "get",
           url: "/users/me",
+          params: undefined,
         })
       ).toBe(true);
 
