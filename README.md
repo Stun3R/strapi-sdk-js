@@ -15,7 +15,7 @@
 
 ## 🚀 Features
 
-- Strapi v4 supports
+- Strapi v5 supports
 - RESTful methods
 - Simplified request responses
 - Formatted error handling
