@@ -581,7 +581,9 @@ export interface StrapiSystemFields {
   locale?: string;
 }
 
-export type StrapiResponseData<T> = T extends object
+export type StrapiResponseData<T> = T extends undefined | null
+  ? StrapiSystemFields // Ensure system fields are still available
+  : T extends object
   ? T extends Array<infer U>
     ? Array<StrapiResponseData<U>> // Handle arrays
     : T extends Record<string, unknown>
@@ -590,7 +592,7 @@ export type StrapiResponseData<T> = T extends object
   : T;
 
 export interface StrapiResponse<T> {
-  data: StrapiResponseData<T>;
+  data: StrapiResponseData<T> & StrapiSystemFields; // Ensure data always includes system fields
   meta: StrapiResponseMeta;
 }
 
@@ -604,7 +606,6 @@ export interface StrapiResponseMetaPagination {
 export interface StrapiResponseMeta extends Record<string, unknown> {
   pagination?: StrapiResponseMetaPagination;
 }
-
 
 export interface StrapiAuthenticationResponse {
   user: Record<string, unknown>;
