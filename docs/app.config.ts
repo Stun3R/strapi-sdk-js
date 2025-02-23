@@ -2,7 +2,7 @@ export default defineAppConfig({
   docus: {
     title: "Strapi SDK",
     description: "The SDK for seamless integration with your Strapi API.",
-    url: "https://strapi-sdk-js.netlify.app/",
+    url: "https://v2-strapi-sdk-js.netlify.app/",
     image: "/preview.png",
 
     socials: {
@@ -12,7 +12,7 @@ export default defineAppConfig({
 
     github: {
       dir: "docs/content",
-      branch: "develop",
+      branch: "v2",
       repo: "strapi-sdk-js",
       owner: "Stun3R",
       edit: true,
