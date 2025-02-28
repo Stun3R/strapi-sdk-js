@@ -598,8 +598,12 @@ export interface StrapiResponse<T> {
 
 // Pagination interface for optional pagination info in the meta field
 export interface StrapiResponseMetaPagination {
-  page: number;
-  pageSize: number;
+  page?: number;
+  pageSize?: number;
+  pageCount?: number;
+  limit?: number;
+  start?: number;
+  total?: number;
 }
 
 // Meta field can be Record<string, unknown> or optionally contain pagination info
