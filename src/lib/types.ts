@@ -560,7 +560,7 @@ export interface StrapiRequestParams extends StrapiBaseRequestParams {
   sort?: string | Array<string>;
   pagination?: PaginationByOffset | PaginationByPage;
   filters?: Record<string, unknown>;
-  state?: "draft" | "published";
+  status?: "draft" | "published";
   locale?: StrapiLocale;
 }
 
