@@ -49,6 +49,9 @@
   "files": [
     "dist/"
   ],
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
     "start": "rollup -c --watch",
     "build": "rm -rf dist && rollup -c",
