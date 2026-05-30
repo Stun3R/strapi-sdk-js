@@ -28,6 +28,9 @@
     "email": "thibautdavid@icloud.com",
     "url": "https://thibautdavid.com"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "maintainers": [
     {
       "name": "Thibaut DAVID",
@@ -90,6 +93,7 @@
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@types/jest": "27.5.2",
+    "@types/node": "^25.9.1",
     "@types/sinon": "10.0.20",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
