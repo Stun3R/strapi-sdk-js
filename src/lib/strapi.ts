@@ -73,7 +73,9 @@ export class Strapi {
     // create axios instance
     this.axios = axios.create({
       baseURL: joinURL(this.options.url, this.options.prefix),
-      paramsSerializer: qs.stringify,
+      paramsSerializer: {
+        serialize: (params) => qs.stringify(params),
+      },
       ...this.options.axiosOptions,
     });
 
