@@ -37,4 +37,19 @@ describe("Creation of SDK instance", () => {
       ["user", "options", "axios"].sort()
     );
   });
+
+  test("Serializes query params with qs", () => {
+    const strapi = new Strapi();
+    const paramsSerializer = strapi.axios.defaults.paramsSerializer as {
+      serialize: (params: Record<string, unknown>) => string;
+    };
+
+    expect(paramsSerializer).toMatchObject({
+      serialize: expect.any(Function),
+    });
+
+    expect(paramsSerializer?.serialize?.({ fields: ["title", "slug"] })).toBe(
+      "fields%5B0%5D=title&fields%5B1%5D=slug"
+    );
+  });
 });

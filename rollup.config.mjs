@@ -3,8 +3,10 @@ import dts from "rollup-plugin-dts";
 import json from "@rollup/plugin-json";
 import resolve from "@rollup/plugin-node-resolve";
 import esbuild from "rollup-plugin-esbuild";
+import { createRequire } from "node:module";
 
-import packageJson from "./package.json" assert { type: "json" };
+const require = createRequire(import.meta.url);
+const packageJson = require("./package.json");
 
 const name = packageJson.main.split(".")[0];
 const external = Object.keys(packageJson.dependencies || {});
