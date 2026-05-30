@@ -10,6 +10,8 @@ This SDK is a way to avoid repeated Strapi HTTP client setup. Keep changes focus
 
 ## Build, Test, and Development Commands
 
+Use Node 22 for development; run `nvm use` from the repo root to load `.nvmrc`.
+
 - `yarn start`: runs Rollup in watch mode for local SDK development.
 - `yarn build`: removes `dist/` and builds CommonJS, ESM, and type outputs.
 - `yarn lint`: runs ESLint over `.ts` and `.js` files.
