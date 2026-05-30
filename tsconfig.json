@@ -31,5 +31,7 @@
     "noEmit": true,
     // Resolve json module
     "resolveJsonModule": true
-  }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["docs", "test", "dist", "node_modules"]
 }
