@@ -1,6 +1,13 @@
 
 
-# [3.0.0](https://github.com/Stun3R/strapi-sdk-js/compare/v2.3.4...v3.0.0) (2025-02-23)
+## [3.0.1](https://github.com/Stun3R/strapi-sdk-js/compare/v3.0.0...v3.0.1) (2026-05-30)
+
+### 🐛 Bug Fixes
+
+* update production security dependencies ([1eab891](https://github.com/Stun3R/strapi-sdk-js/commit/1eab89186adbf1ccc1b3992bf6c9df62555fa339))
+
+
+## [3.0.0](https://github.com/Stun3R/strapi-sdk-js/compare/v2.3.4...v3.0.0) (2025-02-23)
 
 ### 🚀 Features
 
@@ -39,7 +46,7 @@
 
 - build: update the build target to support webpack based frameworks ([e8c10ef](https://github.com/Stun3R/strapi-sdk-js/commit/e8c10ef74f757cb36d622b785c2d3ef4637fee54)), closes [#179](https://github.com/Stun3R/strapi-sdk-js/issues/179)
 
-# [2.3.0](https://github.com/Stun3R/strapi-sdk-js/compare/v2.2.0...v2.3.0) (2023-08-10)
+## [2.3.0](https://github.com/Stun3R/strapi-sdk-js/compare/v2.2.0...v2.3.0) (2023-08-10)
 
 ### 🐛 Bug Fixes
 
@@ -61,7 +68,7 @@
 - **deps:** update dependency `js-cookie` to v3.0.5 ([844af89](https://github.com/Stun3R/strapi-sdk-js/commit/844af89186d9c86ee8103fd40a8aa078f6be11ca))
 - **deps:** update dependency `qs` to v6.11.2 ([080f39c](https://github.com/Stun3R/strapi-sdk-js/commit/080f39c4de6c37e8b76919bd9f98b459690dd871))
 
-# [2.2.0](https://github.com/Stun3R/strapi-sdk-js/compare/v2.1.5...v2.2.0) (2022-02-17)
+## [2.2.0](https://github.com/Stun3R/strapi-sdk-js/compare/v2.1.5...v2.2.0) (2022-02-17)
 
 ### ♻️ Refactor
 
