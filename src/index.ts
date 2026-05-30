@@ -19,6 +19,8 @@ export type {
   StrapiRequestParams,
   StrapiResetPasswordData,
   StrapiResponse,
+  StrapiResponseMeta,
+  StrapiResponseMetaPagination,
   StrapiUser,
 } from "./lib/types";
 
