@@ -4,7 +4,8 @@ test/
 docs/
 example/
 scripts/
+coverage/
+commitlint.config.js
+husky.config.js
+jest.config.js
 .eslintrc.js
-.commitlint.config.js
-.husky.config.js
-.jest.config.js
