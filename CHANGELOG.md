@@ -1,9 +1,16 @@
 
 
+## [2.3.5](https://github.com/Stun3R/strapi-sdk-js/compare/v2.3.4...v2.3.5) (2026-05-30)
+
+
+### 🐛 Bug Fixes
+
+* update v2 production security dependencies ([fb8c3a9](https://github.com/Stun3R/strapi-sdk-js/commit/fb8c3a93b1071e72a5445e9c4625767bb4e0f0e6))
+
 ## [2.3.4](https://github.com/Stun3R/strapi-sdk-js/compare/v2.3.3...v2.3.4) (2025-02-20)
 
 
-### Bug Fixes
+### 🐛 Bug Fixes
 
 * **auth:** add params option to the strapi.fetchUser method ([3781536](https://github.com/Stun3R/strapi-sdk-js/commit/3781536c7a94d1c298f5ac8259dcc9bb925972c8)), closes [#195](https://github.com/Stun3R/strapi-sdk-js/issues/195)
 * **auth:** allows custom property for register ([b2cafc5](https://github.com/Stun3R/strapi-sdk-js/commit/b2cafc5c5e2d1593bf00093915274a2d7ae7fceb)), closes [#198](https://github.com/Stun3R/strapi-sdk-js/issues/198)
