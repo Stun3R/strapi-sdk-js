@@ -96,7 +96,7 @@
     "commitizen": "4.3.1",
     "cz-conventional-changelog": "3.3.0",
     "dotenv-cli": "7.4.4",
-    "esbuild": "^0.18.19",
+    "esbuild": "^0.28.0",
     "eslint": "8.57.1",
     "husky": "8.0.3",
     "jest": "27.5.1",
