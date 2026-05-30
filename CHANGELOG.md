@@ -1,5 +1,12 @@
 
 
+## [3.0.1](https://github.com/Stun3R/strapi-sdk-js/compare/v3.0.0...v3.0.1) (2026-05-30)
+
+### 🐛 Bug Fixes
+
+* update production security dependencies ([1eab891](https://github.com/Stun3R/strapi-sdk-js/commit/1eab89186adbf1ccc1b3992bf6c9df62555fa339))
+
+
 # [3.0.0](https://github.com/Stun3R/strapi-sdk-js/compare/v2.3.4...v3.0.0) (2025-02-23)
 
 ### 🚀 Features
