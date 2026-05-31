@@ -596,7 +596,7 @@ export type StrapiResponseData<T> = T extends undefined | null
   : T;
 
 export interface StrapiResponse<T> {
-  data: StrapiResponseData<T> & StrapiSystemFields; // Ensure data always includes system fields
+  data: StrapiResponseData<T>;
   meta: StrapiResponseMeta;
 }
 
