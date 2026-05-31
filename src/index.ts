@@ -14,6 +14,7 @@ export type {
   StrapiForgotPasswordData,
   StrapiChangePasswordData,
   StrapiLocale,
+  StrapiDeleteRequestParams,
   StrapiOptions,
   StrapiRegistrationData,
   StrapiRequestParams,

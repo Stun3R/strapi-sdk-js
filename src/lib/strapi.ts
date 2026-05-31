@@ -17,6 +17,7 @@ import type {
   StrapiAuthenticationResponse,
   StrapiAuthProvider,
   StrapiBaseRequestParams,
+  StrapiDeleteRequestParams,
   StrapiDefaultOptions,
   StrapiEmailConfirmationData,
   StrapiError,
@@ -389,14 +390,22 @@ export class Strapi {
   }
 
   /**
-   * Delete en entry
+   * Delete an entry
    *
    * @param  {string} contentType - Content type's name pluralized
    * @param  {string} documentId - documentId of entry to be deleted
+   * @param  {StrapiDeleteRequestParams} params? - Delete-specific query parameters
    * @returns Promise<void>
    */
-  public delete(contentType: string, documentId: string): Promise<void> {
-    return this.request("delete", `/${contentType}/${documentId}`);
+  public delete(
+    contentType: string,
+    documentId: string,
+    params?: StrapiDeleteRequestParams
+  ): Promise<void> {
+    return this.request("delete", `/${contentType}/${documentId}`, {
+      params,
+    }
+  );
   }
 
   /**
