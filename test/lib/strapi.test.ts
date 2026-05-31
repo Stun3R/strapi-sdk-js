@@ -460,6 +460,49 @@ describe("Strapi SDK", () => {
       windowSpy.mockRestore();
     });
 
+    test("Set and remove Token in non DOM env", () => {
+      const windowSpy = jest.spyOn(window, "window", "get");
+      // @ts-ignore
+      windowSpy.mockImplementation(() => undefined);
+
+      context.strapi.setToken("XXX");
+      expect(context.strapi.getToken()).toBe("XXX");
+
+      context.strapi.removeToken();
+      expect(context.strapi.getToken()).toBe(null);
+
+      windowSpy.mockRestore();
+    });
+
+    test("Set Token authenticates requests in non DOM env", async () => {
+      const windowSpy = jest.spyOn(window, "window", "get");
+      // @ts-ignore
+      windowSpy.mockImplementation(() => undefined);
+
+      const strapi = new Strapi({
+        url: "http://strapi-host/",
+        axiosOptions: {
+          adapter: async (config) => ({
+            config,
+            data: config.headers,
+            headers: {},
+            status: 200,
+            statusText: "OK",
+          }),
+        },
+      });
+
+      strapi.setToken("XXX");
+      const headers = await strapi.request<Record<string, string>>(
+        "get",
+        "/users/me"
+      );
+
+      expect(headers.Authorization).toBe("Bearer XXX");
+
+      windowSpy.mockRestore();
+    });
+
     test("Get Token from Cookies", () => {
       Cookies.set("strapi_jwt", "XXX");
 
