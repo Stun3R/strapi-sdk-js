@@ -1,6 +1,6 @@
 {
   "name": "strapi-sdk-js",
-  "version": "2.3.5",
+  "version": "2.4.0",
   "description": "📦 Javascript SDK for your Strapi API",
   "keywords": [
     "strapi",
