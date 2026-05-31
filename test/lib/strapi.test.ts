@@ -603,6 +603,25 @@ describe("Strapi SDK", () => {
         context.axiosRequest.calledWithExactly({
           method: "delete",
           url: "/restaurants/hgv1vny5cebq2l3czil1rpb3",
+          params: undefined,
+        })
+      ).toBe(true);
+    });
+
+    test("delete - Delete a localized {content-type} entry", async () => {
+      await context.strapi.delete(
+        "restaurants",
+        "hgv1vny5cebq2l3czil1rpb3",
+        { locale: "fr" }
+      );
+
+      expect(
+        context.axiosRequest.calledWithExactly({
+          method: "delete",
+          url: "/restaurants/hgv1vny5cebq2l3czil1rpb3",
+          params: {
+            locale: "fr",
+          },
         })
       ).toBe(true);
     });

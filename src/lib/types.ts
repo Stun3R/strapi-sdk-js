@@ -556,6 +556,10 @@ export interface StrapiBaseRequestParams {
   populate?: string | Array<string> | Record<string, unknown>;
 }
 
+export interface StrapiDeleteRequestParams {
+  locale?: StrapiLocale;
+}
+
 export interface StrapiRequestParams extends StrapiBaseRequestParams {
   sort?: string | Array<string>;
   pagination?: PaginationByOffset | PaginationByPage;
