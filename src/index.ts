@@ -22,6 +22,7 @@ export type {
   StrapiResponse,
   StrapiResponseMeta,
   StrapiResponseMetaPagination,
+  StrapiPublicationStatus,
   StrapiUser,
 } from "./lib/types";
 

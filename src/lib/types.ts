@@ -560,11 +560,13 @@ export interface StrapiDeleteRequestParams {
   locale?: StrapiLocale;
 }
 
+export type StrapiPublicationStatus = "draft" | "published";
+
 export interface StrapiRequestParams extends StrapiBaseRequestParams {
   sort?: string | Array<string>;
   pagination?: PaginationByOffset | PaginationByPage;
   filters?: Record<string, unknown>;
-  status?: "draft" | "published";
+  status?: StrapiPublicationStatus;
   locale?: StrapiLocale;
 }
 
