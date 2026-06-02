@@ -17,6 +17,7 @@ import type {
   StrapiAuthenticationResponse,
   StrapiAuthProvider,
   StrapiBaseRequestParams,
+  StrapiDeleteRequestParams,
   StrapiDefaultOptions,
   StrapiEmailConfirmationData,
   StrapiError,
@@ -49,6 +50,7 @@ export class Strapi {
   public axios: AxiosInstance;
   public options: StrapiDefaultOptions;
   public user: StrapiUser = null;
+  private _token: string | null = null;
 
   /**
    * Strapi SDK Constructor
@@ -389,14 +391,22 @@ export class Strapi {
   }
 
   /**
-   * Delete en entry
+   * Delete an entry
    *
    * @param  {string} contentType - Content type's name pluralized
    * @param  {string} documentId - documentId of entry to be deleted
+   * @param  {StrapiDeleteRequestParams} params? - Delete-specific query parameters
    * @returns Promise<void>
    */
-  public delete(contentType: string, documentId: string): Promise<void> {
-    return this.request("delete", `/${contentType}/${documentId}`);
+  public delete(
+    contentType: string,
+    documentId: string,
+    params?: StrapiDeleteRequestParams
+  ): Promise<void> {
+    return this.request("delete", `/${contentType}/${documentId}`, {
+      params,
+    }
+  );
   }
 
   /**
@@ -426,17 +436,15 @@ export class Strapi {
    */
   public getToken(): string | null {
     const { useLocalStorage, key } = this.options.store;
-    if (isBrowser()) {
-      const token = useLocalStorage
-        ? window.localStorage.getItem(key)
-        : (Cookies.get(key) as string);
+    if (!isBrowser()) return this._token;
 
-      if (typeof token === "undefined") return null;
+    const token = useLocalStorage
+      ? window.localStorage.getItem(key)
+      : (Cookies.get(key) as string);
 
-      return token;
-    }
+    if (typeof token === "undefined") return null;
 
-    return null;
+    return token;
   }
 
   /**
@@ -447,11 +455,14 @@ export class Strapi {
    */
   public setToken(token: string): void {
     const { useLocalStorage, key, cookieOptions } = this.options.store;
-    if (isBrowser()) {
-      useLocalStorage
-        ? window.localStorage.setItem(key, token)
-        : Cookies.set(key, token, cookieOptions);
+    if (!isBrowser()) {
+      this._token = token;
+      return;
     }
+
+    useLocalStorage
+      ? window.localStorage.setItem(key, token)
+      : Cookies.set(key, token, cookieOptions);
   }
 
   /**
@@ -461,10 +472,11 @@ export class Strapi {
    */
   public removeToken(): void {
     const { useLocalStorage, key } = this.options.store;
-    if (isBrowser()) {
-      useLocalStorage
-        ? window.localStorage.removeItem(key)
-        : Cookies.remove(key);
+    if (!isBrowser()) {
+      this._token = null;
+      return;
     }
+
+    useLocalStorage ? window.localStorage.removeItem(key) : Cookies.remove(key);
   }
 }

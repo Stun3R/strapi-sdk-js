@@ -556,11 +556,17 @@ export interface StrapiBaseRequestParams {
   populate?: string | Array<string> | Record<string, unknown>;
 }
 
+export interface StrapiDeleteRequestParams {
+  locale?: StrapiLocale;
+}
+
+export type StrapiPublicationStatus = "draft" | "published";
+
 export interface StrapiRequestParams extends StrapiBaseRequestParams {
   sort?: string | Array<string>;
   pagination?: PaginationByOffset | PaginationByPage;
   filters?: Record<string, unknown>;
-  state?: "draft" | "published";
+  status?: StrapiPublicationStatus;
   locale?: StrapiLocale;
 }
 
@@ -592,14 +598,17 @@ export type StrapiResponseData<T> = T extends undefined | null
   : T;
 
 export interface StrapiResponse<T> {
-  data: StrapiResponseData<T> & StrapiSystemFields; // Ensure data always includes system fields
+  data: StrapiResponseData<T>;
   meta: StrapiResponseMeta;
 }
 
-// Pagination interface for optional pagination info in the meta field
 export interface StrapiResponseMetaPagination {
   page: number;
   pageSize: number;
+  start: number;
+  limit: number;
+  pageCount?: number;
+  total?: number;
 }
 
 // Meta field can be Record<string, unknown> or optionally contain pagination info

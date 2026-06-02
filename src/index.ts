@@ -14,11 +14,15 @@ export type {
   StrapiForgotPasswordData,
   StrapiChangePasswordData,
   StrapiLocale,
+  StrapiDeleteRequestParams,
   StrapiOptions,
   StrapiRegistrationData,
   StrapiRequestParams,
   StrapiResetPasswordData,
   StrapiResponse,
+  StrapiResponseMeta,
+  StrapiResponseMetaPagination,
+  StrapiPublicationStatus,
   StrapiUser,
 } from "./lib/types";
 

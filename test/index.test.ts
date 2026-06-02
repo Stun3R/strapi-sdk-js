@@ -34,7 +34,7 @@ describe("Creation of SDK instance", () => {
     );
 
     expect(Object.getOwnPropertyNames(strapi).sort()).toEqual(
-      ["user", "options", "axios"].sort()
+      ["user", "options", "axios", "_token"].sort()
     );
   });
 
