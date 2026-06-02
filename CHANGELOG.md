@@ -1,4 +1,17 @@
+# Changelog
 
+## [3.1.0](https://github.com/Stun3R/strapi-sdk-js/compare/v3.0.1...v3.1.0) (2026-06-02)
+
+
+### 🐛 Bug Fixes
+
+* **auth:** store token in non-browser environments ([9626f2b](https://github.com/Stun3R/strapi-sdk-js/commit/9626f2bfc11b6774c4105ec720360bac812f7638)), closes [#216](https://github.com/Stun3R/strapi-sdk-js/issues/216) @meindonsa
+* **delete:** allow locale param for collection document deletion ([c224836](https://github.com/Stun3R/strapi-sdk-js/commit/c2248361d4d3530237778769fac16c3b987a241b)), closes [#219](https://github.com/Stun3R/strapi-sdk-js/issues/219)
+* **lint:** ignore non-source config files ([3080f43](https://github.com/Stun3R/strapi-sdk-js/commit/3080f43d05ba36dbce78af4897942aff19e4d734))
+* Replace 'state' to 'status' to retrieve draft ([1d26d78](https://github.com/Stun3R/strapi-sdk-js/commit/1d26d782f1a2fc329a25839686c20278a4e4aa28))
+* **types:** extend pagination response metadata ([81d1cf8](https://github.com/Stun3R/strapi-sdk-js/commit/81d1cf83e652cf43f5e11921320e81b8344b920c)), closes [#225](https://github.com/Stun3R/strapi-sdk-js/issues/225)
+* **types:** removes system fields injection in array ([6df8992](https://github.com/Stun3R/strapi-sdk-js/commit/6df89926738665deb5fb824a8b1be19da1b1589c)), closes [#222](https://github.com/Stun3R/strapi-sdk-js/issues/222)
+* **types:** renames publicationState to status ([1d359c0](https://github.com/Stun3R/strapi-sdk-js/commit/1d359c0485625a1c1320a880e5d1cab3af09ac74)), closes [#230](https://github.com/Stun3R/strapi-sdk-js/issues/230)
 
 ## [3.0.1](https://github.com/Stun3R/strapi-sdk-js/compare/v3.0.0...v3.0.1) (2026-05-30)
 
