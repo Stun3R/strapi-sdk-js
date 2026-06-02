@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        node: [22]
+        node: [22.22.3]
 
     steps:
       - name: Checkout repo
