@@ -79,7 +79,7 @@
   "dependencies": {
     "@types/js-cookie": "^3.0.0",
     "@types/qs": "^6.9.6",
-    "axios": "^0.32.0",
+    "axios": "^0.34.0",
     "defu": "^6.1.5",
     "js-cookie": "^3.0.7",
     "qs": "^6.15.2",
